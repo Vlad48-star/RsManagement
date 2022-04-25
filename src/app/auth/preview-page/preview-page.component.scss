@@ -1,0 +1,28 @@
+.wrap-header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: black;
+}
+
+.position-logo{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  background-color: black;
+}
+
+.logo{
+  height: 50px;
+  width: 50px;
+}
+
+.text-logo{
+  color: white;
+  font-size: 25px;
+}
+
+.registration-wrap{
+  display: flex;
+  justify-content: end;
+}
