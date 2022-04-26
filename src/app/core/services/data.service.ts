@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class DataService {
   constructor(private httpClient: HttpClient) {}
-  private url = 'http://localhost:4000/';
+  private url = 'http://localhost:4200/api/';
 
   login({ login, password }: ILogin) {
     console.log({ login, password });
