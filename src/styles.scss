@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@import url(./reset.scss);
+
+:root {
+  --error-color: #eb5a46;
+}
+.flex {
+  &-row {
+    display: flex;
+    flex-direction: row;
+  }
+  &-column {
+    display: flex;
+    flex-direction: column;
+  }
+}

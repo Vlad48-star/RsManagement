@@ -1,1 +1,69 @@
-<p>login works!</p>
+<div class="wrapper">
+  <div class="content flex-column">
+    <h2>{{ title | titlecase }}</h2>
+    <form
+      [formGroup]="loginForm"
+      (ngSubmit)="formSubmit()"
+      class="flex-column"
+      [class.err_on_submit]="errorOnsubmit"
+    >
+      <label class="flex-column">
+        <span>{{ 'login' }}</span>
+        <input
+          type="text"
+          class="input-text"
+          name="login"
+          formControlName="login"
+          required
+        />
+        <ng-container
+          *ngIf="
+            (login!.invalid && (login!.touched || login!.dirty)) ||
+            errorOnsubmit
+          "
+        >
+          <span *ngIf="login!.errors?.['required']"
+            >Please enter a login email</span
+          >
+          <span *ngIf="login!.errors?.['pattern']"
+            >The login email is invalid</span
+          >
+        </ng-container>
+      </label>
+      <label class="flex-column">
+        <span>{{ 'password' }}</span>
+        <input
+          type="password"
+          class="input-text"
+          name="password"
+          formControlName="password"
+          required
+        />
+        <ng-container
+          *ngIf="
+            (password!.invalid && (password!.touched || password!.dirty)) ||
+            errorOnsubmit
+          "
+        >
+          <span *ngIf="password!.errors?.['required']"
+            >Please enter a password</span
+          >
+          <span *ngIf="password!.errors?.['minlength']"
+            >Please enter a password at least 8 characters
+          </span>
+          <span *ngIf="password!.errors?.['haveUpperCaseAndLowerCase']"
+            >Please enter a password a mixture of both uppercase and lowercase
+            letters
+          </span>
+          <span *ngIf="password!.errors?.['hasNumber']"
+            >Please enter a password a mixture of letters and numbers
+          </span>
+          <span *ngIf="password!.errors?.['specialCharacter']"
+            >Please enter a password a least one special character
+          </span>
+        </ng-container>
+      </label>
+      <button class="btn btn-text">{{ 'login' | titlecase }}</button>
+    </form>
+  </div>
+</div>
