@@ -1,0 +1,26 @@
+.registration-form{
+  display: grid;
+  justify-items: center;
+  width: 100%;
+  margin-top: 200px;
+  .content {
+    max-width: 500px;
+    border-radius: 3px;
+    padding: 25px 40px;
+    box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+  }
+  .wrap-btn{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    .btn{
+      cursor: pointer;
+    }
+  }
+}
+
+.form-group{
+  display: grid;
+  margin-bottom: 10px;
+}
+

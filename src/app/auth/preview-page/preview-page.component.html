@@ -4,10 +4,8 @@
     <div class="text-logo">Managment</div>
   </div>
   <div class="registration-wrap">
-    <a [routerLink]="['/login']" routerLinkActive="router-link-active">
-      <button>Sign in</button>
-    </a>
-    <button>Sign up</button>
+    <button [routerLink]="['/login']" routerLinkActive="router-link-active">Login</button>
+    <button [routerLink]="['/registration']">Sign up</button>
   </div>
 </header>
 <main></main>
