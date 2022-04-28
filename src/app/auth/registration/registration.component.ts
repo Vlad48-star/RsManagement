@@ -17,7 +17,7 @@ export class RegistrationComponent {
   }
 
   onSubmit(){
-    this.auth.register(this.signInForm);
+    this.auth.register(this.signInForm.value).subscribe(response => response);
     this.router.navigateByUrl('/board');
   }
 
