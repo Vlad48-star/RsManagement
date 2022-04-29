@@ -1,5 +1,4 @@
 import { RequestsService } from './services/requests.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DataService } from './services/data.service';
 import { NgModule } from '@angular/core';
