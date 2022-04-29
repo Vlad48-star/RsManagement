@@ -1,4 +1,4 @@
-import { AuthService } from './../core/services/auth.service';
+import { AuthService } from '../core/services/auth.service';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
@@ -7,12 +7,12 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable, first } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class BoardGuard implements CanActivate {
   constructor(public authService: AuthService, private router: Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -27,10 +27,10 @@ export class AuthGuard implements CanActivate {
   }
   checkLogin(url: string): boolean {
     let isLogin = this.authService.isLoggedIn();
-    if (isLogin) {
+    if (!isLogin) {
       return true;
     }
-    this.router.navigate(['/login']);
+    this.router.navigate(['/board']);
     return false;
   }
 }
