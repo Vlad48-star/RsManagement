@@ -8,7 +8,7 @@ import { ApiInterceptorService } from './services/app-interceptor.service';
 import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
-  declarations: [NotFoundComponent],
+  declarations: [NotFoundComponent, HeaderComponent],
   imports: [CommonModule, HttpClientModule],
   providers: [
     FormValidatorService,
