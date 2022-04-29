@@ -1,23 +1,22 @@
+import { AuthService } from './../../core/services/auth.service';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { DataService } from 'src/app/core/services/data.service';
-
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+  styleUrls: ['./registration.component.scss'],
 })
 export class RegistrationComponent {
   signInForm: any;
 
-  constructor(private auth: DataService, private router: Router) {
+  constructor(private auth: AuthService, private router: Router) {
     this.createForm();
   }
 
-  onSubmit(){
-    this.auth.register(this.signInForm.value).subscribe(response => response);
+  onSubmit() {
+    this.auth.register(this.signInForm.value).subscribe((response) => response);
     this.router.navigateByUrl('/board');
   }
 

@@ -1,0 +1,7 @@
+<div *ngIf="board">
+  <a [routerLink]="['detailed', board.id]">
+    <div class="board-title">
+      {{ board.title }}
+    </div>
+  </a>
+</div>
