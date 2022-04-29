@@ -4,8 +4,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { FormValidatorService } from './services/form-validator.service';
-import { RouterModule } from '@angular/router';
 import { ApiInterceptorService } from './services/app-interceptor.service';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [NotFoundComponent],
@@ -19,5 +19,6 @@ import { ApiInterceptorService } from './services/app-interceptor.service';
       multi: true,
     },
   ],
+  exports: [HeaderComponent],
 })
 export class CoreModule {}
