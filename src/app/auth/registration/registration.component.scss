@@ -1,10 +1,14 @@
+.size-form{
+  width: 300px;
+}
+
 .registration-form{
   display: grid;
   justify-items: center;
   width: 100%;
   margin-top: 200px;
   .content {
-    max-width: 500px;
+    max-width: 400px;
     border-radius: 3px;
     padding: 25px 40px;
     box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
@@ -13,10 +17,10 @@
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
-    .btn{
-      cursor: pointer;
-    }
   }
+}
+.btn{
+  background-color: #ff9800;
 }
 
 .form-group{
