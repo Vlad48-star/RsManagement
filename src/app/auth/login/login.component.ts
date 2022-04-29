@@ -1,7 +1,10 @@
+import { Router } from '@angular/router';
+import { AuthService } from './../../core/services/auth.service';
 import { DataService } from './../../core/services/data.service';
 import { FormValidatorService } from './../../core/services/form-validator.service';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { first } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +14,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class LoginComponent {
   constructor(
     private formValidatorService: FormValidatorService,
-    private dataService: DataService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.createForm();
   }
@@ -27,11 +31,13 @@ export class LoginComponent {
       return;
     }
     this.errorOnsubmit = false;
-    // this.loginService.submitHandler(this.loginForm.value);
-    console.log(this.loginForm.value);
-    this.dataService
+    this.authService
       .login(this.loginForm.value)
-      .subscribe((response) => console.log(response));
+      .pipe(first())
+      .subscribe(() => {
+        // this.loginService.submitHandler(this.loginForm.value);
+        this.router.navigate(['/board']);
+      });
   }
 
   private createForm() {

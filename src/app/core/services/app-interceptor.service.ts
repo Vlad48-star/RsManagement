@@ -13,19 +13,18 @@ export class ApiInterceptorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const headers = new HttpHeaders()
-      .set('Access-Control-Allow-Origin', ' http://localhost:4000/')
-      .set(
-        'Access-Control-Allow-Methods',
-        'GET, POST, PATCH, PUT, DELETE, OPTIONS'
-      )
-      .set(
-        'Access-Control-Allow-Headers',
-        ' Origin, Content-Type, X-Auth-Token'
+    const idToken = localStorage.getItem('id_token');
+    if (idToken) {
+      const headers = new HttpHeaders().set(
+        'Authorization',
+        'Bearer ' + idToken
       );
-    const authReq = req.clone({
-      headers: headers,
-    });
-    return next.handle(authReq);
+      const authReq = req.clone({
+        headers: headers,
+      });
+      return next.handle(authReq);
+    } else {
+      return next.handle(req);
+    }
   }
 }
