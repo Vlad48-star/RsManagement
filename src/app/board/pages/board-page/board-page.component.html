@@ -1,2 +1,9 @@
-<app-header></app-header>
-<p>board-page works!</p>
+<div class="wrapper flex-column">
+  <app-header></app-header>
+  <div class="content">
+    <app-main-menu></app-main-menu>
+    <div>
+      <router-outlet name="border-content"></router-outlet>
+    </div>
+  </div>
+</div>

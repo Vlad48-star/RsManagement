@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   constructor(private http: HttpClient, public router: Router) {}
   private url = '/api/';
+
   login({ login, password }: ILogin) {
     return this.http
       .post<IToken>(this.url + 'signin', {

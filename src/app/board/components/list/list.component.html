@@ -1,0 +1,12 @@
+<ng-container *ngIf="(boards$ | async)?.length; else addFirstBoard">
+  <div class="list-wrapper">
+    <app-list-item
+      *ngFor="let board of boards$ | async"
+      [board]="board"
+    ></app-list-item>
+  </div>
+</ng-container>
+<ng-template #addFirstBoard>
+  <div>У вас пока что нету досок, попробуй создать первую</div>
+</ng-template>
+<app-crate-board></app-crate-board>
