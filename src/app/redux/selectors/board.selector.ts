@@ -1,5 +1,16 @@
+import { IBoard } from './../../board/model/board.model';
 import { BOARD_KEY, TBoardState } from './../actions/board.action';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 export const selectBoardFeature = createFeatureSelector<TBoardState>(BOARD_KEY);
-export const selectBoard = createSelector(selectBoardFeature, (state) => state);
+export const selectAllBoard = createSelector(
+  selectBoardFeature,
+  (state) => state
+);
+export const selectBoard = (id: string | null) =>
+  createSelector(selectBoardFeature, (state) => {
+    if (id == null) {
+      return state;
+    }
+    return state.filter((elem: IBoard) => elem.id === id);
+  });

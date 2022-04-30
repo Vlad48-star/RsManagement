@@ -22,11 +22,12 @@ export class BoardGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    let url: string = state.url;
+    const url: string = state.url;
     return this.checkLogin(url);
   }
   checkLogin(url: string): boolean {
-    let isLogin = this.authService.isLoggedIn();
+    const isLogin = this.authService.isLoggedIn();
+    console.log(url);
     if (!isLogin) {
       return true;
     }

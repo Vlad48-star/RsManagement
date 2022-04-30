@@ -1,7 +1,7 @@
-<div *ngIf="board">
-  <a [routerLink]="['detailed', board.id]">
+<a *ngIf="board" [routerLink]="['/board/' + board.id]">
+  <div routerLinkActive="active" class="item-wrapper">
     <div class="board-title">
       {{ board.title }}
     </div>
-  </a>
-</div>
+  </div>
+</a>

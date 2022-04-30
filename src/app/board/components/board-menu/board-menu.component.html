@@ -1,0 +1,8 @@
+<div class="wrapper">
+  <ng-container
+    *ngIf="urlParams.id !== undefined ? true : false; else elseTemplate"
+  >
+    <app-list></app-list>
+  </ng-container>
+  <ng-template #elseTemplate> Выберите доску </ng-template>
+</div>
