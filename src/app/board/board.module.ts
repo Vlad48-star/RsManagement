@@ -5,17 +5,21 @@ import { BoardRoutingModule } from './board-routing.module';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BoardPageComponent } from './pages/board-page/board-page.component';
+import { AllBoardPageComponent } from './pages/all-board-page/all-board-page.component';
 import { ListComponent } from './components/list/list.component';
 import { CrateBoardComponent } from './components/crate-board/crate-board.component';
 import { ListItemComponent } from './components/list-item/list-item.component';
+import { BoardPageComponent } from './pages/board-page/board-page.component';
+import { BoardMenuComponent } from './components/board-menu/board-menu.component';
 
 @NgModule({
   declarations: [
-    BoardPageComponent,
+    AllBoardPageComponent,
     ListComponent,
     CrateBoardComponent,
     ListItemComponent,
+    BoardPageComponent,
+    BoardMenuComponent,
   ],
   imports: [
     CommonModule,

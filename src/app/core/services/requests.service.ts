@@ -30,22 +30,10 @@ export class RequestsService {
   }
 
   public getBoardData() {
-    return this.http.get<IBoard[]>(this.url + 'boards').pipe(
-      retry(4),
-      catchError((error) => {
-        console.log('[ERROR]: ', error);
-        return EMPTY;
-      })
-    );
+    return this.http.get<IBoard[]>(this.url + 'boards');
   }
 
   public addBoard(title: string) {
-    return this.http.post<IBoard>(this.url + 'boards', { title }).pipe(
-      retry(4),
-      catchError((error) => {
-        console.log('[ERROR]: ', error);
-        return EMPTY;
-      })
-    );
+    return this.http.post<IBoard>(this.url + 'boards', { title });
   }
 }

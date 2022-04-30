@@ -1,9 +1,27 @@
 <div class="wrapper flex-column">
   <app-header></app-header>
   <div class="content">
-    <app-main-menu></app-main-menu>
+    <app-board-menu></app-board-menu>
     <div>
-      <router-outlet name="border-content"></router-outlet>
+      <div *ngFor="let item of board$ | async">
+        <form
+          action=""
+          [formGroup]="boardNameForm"
+          [class.err_on_submit]="errorOnsubmit"
+        >
+          <input
+            type="text"
+            [value]="item.title"
+            name="title"
+            formControlName="title"
+            [readonly]="!titleEditable"
+            (blur)="onBlurMethod()"
+          />
+          <button (click)="editableHandler()">Edit</button>
+          <button (click)="delBoardHandler()">Del</button>
+        </form>
+      </div>
+      <div>board content</div>
     </div>
   </div>
 </div>
