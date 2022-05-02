@@ -4,8 +4,38 @@
     <div class="text-logo">Managment</div>
   </div>
   <div class="registration-wrap">
-    <button class="btn-floating pulse" [routerLink]="['/login']" routerLinkActive="router-link-active">Login</button>
-    <button class="btn-floating pulse" [routerLink]="['/registration']">Sign up</button>
+    <button class="sigh-in btn" [routerLink]="['/login']" routerLinkActive="router-link-active">Login</button>
+    <button class="btn" [routerLink]="['/registration']">Sign up</button>
   </div>
 </header>
-<main></main>
+<main>
+  <div class="wrap-video back-image">
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/SeAd200FIPs"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+      </iframe>
+      <p class="summary-video">Save your time. Check out the features of the application!</p>
+  </div>
+</main>
+<footer class="footer">
+  <div class="footer-row">
+    <div class="logo-container footer-logo-container">
+      <div class="footer-logo"></div>
+      <p class="footer-logo-title">Managment</p>
+    </div>
+    <a class="footer-logo__rss" href="https://rs.school/js/" target="_blank"></a>
+  </div>
+  <div class="footer-row footer-github-username">
+    <a class="github-username" href="https://github.com/Asindeton" target="_blank">Asindeton</a>
+    <a class="github-username" href="https://github.com/Vlad48-star" target="_blank">Vlad48-star</a>
+    <a class="github-username" href="https://github.com/debaev" target="_blank">debaev</a>
+  </div>
+  <div class="footer-row">
+    <a class="github-username" href="/#team">About team</a>
+    <p class="copyright">© 2022</p>
+  </div>
+</footer>
