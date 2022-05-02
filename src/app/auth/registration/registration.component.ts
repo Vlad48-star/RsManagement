@@ -24,7 +24,6 @@ export class RegistrationComponent {
     this.signInForm = new FormGroup({
       name: new FormControl('', [
         Validators.required,
-        // Validators.max(16),
       ]),
       login: new FormControl('', [
         Validators.required,
@@ -32,8 +31,7 @@ export class RegistrationComponent {
       ]),
       password: new FormControl('', [
         Validators.required,
-        // Validators.min(1),
-        Validators.pattern(/^[A-z0-9]*$/),
+        Validators.minLength(8)
       ]),
     });
   }
@@ -49,4 +47,10 @@ export class RegistrationComponent {
   get password() {
     return this.signInForm.get('password');
   }
+
+  get count() {
+    const count = 8 - this.signInForm.get('password').errors['minlength']['actualLength'];
+    return count;
+  }
 }
+

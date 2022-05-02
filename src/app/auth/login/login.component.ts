@@ -12,15 +12,15 @@ import { first } from 'rxjs';
 })
 export class LoginComponent {
   constructor(
-    private formValidatorService: FormValidatorService,
+    // private formValidatorService: FormValidatorService,
     private authService: AuthService,
     private router: Router
   ) {
     this.createForm();
   }
-  title = 'Вход';
+  title = 'Login';
 
-  loginForm!: FormGroup;
+  loginForm!: any;
 
   errorOnsubmit = false;
 
@@ -41,11 +41,14 @@ export class LoginComponent {
 
   private createForm() {
     this.loginForm = new FormGroup({
-      login: new FormControl('user001', [
+      login: new FormControl('', [
         Validators.required,
-        // Validators.pattern(this.formValidatorService.emailValidatorRegEx),
+        Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/),
       ]),
-      password: new FormControl('userpass@123', [Validators.required]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
     });
   }
 
