@@ -7,9 +7,9 @@ import { createReducer, on } from '@ngrx/store';
 
 export const boardReducer = createReducer(
   initialBoardState,
-  on(BoardActions.get, (state, { response }): TBoardState => response),
+  on(BoardActions.loadSuccess, (state, { response }): TBoardState => response),
   on(
-    BoardActions.add,
+    BoardActions.addSuccess,
     (state, { response }): TBoardState => [...state, response]
   )
 );

@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListItemComponent } from './list-item.component';
+import { AllBoardPageComponent } from './all-board-page.component';
 
-describe('ListItemComponent', () => {
-  let component: ListItemComponent;
-  let fixture: ComponentFixture<ListItemComponent>;
+describe('BoardPageComponent', () => {
+  let component: AllBoardPageComponent;
+  let fixture: ComponentFixture<AllBoardPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ListItemComponent],
+      declarations: [AllBoardPageComponent],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListItemComponent);
+    fixture = TestBed.createComponent(AllBoardPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,7 @@
+.item-wrapper {
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  &.active {
+    border-color: rebeccapurple;
+  }
+}

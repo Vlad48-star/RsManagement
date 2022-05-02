@@ -1,4 +1,5 @@
-import { DataService } from 'src/app/core/services/data.service';
+import { BoardActions } from './../../../redux/actions/board.action';
+import { Store } from '@ngrx/store';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 
@@ -8,7 +9,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./crate-board.component.scss'],
 })
 export class CrateBoardComponent {
-  constructor(private dataService: DataService) {
+  constructor(private store: Store) {
     this.createForm();
   }
   newBoardForm!: FormGroup;
@@ -20,7 +21,9 @@ export class CrateBoardComponent {
       return;
     }
     this.errorOnsubmit = false;
-    this.dataService.addBoard(this.newBoardForm.value);
+    this.store.dispatch(
+      BoardActions.add({ response: this.newBoardForm.value })
+    );
     this.newBoardForm.reset();
   }
   private createForm() {

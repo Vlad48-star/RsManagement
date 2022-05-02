@@ -7,10 +7,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { FormValidatorService } from './services/form-validator.service';
 import { ApiInterceptorService } from './services/app-interceptor.service';
 import { HeaderComponent } from './components/header/header.component';
-import { MainMenuComponent } from './components/main-menu/main-menu.component';
 
 @NgModule({
-  declarations: [NotFoundComponent, HeaderComponent, MainMenuComponent],
+  declarations: [NotFoundComponent, HeaderComponent],
   imports: [CommonModule, HttpClientModule],
   providers: [
     FormValidatorService,
@@ -22,6 +21,6 @@ import { MainMenuComponent } from './components/main-menu/main-menu.component';
       multi: true,
     },
   ],
-  exports: [HeaderComponent, MainMenuComponent],
+  exports: [HeaderComponent],
 })
 export class CoreModule {}
