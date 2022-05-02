@@ -3,24 +3,21 @@
   <div class="content">
     <app-board-menu></app-board-menu>
     <div>
-      <div *ngFor="let item of board$ | async">
-        <form
-          action=""
-          [formGroup]="boardNameForm"
-          [class.err_on_submit]="errorOnsubmit"
-        >
-          <input
-            type="text"
-            [value]="item.title"
-            name="title"
-            formControlName="title"
-            [readonly]="!titleEditable"
-            (blur)="onBlurMethod()"
-          />
-          <button (click)="editableHandler()">Edit</button>
-          <button (click)="delBoardHandler()">Del</button>
-        </form>
-      </div>
+      <form
+        action=""
+        [formGroup]="boardNameForm"
+        [class.err_on_submit]="errorOnsubmit"
+        (ngSubmit)="onBlurMethod()"
+      >
+        <input
+          type="text"
+          name="title"
+          formControlName="title"
+          (blur)="onBlurMethod()"
+        />
+        <input type="submit" hidden />
+        <button type="button" (click)="delBoardHandler()">Del</button>
+      </form>
       <div>board content</div>
     </div>
   </div>

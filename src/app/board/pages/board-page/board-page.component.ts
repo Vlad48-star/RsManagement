@@ -1,3 +1,4 @@
+import { BoardActions } from './../../../redux/actions/board.action';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { first, Observable, mergeMap } from 'rxjs';
 import { IBoard } from './../../model/board.model';
@@ -16,10 +17,9 @@ export class BoardPageComponent implements OnInit {
     this.createForm();
   }
   boardNameForm!: FormGroup;
-  board$!: Observable<IBoard[]>;
+  data!: IBoard;
 
   errorOnsubmit = false;
-  titleEditable = false;
 
   private createForm() {
     this.boardNameForm = new FormGroup({
@@ -27,26 +27,37 @@ export class BoardPageComponent implements OnInit {
     });
   }
 
-  public editableHandler() {
-    this.titleEditable = !this.titleEditable;
-  }
-
-  private changeBoard() {
+  private changeBoard(newData: IBoard) {
+    if (newData == undefined) {
+      return;
+    }
+    this.data = newData;
     this.errorOnsubmit = false;
-    this.titleEditable = false;
+    this.boardNameForm.patchValue({ title: newData.title });
+    this.store.dispatch(BoardActions.get({ response: { id: this.data.id } }));
   }
   public delBoardHandler() {
-    console.log('asd');
+    this.store.dispatch(
+      BoardActions.delete({ response: { id: this.data.id } })
+    );
   }
   public onBlurMethod() {
-    console.log(this.boardNameForm.value);
+    if (this.boardNameForm.value.title == '') {
+      this.boardNameForm.patchValue({ title: this.data.title });
+    }
+    this.store.dispatch(
+      BoardActions.update({
+        response: { title: this.boardNameForm.value.title, id: this.data.id },
+      })
+    );
   }
 
   ngOnInit(): void {
     console.log('init');
     this.route.paramMap.subscribe((params) => {
-      this.changeBoard();
-      return (this.board$ = this.store.select(selectBoard(params.get('id'))));
+      this.store.select(selectBoard(params.get('id'))).subscribe((data) => {
+        this.changeBoard(data[0]);
+      });
     });
   }
 }
