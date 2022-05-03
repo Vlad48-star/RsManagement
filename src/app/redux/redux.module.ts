@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { reducers, metaReducers } from './reducers';
 import { BoardEffects } from './effects/board.effects';
+import { ColumnEffects } from './effects/column.effects';
 
 @NgModule({
   declarations: [],
@@ -18,7 +19,7 @@ import { BoardEffects } from './effects/board.effects';
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([BoardEffects]),
+    EffectsModule.forRoot([BoardEffects, ColumnEffects]),
   ],
 })
 export class ReduxModule {}

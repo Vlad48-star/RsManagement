@@ -1,23 +1,36 @@
-import { BoardActions } from './../../../redux/actions/board.action';
+import { Subscription, Observable } from 'rxjs';
+import {
+  BoardActions,
+  TCurrentBoardState,
+} from './../../../redux/actions/board.action';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { first, Observable, mergeMap } from 'rxjs';
-import { IBoard } from './../../model/board.model';
-import { selectBoard } from './../../../redux/selectors/board.selector';
+import { IBoard, IColumn } from './../../model/board.model';
+import {
+  selectBoard,
+  selectCurrentBoard,
+} from './../../../redux/selectors/board.selector';
 import { Store } from '@ngrx/store';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { selectAllColumn } from 'src/app/redux/selectors/column.selector';
 
 @Component({
   selector: 'app-board-page',
   templateUrl: './board-page.component.html',
   styleUrls: ['./board-page.component.scss'],
 })
-export class BoardPageComponent implements OnInit {
+export class BoardPageComponent implements OnInit, OnDestroy {
   constructor(public route: ActivatedRoute, private store: Store) {
     this.createForm();
   }
   boardNameForm!: FormGroup;
   data!: IBoard;
+
+  stateBoardSubscription!: Subscription;
+  routeSubscription!: Subscription;
+
+  currentBoard$!: Observable<TCurrentBoardState>;
+  columnsOfCurrentBoard$!: Observable<IColumn[]>;
 
   errorOnsubmit = false;
 
@@ -54,10 +67,18 @@ export class BoardPageComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('init');
-    this.route.paramMap.subscribe((params) => {
-      this.store.select(selectBoard(params.get('id'))).subscribe((data) => {
-        this.changeBoard(data[0]);
-      });
+    this.routeSubscription = this.route.paramMap.subscribe((params) => {
+      this.stateBoardSubscription = this.store
+        .select(selectBoard(params.get('id')))
+        .subscribe((data) => {
+          this.changeBoard(data[0]);
+        });
     });
+    this.currentBoard$ = this.store.select(selectCurrentBoard);
+    this.columnsOfCurrentBoard$ = this.store.select(selectAllColumn);
+  }
+  ngOnDestroy(): void {
+    this.stateBoardSubscription.unsubscribe();
+    this.routeSubscription.unsubscribe();
   }
 }

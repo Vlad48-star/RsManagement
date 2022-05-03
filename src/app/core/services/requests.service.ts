@@ -1,5 +1,10 @@
 import { IBoardID } from './../../board/components/crate-board/model/newBoard.model';
-import { IBoard, IBoardData } from './../../board/model/board.model';
+import {
+  IBoard,
+  IBoardData,
+  IColumn,
+  INewColumn,
+} from './../../board/model/board.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { shareReplay, tap } from 'rxjs';
@@ -49,5 +54,15 @@ export class RequestsService {
 
   public deleteBoard({ id }: IBoardID) {
     return this.http.delete<IBoard>(this.url + 'boards/' + id);
+  }
+
+  public loadAllColumn({ id }: IBoardID) {
+    return this.http.get<IColumn[]>(this.url + 'boards/' + id + '/columns');
+  }
+  public addColumn({ title, order }: INewColumn, { id }: IBoardID) {
+    return this.http.post<IColumn>(this.url + 'boards/' + id + '/columns', {
+      title,
+      order,
+    });
   }
 }

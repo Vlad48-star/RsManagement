@@ -30,3 +30,8 @@ export interface IFile {
   filename: string;
   fileSize: number;
 }
+
+export interface INewColumn {
+  title: string;
+  order: number;
+}
