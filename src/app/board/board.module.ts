@@ -11,6 +11,7 @@ import { CrateBoardComponent } from './components/crate-board/crate-board.compon
 import { ListItemComponent } from './components/list-item/list-item.component';
 import { BoardPageComponent } from './pages/board-page/board-page.component';
 import { BoardMenuComponent } from './components/board-menu/board-menu.component';
+import { ColumnModule } from '../column/column.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { BoardMenuComponent } from './components/board-menu/board-menu.component
     CoreModule,
     FormsModule,
     ReactiveFormsModule,
+    ColumnModule,
   ],
 })
 export class BoardModule {}
