@@ -30,12 +30,12 @@
               *ngFor="let column of columnsOfCurrentBoard$ | async"
               [columnInfo]="column"
             ></app-column>
-            <div>
+            <div class="add-wrapper">
               <app-add-column></app-add-column>
             </div>
           </ng-container>
           <ng-template #emptyColumns>
-            <div>
+            <div class="add-wrapper">
               <div>add your first column</div>
               <app-add-column></app-add-column>
             </div>

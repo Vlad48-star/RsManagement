@@ -1,5 +1,4 @@
-import { ColumnActions } from './../../../redux/actions/column.action';
-import { Subscription, mergeMap, map, Observable } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import {
   BoardActions,
   TCurrentBoardState,

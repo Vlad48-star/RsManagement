@@ -32,13 +32,12 @@ export class AddColumnComponent implements OnInit, OnDestroy {
     }
     this.errorOnsubmit = false;
 
-    const newColumnData: INewColumn = {
-      ...this.newColumnForm.value,
-      order: this.currentBoardInfo.columns.length + 1,
-    };
     this.store.dispatch(
       ColumnActions.add({
-        response: newColumnData,
+        response: {
+          ...this.newColumnForm.value,
+          order: this.currentBoardInfo.columns.length + 1,
+        },
         id: { id: this.currentBoardInfo.id },
       })
     );

@@ -3,7 +3,15 @@ import { RequestsService } from './../../core/services/requests.service';
 import { ColumnActions } from './../actions/column.action';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { retry, map, catchError, EMPTY, mergeMap, exhaustMap } from 'rxjs';
+import {
+  retry,
+  map,
+  catchError,
+  EMPTY,
+  mergeMap,
+  exhaustMap,
+  pairwise,
+} from 'rxjs';
 
 @Injectable()
 export class ColumnEffects {

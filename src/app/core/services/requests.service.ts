@@ -13,8 +13,8 @@ import { ILogin, IToken, IPerson } from './models/request.model';
 @Injectable()
 export class RequestsService {
   constructor(private http: HttpClient) {}
-  // private url = 'https://still-waters-55383.herokuapp.com/';
-  private url = '/api/';
+  private url = 'https://still-waters-55383.herokuapp.com/';
+  // private url = '/api/';
 
   public login(
     { login, password }: ILogin,

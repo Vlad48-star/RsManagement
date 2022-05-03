@@ -1,3 +1,5 @@
 <div class="wrapper">
   <div>{{ columnInfo.title }}</div>
+  <app-task *ngFor="let task of columnInfo.tasks"></app-task>
+  <app-add-task></app-add-task>
 </div>
