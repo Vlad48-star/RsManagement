@@ -13,6 +13,7 @@ import { Store } from '@ngrx/store';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { selectAllColumn } from 'src/app/redux/selectors/column.selector';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 
 @Component({
   selector: 'app-board-page',
@@ -20,7 +21,11 @@ import { selectAllColumn } from 'src/app/redux/selectors/column.selector';
   styleUrls: ['./board-page.component.scss'],
 })
 export class BoardPageComponent implements OnInit, OnDestroy {
-  constructor(public route: ActivatedRoute, private store: Store) {
+  constructor(
+    public route: ActivatedRoute,
+    private store: Store,
+    private dialogServise: DialogService
+  ) {
     this.createForm();
   }
   boardNameForm!: FormGroup;
@@ -50,9 +55,19 @@ export class BoardPageComponent implements OnInit, OnDestroy {
     this.store.dispatch(BoardActions.get({ response: { id: this.data.id } }));
   }
   public delBoardHandler() {
-    this.store.dispatch(
-      BoardActions.delete({ response: { id: this.data.id } })
-    );
+    this.dialogServise
+      .confirmDialog({
+        title: 'Вы уверены?',
+        message: 'Вы собираетесь удалить этот таск(эту колонку)?',
+        confirmText: 'да',
+        cancelText: 'нет',
+      })
+      .subscribe((res) => {
+        if (res)
+          this.store.dispatch(
+            BoardActions.delete({ response: { id: this.data.id } })
+          );
+      });
   }
   public onBlurMethod() {
     if (this.boardNameForm.value.title == '') {
