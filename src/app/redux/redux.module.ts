@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { reducers, metaReducers } from './reducers';
 import { BoardEffects } from './effects/board.effects';
 import { ColumnEffects } from './effects/column.effects';
+import { UserEffects } from './effects/user.effects';
 
 @NgModule({
   declarations: [],
@@ -19,7 +20,7 @@ import { ColumnEffects } from './effects/column.effects';
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([BoardEffects, ColumnEffects]),
+    EffectsModule.forRoot([UserEffects, BoardEffects, ColumnEffects]),
   ],
 })
 export class ReduxModule {}

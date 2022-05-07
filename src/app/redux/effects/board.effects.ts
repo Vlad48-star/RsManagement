@@ -1,3 +1,4 @@
+import { UserActions } from './../actions/user.action';
 import { ColumnActions } from './../actions/column.action';
 import { Router } from '@angular/router';
 import { BoardActions } from './../actions/board.action';
@@ -95,6 +96,13 @@ export class BoardEffects {
     return this.actions$.pipe(
       ofType(BoardActions.get),
       map((actions) => ColumnActions.load({ response: actions.response }))
+    );
+  });
+
+  loadUsers$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(BoardActions.loadSuccess),
+      map(() => UserActions.load())
     );
   });
 

@@ -1,4 +1,3 @@
-import { BoardActions } from './../../../redux/actions/board.action';
 import { IBoard } from './../../model/board.model';
 import { Observable } from 'rxjs';
 import { selectAllBoard } from './../../../redux/selectors/board.selector';
@@ -11,11 +10,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent implements OnInit {
+export class ListComponent {
   constructor(public dataService: DataService, private store: Store) {}
   boards$: Observable<IBoard[]> = this.store.select(selectAllBoard);
-
-  ngOnInit(): void {
-    this.store.dispatch(BoardActions.load());
-  }
 }
