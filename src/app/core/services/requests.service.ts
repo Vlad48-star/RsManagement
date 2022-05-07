@@ -1,3 +1,5 @@
+import { INewTask, ITaskRes } from './../../redux/actions/task.action';
+import { IColumnID } from './../../column/components/models/column.model';
 import { IBoardID } from './../../board/components/crate-board/model/newBoard.model';
 import {
   IBoard,
@@ -63,5 +65,14 @@ export class RequestsService {
       title,
       order,
     });
+  }
+
+  public addTask(taskData: INewTask, boardId: IBoardID, columnId: IColumnID) {
+    return this.http.post<ITaskRes>(
+      this.url + 'boards/' + boardId.id + '/columns/' + columnId.id + '/tasks',
+      {
+        ...taskData,
+      }
+    );
   }
 }

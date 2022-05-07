@@ -1,5 +1,5 @@
 import { ColumnActions } from './../../../redux/actions/column.action';
-import { IBoardData, INewColumn } from './../../../board/model/board.model';
+import { IBoardData } from './../../../board/model/board.model';
 import { selectCurrentBoard } from './../../../redux/selectors/board.selector';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';

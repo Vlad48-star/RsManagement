@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import {
+  INewTask,
+  INewTaskForm,
+  TaskActions,
+} from './../../../redux/actions/task.action';
+import { Component, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
@@ -11,16 +16,31 @@ export class AddTaskComponent {
   constructor(private store: Store) {
     this.createForm();
   }
+  @Input() taskOrder!: number;
+  @Input() columnInfo!: string;
+
   newTaskForm!: FormGroup;
   showAddTask = false;
   errorOnsubmit = false;
 
   formSubmit() {
     this.errorOnsubmit = true;
+
     if (!this.newTaskForm.valid) {
       return;
     }
-    console.log(this.newTaskForm.value);
+
+    this.store.dispatch(
+      TaskActions.createTask({
+        response: {
+          title: this.newTaskForm.value.title,
+          order: this.taskOrder,
+          description: 'descriptions',
+        },
+        columnId: this.columnInfo,
+      })
+    );
+
     this.errorOnsubmit = false;
     this.newTaskForm.reset();
     this.showAddTask = !this.showAddTask;

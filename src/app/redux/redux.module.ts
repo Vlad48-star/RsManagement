@@ -1,3 +1,4 @@
+import { TaskEffects } from './effects/task.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreModule } from '@ngrx/store';
@@ -20,7 +21,12 @@ import { UserEffects } from './effects/user.effects';
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([UserEffects, BoardEffects, ColumnEffects]),
+    EffectsModule.forRoot([
+      UserEffects,
+      BoardEffects,
+      ColumnEffects,
+      TaskEffects,
+    ]),
   ],
 })
 export class ReduxModule {}
