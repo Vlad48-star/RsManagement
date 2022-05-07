@@ -1,23 +1,40 @@
-import { BoardActions } from './../../../redux/actions/board.action';
+import { Subscription, Observable } from 'rxjs';
+import {
+  BoardActions,
+  TCurrentBoardState,
+} from './../../../redux/actions/board.action';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { first, Observable, mergeMap } from 'rxjs';
-import { IBoard } from './../../model/board.model';
-import { selectBoard } from './../../../redux/selectors/board.selector';
+import { IBoard, IColumn } from './../../model/board.model';
+import {
+  selectBoard,
+  selectCurrentBoard,
+} from './../../../redux/selectors/board.selector';
 import { Store } from '@ngrx/store';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { selectAllColumn } from 'src/app/redux/selectors/column.selector';
+import { DialogService } from 'src/app/shared/services/dialog.service';
 
 @Component({
   selector: 'app-board-page',
   templateUrl: './board-page.component.html',
   styleUrls: ['./board-page.component.scss'],
 })
-export class BoardPageComponent implements OnInit {
-  constructor(public route: ActivatedRoute, private store: Store) {
+export class BoardPageComponent implements OnInit, OnDestroy {
+  constructor(
+    public route: ActivatedRoute,
+    private store: Store,
+    private dialogServise: DialogService
+  ) {
     this.createForm();
   }
   boardNameForm!: FormGroup;
   data!: IBoard;
+
+  stateBoardSubscription!: Subscription;
+  routeSubscription!: Subscription;
+
+  currentBoard$!: Observable<TCurrentBoardState>;
 
   errorOnsubmit = false;
 
@@ -37,9 +54,19 @@ export class BoardPageComponent implements OnInit {
     this.store.dispatch(BoardActions.get({ response: { id: this.data.id } }));
   }
   public delBoardHandler() {
-    this.store.dispatch(
-      BoardActions.delete({ response: { id: this.data.id } })
-    );
+    this.dialogServise
+      .confirmDialog({
+        title: 'Вы уверены?',
+        message: 'Вы собираетесь удалить этот таск(эту колонку)?',
+        confirmText: 'да',
+        cancelText: 'нет',
+      })
+      .subscribe((res) => {
+        if (res)
+          this.store.dispatch(
+            BoardActions.delete({ response: { id: this.data.id } })
+          );
+      });
   }
   public onBlurMethod() {
     if (this.boardNameForm.value.title == '') {
@@ -54,10 +81,17 @@ export class BoardPageComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('init');
-    this.route.paramMap.subscribe((params) => {
-      this.store.select(selectBoard(params.get('id'))).subscribe((data) => {
-        this.changeBoard(data[0]);
-      });
+    this.routeSubscription = this.route.paramMap.subscribe((params) => {
+      this.stateBoardSubscription = this.store
+        .select(selectBoard(params.get('id')))
+        .subscribe((data) => {
+          this.changeBoard(data[0]);
+        });
     });
+    this.currentBoard$ = this.store.select(selectCurrentBoard);
+  }
+  ngOnDestroy(): void {
+    this.stateBoardSubscription.unsubscribe();
+    this.routeSubscription.unsubscribe();
   }
 }

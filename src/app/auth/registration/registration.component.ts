@@ -26,16 +26,14 @@ export class RegistrationComponent {
 
   private createForm() {
     this.signInForm = new FormGroup({
-      name: new FormControl('', [
-        Validators.required,
-      ]),
+      name: new FormControl('', [Validators.required]),
       login: new FormControl('', [
         Validators.required,
         Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/),
       ]),
       password: new FormControl('', [
         Validators.required,
-        Validators.minLength(8)
+        Validators.minLength(8),
       ]),
     });
   }
@@ -53,8 +51,8 @@ export class RegistrationComponent {
   }
 
   get count() {
-    const count = 8 - this.signInForm.get('password').errors['minlength']['actualLength'];
+    const count =
+      8 - this.signInForm.get('password').errors['minlength']['actualLength'];
     return count;
   }
 }
-

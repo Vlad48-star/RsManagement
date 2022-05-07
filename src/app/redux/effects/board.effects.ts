@@ -1,3 +1,5 @@
+import { UserActions } from './../actions/user.action';
+import { ColumnActions } from './../actions/column.action';
 import { Router } from '@angular/router';
 import { BoardActions } from './../actions/board.action';
 import { RequestsService } from './../../core/services/requests.service';
@@ -77,15 +79,30 @@ export class BoardEffects {
   getBorderData$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BoardActions.get),
-      exhaustMap((actions) => {
-        return this.requestsService.getBoardData(actions.response);
-      }),
-      retry(4),
-      map((response) => BoardActions.getSuccess({ response })),
-      catchError((error) => {
-        console.log('[ERROR]: ', error);
-        return EMPTY;
-      })
+      mergeMap((actions) =>
+        this.requestsService.getBoardData(actions.response).pipe(
+          retry(4),
+          map((response) => BoardActions.getSuccess({ response })),
+          catchError((error) => {
+            console.log('[ERROR]: ', error);
+            return EMPTY;
+          })
+        )
+      )
+    );
+  });
+
+  loadColumns$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(BoardActions.get),
+      map((actions) => ColumnActions.load({ response: actions.response }))
+    );
+  });
+
+  loadUsers$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(BoardActions.loadSuccess),
+      map(() => UserActions.load())
     );
   });
 

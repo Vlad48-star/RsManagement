@@ -18,7 +18,34 @@
         <input type="submit" hidden />
         <button type="button" (click)="delBoardHandler()">Del</button>
       </form>
-      <div>board content</div>
+      <div class="column-grid">
+        <ng-container *ngIf="(currentBoard$ | async) !== undefined">
+          <ng-container
+            *ngIf="
+              (currentBoard$ | async)!.columns.length > 0;
+              else emptyColumns
+            "
+          >
+            <app-column
+              *ngFor="
+                let column of (currentBoard$ | async)?.columns;
+                let indexOfColumn = index
+              "
+              [columnInfo]="column"
+              [columnOrder]="indexOfColumn"
+            ></app-column>
+            <div class="add-wrapper">
+              <app-add-column></app-add-column>
+            </div>
+          </ng-container>
+          <ng-template #emptyColumns>
+            <div class="add-wrapper">
+              <div>add your first column</div>
+              <app-add-column></app-add-column>
+            </div>
+          </ng-template>
+        </ng-container>
+      </div>
     </div>
   </div>
 </div>

@@ -1,25 +1,28 @@
+import { INewTask, ITaskRes } from './../../redux/actions/task.action';
+import { IColumnID } from './../../column/components/models/column.model';
 import { IBoardID } from './../../board/components/crate-board/model/newBoard.model';
-import { IBoard, IColumn, IBoardData } from './../../board/model/board.model';
+import {
+  IBoard,
+  IBoardData,
+  IColumn,
+  INewColumn,
+} from './../../board/model/board.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { shareReplay, tap } from 'rxjs';
 import { ILogin, IToken, IPerson } from './models/request.model';
+import { IUser } from 'src/app/redux/actions/user.action';
 
 @Injectable()
 export class RequestsService {
   constructor(private http: HttpClient) {}
-  private url = '/api/';
+  private url = 'https://still-waters-55383.herokuapp.com/';
+  // private url = '/api/';
 
-  public login(
-    { login, password }: ILogin,
-    storeMethod: (data: IToken) => void
-  ) {
-    return this.http
-      .post<IToken>(this.url + 'signin', {
-        login,
-        password,
-      })
-      .pipe(tap(storeMethod), shareReplay());
+  public login({ login, password }: ILogin) {
+    return this.http.post<IToken>(this.url + 'signin', {
+      login,
+      password,
+    });
   }
 
   public register({ name, login, password }: IPerson) {
@@ -28,6 +31,10 @@ export class RequestsService {
       login,
       password,
     });
+  }
+
+  public loadAllUsers() {
+    return this.http.get<IUser[]>(this.url + 'users');
   }
 
   public loadAllBoard() {
@@ -48,5 +55,24 @@ export class RequestsService {
 
   public deleteBoard({ id }: IBoardID) {
     return this.http.delete<IBoard>(this.url + 'boards/' + id);
+  }
+
+  public loadAllColumn({ id }: IBoardID) {
+    return this.http.get<IColumn[]>(this.url + 'boards/' + id + '/columns');
+  }
+  public addColumn({ title, order }: INewColumn, { id }: IBoardID) {
+    return this.http.post<IColumn>(this.url + 'boards/' + id + '/columns', {
+      title,
+      order,
+    });
+  }
+
+  public addTask(taskData: INewTask, boardId: IBoardID, columnId: IColumnID) {
+    return this.http.post<ITaskRes>(
+      this.url + 'boards/' + boardId.id + '/columns/' + columnId.id + '/tasks',
+      {
+        ...taskData,
+      }
+    );
   }
 }

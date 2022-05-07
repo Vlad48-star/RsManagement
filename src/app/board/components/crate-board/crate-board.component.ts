@@ -1,3 +1,4 @@
+import { DialogService } from 'src/app/shared/services/dialog.service';
 import { BoardActions } from './../../../redux/actions/board.action';
 import { Store } from '@ngrx/store';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -9,7 +10,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./crate-board.component.scss'],
 })
 export class CrateBoardComponent {
-  constructor(private store: Store) {
+  constructor(private store: Store, private dialog: DialogService) {
     this.createForm();
   }
   newBoardForm!: FormGroup;
@@ -25,6 +26,7 @@ export class CrateBoardComponent {
       BoardActions.add({ response: this.newBoardForm.value })
     );
     this.newBoardForm.reset();
+    this.dialog.close();
   }
   private createForm() {
     this.newBoardForm = new FormGroup({

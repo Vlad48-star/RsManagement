@@ -1,0 +1,27 @@
+<div>
+  <form
+    [formGroup]="newColumnForm"
+    (ngSubmit)="formSubmit()"
+    class="flex-column"
+  >
+    <div class="flex-row">
+      <input
+        type="text"
+        class="input-text"
+        name="title"
+        formControlName="title"
+        required
+      />
+      <button class="btn btn-text">{{ 'Добавить' | titlecase }}</button>
+    </div>
+    <ng-container
+      *ngIf="
+        (title!.invalid && (title!.touched || title!.dirty)) || errorOnsubmit
+      "
+    >
+      <span *ngIf="title!.errors?.['required']"
+        >Пожалуйста, введите имя колонки</span
+      >
+    </ng-container>
+  </form>
+</div>
