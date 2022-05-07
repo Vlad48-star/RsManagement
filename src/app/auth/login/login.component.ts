@@ -30,13 +30,12 @@ export class LoginComponent {
       return;
     }
     this.errorOnsubmit = false;
-    this.authService
-      .login(this.loginForm.value)
-      .pipe(first())
-      .subscribe(() => {
-        // this.loginService.submitHandler(this.loginForm.value);
-        this.router.navigate(['/board']);
-      });
+    this.authService.login(this.loginForm.value);
+    // .pipe(first())
+    // .subscribe(() => {
+    //   // this.loginService.submitHandler(this.loginForm.value);
+    //   this.router.navigate(['/board']);
+    // });
   }
 
   private createForm() {

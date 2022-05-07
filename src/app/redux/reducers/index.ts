@@ -1,3 +1,4 @@
+import { USER_KEY, TUserState } from './../actions/user.action';
 import { columnReducer } from './column.reducer';
 import { COLUMN_KEY, TColumnState } from './../actions/column.action';
 import { boardReducer, borderItemReducer } from './board.reducer';
@@ -9,14 +10,17 @@ import {
 } from './../actions/board.action';
 import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { environment } from '../../../environments/environment';
+import { userReducer } from './user.reducer';
 
 export interface State {
+  [USER_KEY]: TUserState;
   [BOARD_KEY]: TBoardState;
   [CURRENT_BOARD_KEY]: TCurrentBoardState;
   [COLUMN_KEY]: TColumnState;
 }
 
 export const reducers: ActionReducerMap<State> = {
+  [USER_KEY]: userReducer,
   [BOARD_KEY]: boardReducer,
   [CURRENT_BOARD_KEY]: borderItemReducer,
   [COLUMN_KEY]: columnReducer,

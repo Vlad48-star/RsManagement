@@ -7,8 +7,8 @@ import {
 } from './../../board/model/board.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { shareReplay, tap } from 'rxjs';
 import { ILogin, IToken, IPerson } from './models/request.model';
+import { IUser } from 'src/app/redux/actions/user.action';
 
 @Injectable()
 export class RequestsService {
@@ -16,16 +16,11 @@ export class RequestsService {
   private url = 'https://still-waters-55383.herokuapp.com/';
   // private url = '/api/';
 
-  public login(
-    { login, password }: ILogin,
-    storeMethod: (data: IToken) => void
-  ) {
-    return this.http
-      .post<IToken>(this.url + 'signin', {
-        login,
-        password,
-      })
-      .pipe(tap(storeMethod), shareReplay());
+  public login({ login, password }: ILogin) {
+    return this.http.post<IToken>(this.url + 'signin', {
+      login,
+      password,
+    });
   }
 
   public register({ name, login, password }: IPerson) {
@@ -34,6 +29,10 @@ export class RequestsService {
       login,
       password,
     });
+  }
+
+  public loadAllUsers() {
+    return this.http.get<IUser[]>(this.url + 'users');
   }
 
   public loadAllBoard() {
