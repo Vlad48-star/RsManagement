@@ -17,7 +17,8 @@
           (blur)="formSubmit()"
           required
         />
-        <button class="btn btn-text">{{ 'Добавить' | titlecase }}</button>
+      <button class="btn btn-text" style="background-color: red;" [mat-dialog-close]="false">{{ 'cancel' | titlecase }}</button>
+      <button class="btn btn-text">{{ 'Добавить' | titlecase }}</button>
       </div>
       <ng-container
         *ngIf="

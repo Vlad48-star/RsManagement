@@ -1,3 +1,4 @@
+import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from './../core/core.module';
@@ -32,6 +33,7 @@ import { ColumnModule } from '../column/column.module';
     ReactiveFormsModule,
     ColumnModule,
     MatDialogModule,
+    MatIconModule,
   ],
 })
 export class BoardModule {}
