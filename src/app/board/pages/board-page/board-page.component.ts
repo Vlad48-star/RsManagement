@@ -35,7 +35,6 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   routeSubscription!: Subscription;
 
   currentBoard$!: Observable<TCurrentBoardState>;
-  columnsOfCurrentBoard$!: Observable<IColumn[]>;
 
   errorOnsubmit = false;
 
@@ -90,7 +89,6 @@ export class BoardPageComponent implements OnInit, OnDestroy {
         });
     });
     this.currentBoard$ = this.store.select(selectCurrentBoard);
-    this.columnsOfCurrentBoard$ = this.store.select(selectAllColumn);
   }
   ngOnDestroy(): void {
     this.stateBoardSubscription.unsubscribe();

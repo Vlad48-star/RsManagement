@@ -27,8 +27,12 @@
             "
           >
             <app-column
-              *ngFor="let column of columnsOfCurrentBoard$ | async"
+              *ngFor="
+                let column of (currentBoard$ | async)?.columns;
+                let indexOfColumn = index
+              "
               [columnInfo]="column"
+              [columnOrder]="indexOfColumn"
             ></app-column>
             <div class="add-wrapper">
               <app-add-column></app-add-column>
