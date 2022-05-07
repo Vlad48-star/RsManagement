@@ -29,13 +29,7 @@ export class LoginComponent {
       return;
     }
     this.errorOnsubmit = false;
-    this.authService
-      .login(this.loginForm.value)
-      .pipe(first())
-      .subscribe(
-        () => this.router.navigate(['/board']),
-        err => MaterialService.toast(err.error.message)
-      )
+    this.authService.login(this.loginForm.value);
   }
 
   private createForm() {
