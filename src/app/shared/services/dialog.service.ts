@@ -1,3 +1,4 @@
+import { CrateBoardComponent } from './../../board/components/crate-board/crate-board.component';
 import { Observable } from 'rxjs';
 import { IConfirmDialogData } from './../models/confirmModal';
 import { Injectable } from '@angular/core';
@@ -16,5 +17,11 @@ export class DialogService {
         width: '400px',
       })
       .afterClosed();
+  }
+  createBoardFormDialog() {
+    return this.dialog.open(CrateBoardComponent);
+  }
+  close() {
+    this.dialog.closeAll();
   }
 }
