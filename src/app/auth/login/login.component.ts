@@ -1,9 +1,9 @@
 import { Router } from '@angular/router';
 import { AuthService } from './../../core/services/auth.service';
-import { FormValidatorService } from './../../core/services/form-validator.service';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { first } from 'rxjs';
+import { MaterialService } from './../class/material.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,6 @@ import { first } from 'rxjs';
 })
 export class LoginComponent {
   constructor(
-    // private formValidatorService: FormValidatorService,
     private authService: AuthService,
     private router: Router
   ) {
@@ -33,10 +32,10 @@ export class LoginComponent {
     this.authService
       .login(this.loginForm.value)
       .pipe(first())
-      .subscribe(() => {
-        // this.loginService.submitHandler(this.loginForm.value);
-        this.router.navigate(['/board']);
-      });
+      .subscribe(
+        () => this.router.navigate(['/board']),
+        err => MaterialService.toast(err.error.message)
+      )
   }
 
   private createForm() {
