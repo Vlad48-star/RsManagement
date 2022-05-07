@@ -1,3 +1,4 @@
+import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from './../core/core.module';
 // Не уверен что так стоит подключать кор модуль, но по другому достать из него хедер не получилось
@@ -30,6 +31,7 @@ import { ColumnModule } from '../column/column.module';
     FormsModule,
     ReactiveFormsModule,
     ColumnModule,
+    MatDialogModule,
   ],
 })
 export class BoardModule {}
