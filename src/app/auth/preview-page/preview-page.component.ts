@@ -7,5 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./preview-page.component.scss'],
 })
 export class PreviewPageComponent {
+
   constructor(public router: Router) {}
+
+  checkLang() {
+    localStorage.getItem('lang') === 'ru' ? localStorage.setItem('lang', 'en') : localStorage.setItem('lang', 'ru');
+  }
+
 }
