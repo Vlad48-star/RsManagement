@@ -1,3 +1,4 @@
+import { DialogService } from 'src/app/shared/services/dialog.service';
 import { ColumnActions } from './../../../redux/actions/column.action';
 import { IBoardData } from './../../../board/model/board.model';
 import { selectCurrentBoard } from './../../../redux/selectors/board.selector';
@@ -12,7 +13,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./add-column.component.scss'],
 })
 export class AddColumnComponent implements OnInit, OnDestroy {
-  constructor(private store: Store) {
+  constructor(private store: Store, private dialog: DialogService) {
     this.createForm();
   }
   newColumnForm!: FormGroup;
@@ -42,6 +43,7 @@ export class AddColumnComponent implements OnInit, OnDestroy {
       })
     );
     this.newColumnForm.reset();
+    this.dialog.close();
   }
   ngOnInit(): void {
     this.currentBoardInfoSubscription = this.store

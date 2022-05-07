@@ -1,3 +1,4 @@
+import { DialogService } from 'src/app/shared/services/dialog.service';
 import {
   INewTask,
   INewTaskForm,
@@ -13,7 +14,7 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./add-task.component.scss'],
 })
 export class AddTaskComponent {
-  constructor(private store: Store) {
+  constructor(private store: Store, private dialog: DialogService) {
     this.createForm();
   }
   @Input() taskOrder!: number;
@@ -44,6 +45,7 @@ export class AddTaskComponent {
     this.errorOnsubmit = false;
     this.newTaskForm.reset();
     this.showAddTask = !this.showAddTask;
+    this.dialog.close();
   }
   private createForm() {
     this.newTaskForm = new FormGroup(

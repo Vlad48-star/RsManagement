@@ -24,7 +24,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   constructor(
     public route: ActivatedRoute,
     private store: Store,
-    private dialogServise: DialogService
+    private dialog: DialogService
   ) {
     this.createForm();
   }
@@ -54,7 +54,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
     this.store.dispatch(BoardActions.get({ response: { id: this.data.id } }));
   }
   public delBoardHandler() {
-    this.dialogServise
+    this.dialog
       .confirmDialog({
         title: 'Вы уверены?',
         message: 'Вы собираетесь удалить этот таск(эту колонку)?',
@@ -93,5 +93,9 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.stateBoardSubscription.unsubscribe();
     this.routeSubscription.unsubscribe();
+  }
+
+  onAddColumn() {
+    this.dialog.createColumnDialog();
   }
 }

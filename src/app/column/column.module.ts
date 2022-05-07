@@ -1,3 +1,5 @@
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -7,7 +9,14 @@ import { TaskModule } from '../task/task.module';
 
 @NgModule({
   declarations: [ColumnComponent, AddColumnComponent],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, TaskModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    TaskModule,
+    MatDialogModule,
+    MatIconModule,
+  ],
   exports: [ColumnComponent, AddColumnComponent],
 })
 export class ColumnModule {}

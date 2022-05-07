@@ -1,3 +1,5 @@
+import { AddTaskComponent } from './../../task/components/add-task/add-task.component';
+import { AddColumnComponent } from './../../column/components/add-column/add-column.component';
 import { CrateBoardComponent } from './../../board/components/crate-board/crate-board.component';
 import { Observable } from 'rxjs';
 import { IConfirmDialogData } from './../models/confirmModal';
@@ -20,6 +22,12 @@ export class DialogService {
   }
   createBoardFormDialog() {
     return this.dialog.open(CrateBoardComponent);
+  }
+  createColumnDialog() {
+    return this.dialog.open(AddColumnComponent);
+  }
+  addTaskDialog() {
+    return this.dialog.open(AddTaskComponent);
   }
   close() {
     this.dialog.closeAll();

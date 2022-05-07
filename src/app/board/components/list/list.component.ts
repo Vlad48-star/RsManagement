@@ -1,3 +1,4 @@
+import { DialogService } from 'src/app/shared/services/dialog.service';
 import { IBoard } from './../../model/board.model';
 import { Observable } from 'rxjs';
 import { selectAllBoard } from './../../../redux/selectors/board.selector';
@@ -11,6 +12,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent {
-  constructor(public dataService: DataService, private store: Store) {}
+  constructor(
+    public dataService: DataService,
+    private store: Store,
+    private dialog: DialogService
+  ) {}
   boards$: Observable<IBoard[]> = this.store.select(selectAllBoard);
+  onCreateNewBoard() {
+    this.dialog.createBoardFormDialog();
+  }
 }
