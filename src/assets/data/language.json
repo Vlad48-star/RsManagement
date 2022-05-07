@@ -1,0 +1,65 @@
+{
+  "en":
+    {
+      "pageView":{
+        "login": "login",
+        "password": "password",
+        "team": "About team",
+        "age": "age",
+        "registration": "sign up",
+        "sign in": "sign in",
+        "back": "back",
+        "submit": "submit",
+        "userName": "User name",
+        "userPassword": "User password",
+        "userEmail": "User email",
+        "summary": "Save your time. Check out the features of the application!",
+        "cv": "More about in CV"
+      },
+      "errResponseRegistration":{
+        "password": "The password is not be empty",
+        "login": "The login is not be empty",
+        "validEmail": "Please enter a valid email",
+        "email": "The email is not be empty",
+        "enter": "Enter characters"
+      },
+      "errResponseLogin":{
+        "validEmail": "The login email is invalid",
+        "email": "Please enter a login email",
+        "password": "Please enter a password",
+        "minPassword": "Please enter a password at least 8 characters"
+      }
+    }
+  ,
+  "ru":
+    {
+      "pageView":{
+        "login": "Имя",
+        "password": "Пароль",
+        "team": "О команде",
+        "age": "возраст",
+        "registration": "Регистрация",
+        "sign in": "Войти",
+        "back": "Назад",
+        "submit": "Отправить",
+        "userName": "Имя пользователя",
+        "userPassword": "Пароль",
+        "userEmail": "Почта",
+        "summary": "Экономьте свое время. Ознакомьтесь с возможностями приложения!",
+        "cv": "Подробно в Резюме"
+      },
+      "errResponseRegistration":{
+        "password": "Пароль не должен быть пустым",
+        "login": "Имя не должно быть пустым",
+        "validEmail": "Введите верную электронную почту",
+        "email": "Электронная почта не должна быть пустой",
+        "enter": "Введите"
+      },
+      "errResponseLogin":{
+        "validEmail": "Электронная почта невалидна",
+        "email": "Введите электронную почту",
+        "password": "Введите пароль",
+        "minPassword": "Введите пароль не менее 8 значений"
+      }
+    }
+}

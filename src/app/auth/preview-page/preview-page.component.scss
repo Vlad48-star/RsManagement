@@ -1,11 +1,3 @@
-p{
-  margin: 0;
-}
-
-a{
-  color: black;
-}
-
 .wrap-header{
   display: flex;
   justify-content: space-between;
@@ -14,10 +6,30 @@ a{
   padding: 0 20px;
 }
 
+.switch{
+  display: flex;
+  justify-self: end;
+}
+.switch label .lever {
+  background-color: #fce3bd;
+}
+
+.switch label .lever:after {
+  background-color: #ff9800;
+}
+
+.switch label input[type=checkbox]:checked+.lever {
+  background-color: #fce3bd;
+}
+
+.switch label input[type=checkbox]:checked+.lever:after {
+  background-color: #ff9800;
+}
+
 .position-logo{
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 5px
 }
 
 .logo{
@@ -45,7 +57,6 @@ a{
   background-color: white;
 }
 
-
 .wrap-video{
   display: flex;
   align-items: center;
@@ -70,36 +81,42 @@ a{
   background-image: url(/assets/back.png);
 }
 
-.footer {
+.wrap-persons{
   display: flex;
-  margin: 0 auto;
-  margin-top: 30px;
-  width: 90%;
-  height: 70px;
-  font-size: 24px;
-  align-items: center;
-  color: black;
-  justify-content: space-between;
-  .footer-row {
-    display: flex;
-    align-items: center;
+  padding: 0 20px;
+  margin-bottom: 80px;
+  text-align: center;
+  justify-content: space-around;
+  .person-max{
+    border: solid 4px #ff9800;
+    width: 200px;
+    height: 200px;
+    background: no-repeat;
+    background-image: url(/assets/img/person/Max.webp);
+    background-size: 116%;
+    border-radius: 50%;
   }
-  .github-username {
-    display: block;
-    text-decoration: none;
-    padding: 0 20px;
-    transition: 0.3s;
+  .person-vlad{
+    border: solid 4px #ff9800;
+    width: 200px;
+    height: 200px;
+    background: no-repeat;
+    background-image: url(/assets/img/person/Vlad.webp);
+    background-size: 448%;
+    background-position-y: 34%;
+    background-position-x: 50%;
+    border-radius: 50%;
   }
-  .copyright {
-    padding-right: 20px;
-  }
-  .footer-logo__rss {
-    display: block;
-    width: 90px;
-    height: 32px;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-image: url(/assets/svg/rs.svg);
-    transition: 0.3s;
+  .person-dmitri{
+    border: solid 4px #ff9800;
+    width: 200px;
+    height: 200px;
+    background: no-repeat;
+    background-image: url(/assets/img/person/Dmitri.webp);
+    background-size: 129%;
+    background-position-y: 19%;
+    background-position-x: 63%;
+    border-radius: 50%;
   }
 }
+
