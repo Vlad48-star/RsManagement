@@ -17,16 +17,24 @@
           (blur)="formSubmit()"
           required
         />
+        <input
+          type="text"
+          class="input-text"
+          name="description"
+          formControlName="description"
+          (blur)="formSubmit()"
+          required
+        />
       <button class="btn btn-text" style="background-color: red;" [mat-dialog-close]="false">{{ 'cancel' | titlecase }}</button>
       <button class="btn btn-text">{{ 'Добавить' | titlecase }}</button>
       </div>
       <ng-container
         *ngIf="
-          (title!.invalid && (title!.touched || title!.dirty)) || errorOnsubmit
+          (title!.invalid && (title!.touched || title!.dirty)) || (description!.invalid && (description!.touched || description!.dirty)) || errorOnsubmit
         "
       >
-        <span *ngIf="title!.errors?.['required']"
-          >Пожалуйста, введите имя колонки</span
+        <span *ngIf="title!.errors?.['required'] || description!.errors?.['required']"
+          >Пожалуйста, введите имя колонки и описание</span
         >
       </ng-container>
     </form>

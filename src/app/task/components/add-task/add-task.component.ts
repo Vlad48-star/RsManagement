@@ -36,7 +36,7 @@ export class AddTaskComponent {
         response: {
           title: this.newTaskForm.value.title,
           order: this.taskOrder,
-          description: 'descriptions',
+          description: this.newTaskForm.value.description,
         },
         columnId: this.columnInfo,
       })
@@ -51,6 +51,7 @@ export class AddTaskComponent {
     this.newTaskForm = new FormGroup(
       {
         title: new FormControl('', [Validators.required]),
+        description: new FormControl('', [Validators.required]),
       },
       { updateOn: 'blur' }
     );
@@ -60,5 +61,8 @@ export class AddTaskComponent {
   }
   get title() {
     return this.newTaskForm.get('title');
+  }
+  get description() {
+    return this.newTaskForm.get('description');
   }
 }
