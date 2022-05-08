@@ -9,17 +9,16 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+  errorOnsubmit = false;
+  loginForm!: any;
+  lang = localStorage.getItem('lang');
+
   constructor(
     private authService: AuthService,
     private router: Router
   ) {
     this.createForm();
   }
-  title = 'Login';
-
-  loginForm!: any;
-
-  errorOnsubmit = false;
 
   formSubmit() {
     this.errorOnsubmit = true;
