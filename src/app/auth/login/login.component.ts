@@ -2,8 +2,6 @@ import { Router } from '@angular/router';
 import { AuthService } from './../../core/services/auth.service';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { first } from 'rxjs';
-import { MaterialService } from './../class/material.service';
 
 @Component({
   selector: 'app-login',

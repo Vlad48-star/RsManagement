@@ -2,8 +2,6 @@ import { AuthService } from './../../core/services/auth.service';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MaterialService } from '../class/material.service';
-import * as language from 'src/assets/data/language.json';
 
 @Component({
   selector: 'app-registration',
@@ -12,6 +10,7 @@ import * as language from 'src/assets/data/language.json';
 })
 export class RegistrationComponent {
   signInForm: any;
+  lang = localStorage.getItem('lang');
 
   constructor(private auth: AuthService, private router: Router) {
     this.createForm();
