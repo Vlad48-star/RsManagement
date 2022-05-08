@@ -1,34 +1,36 @@
 <header class="wrap-header">
   <div class="position-logo">
-    <img class="logo" src="./assets/svg/Rs.svg" alt="" />
+    <img class="logo" src="./assets/svg/rs.svg" alt="" />
     <div class="text-logo">Managment</div>
   </div>
-  <div class="switch">
-    <label>
-      EN
-      <input
-        type="checkbox"
-        [(ngModel)]="name"
-        (change)="checkLang($event)"
-      />
-      <span class="lever"></span>
-      RU
-    </label>
-  </div>
-  <div class="registration-wrap">
-    <button
-      class="sigh-in btn"
-      [routerLink]="['/login']"
-      routerLinkActive="router-link-active"
-    >
-    {{ lang === 'ru' ? 'Войти' : 'Login' }}
-    </button>
-    <button
-      class="btn waves-effect waves-light"
-      [routerLink]="['/registration']"
-    >
-    {{ lang === 'ru' ? 'Регистрация' : 'Sign up' }}
-    </button>
+  <div class="wrap-registration">
+    <div class="switch">
+      <label>
+        EN
+        <input
+          type="checkbox"
+          [(ngModel)]="name"
+          (change)="checkLang($event)"
+        />
+        <span class="lever"></span>
+        RU
+      </label>
+    </div>
+    <div class="registration-wrap">
+      <button
+        class="sigh-in btn"
+        [routerLink]="['/login']"
+        routerLinkActive="router-link-active"
+      >
+        {{ lang === 'ru' ? 'Войти' : 'Login' }}
+      </button>
+      <button
+        class="btn waves-effect waves-light"
+        [routerLink]="['/registration']"
+      >
+        {{ lang === 'ru' ? 'Регистрация' : 'Sign up' }}
+      </button>
+    </div>
   </div>
 </header>
 <main>
@@ -44,32 +46,36 @@
     >
     </iframe>
     <p class="summary-video">
-      Save your time. Check out the features of the application!
+      {{
+        lang === 'ru'
+          ? 'Сэкономьте своё время. Ознакомтесь с возможностями приложения!'
+          : 'Save your time. Check out the features of the application!'
+      }}
     </p>
   </div>
   <div class="wrap-persons">
     <div>
       <div class="person-max"></div>
       <p>Developer</p>
-      <p>Age 26</p>
+      <p>{{ lang === 'ru' ? 'Возраст' : 'Age' }} 26</p>
       <a href="https://debaev.github.io/rsschool-cv/">
-        <p>More about in CV</p>
+        <p>{{ lang === 'ru' ? 'Подробнее в резюме' : 'More about in CV' }}</p>
       </a>
     </div>
     <div>
       <div class="person-vlad"></div>
       <p>Vlad Hitrikov</p>
-      <p>Age 26</p>
+      <p>{{ lang === 'ru' ? 'Возраст' : 'Age' }} 26</p>
       <a href="https://resume.io/r/aB2FxvdHA">
-        <p>More about in CV</p>
+        <p>{{ lang === 'ru' ? 'Подробнее в резюме' : 'More about in CV' }}</p>
       </a>
     </div>
     <div>
       <div class="person-dmitri"></div>
       <p>Dmitry Legankov</p>
-      <p>Age 26</p>
+      <p>{{ lang === 'ru' ? 'Возраст' : 'Age' }} 26</p>
       <a href="https://debaev.github.io/rsschool-cv/">
-        <p>More about in CV</p>
+        <p>{{ lang === 'ru' ? 'Подробнее в резюме' : 'More about in CV' }}</p>
       </a>
     </div>
   </div>

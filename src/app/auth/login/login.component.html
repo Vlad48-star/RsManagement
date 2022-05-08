@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class="content flex-column">
-    <h2>{{ title | titlecase }}</h2>
+    <h2>{{ lang === 'ru' ? 'Вход' : 'Login' }}</h2>
     <form
       [formGroup]="loginForm"
       (ngSubmit)="formSubmit()"
@@ -8,7 +8,7 @@
       [class.err_on_submit]="errorOnsubmit"
     >
       <label class="flex-column">
-        <span>{{ 'login' }}</span>
+        <span>{{ lang === 'ru' ? 'Электронная почта' : 'Email' }}</span>
         <input
           [ngClass]="{
             invalid:
@@ -26,16 +26,20 @@
             errorOnsubmit
           "
         >
-          <span class="red-text" *ngIf="login!.errors?.['required']"
-            >Please enter a login email</span
-          >
-          <span class="red-text" *ngIf="login!.errors?.['pattern']"
-            >The login email is invalid</span
-          >
+          <span class="red-text" *ngIf="login!.errors?.['required']">{{
+            lang === 'ru'
+              ? 'Введите электронную почту'
+              : 'Please enter a login email'
+          }}</span>
+          <span class="red-text" *ngIf="login!.errors?.['pattern']">{{
+            lang === 'ru'
+              ? 'Введите верную электронную почту'
+              : 'The login email is invalid'
+          }}</span>
         </ng-container>
       </label>
       <label class="flex-column">
-        <span>{{ 'password' }}</span>
+        <span>{{ lang === 'ru' ? 'Пароль' : 'Password' }}</span>
         <input
           [ngClass]="{
             invalid:
@@ -55,30 +59,24 @@
             errorOnsubmit
           "
         >
-          <span class="red-text" *ngIf="password!.errors?.['required']"
-            >Please enter a password</span
-          >
+          <span class="red-text" *ngIf="password!.errors?.['required']">{{
+            lang === 'ru' ? 'Введите пароль' : 'Please enter a password'
+          }}</span>
           <span class="red-text" *ngIf="password!.errors?.['minlength']"
-            >Please enter a password at least 8 characters
-          </span>
-          <span
-            class="red-text"
-            *ngIf="password!.errors?.['haveUpperCaseAndLowerCase']"
-            >Please enter a password a mixture of both uppercase and lowercase
-            letters
-          </span>
-          <span class="red-text" *ngIf="password!.errors?.['hasNumber']"
-            >Please enter a password a mixture of letters and numbers
-          </span>
-          <span class="red-text" *ngIf="password!.errors?.['specialCharacter']"
-            >Please enter a password a least one special character
+            >{{
+              lang === 'ru'
+                ? 'Введите пароль более 8 символов'
+                : 'Please enter a password at least 8 characters'
+            }}
           </span>
         </ng-container>
       </label>
       <div class="wrap-btn">
-        <button class="btn btn-back" [routerLink]="['/']">Back</button>
+        <button class="btn btn-back" [routerLink]="['/']">
+          {{ lang === 'ru' ? 'Назад' : 'Back' }}
+        </button>
         <button type="submit" class="btn" [disabled]="loginForm.invalid">
-          Submit
+          {{ lang === 'ru' ? 'Отправить' : 'Submit' }}
         </button>
       </div>
     </form>

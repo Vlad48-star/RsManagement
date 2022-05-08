@@ -119,3 +119,10 @@
     border-radius: 50%;
   }
 }
+
+.wrap-registration {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 20px;
+}
