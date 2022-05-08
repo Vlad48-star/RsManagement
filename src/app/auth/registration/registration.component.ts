@@ -18,10 +18,7 @@ export class RegistrationComponent {
   }
 
   onSubmit() {
-    this.auth.register(this.signInForm.value).subscribe(
-      () => this.router.navigateByUrl('/board'),
-      err => MaterialService.toast(err.error.message)
-      );
+    this.auth.register(this.signInForm.value);
   }
 
   private createForm() {
