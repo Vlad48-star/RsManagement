@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="wrapper flex-column">
   <div class="content">
     <app-board-menu></app-board-menu>
@@ -15,9 +16,15 @@
           (blur)="onBlurMethod()"
         />
         <input type="submit" hidden />
-        <button style="background-color: red; color: white" type="button" (click)="delBoardHandler()">Del</button>
+        <button
+          style="background-color: red; color: white"
+          type="button"
+          (click)="delBoardHandler()"
+        >
+          Del
+        </button>
       </form>
-      <hr>
+      <hr />
       <div class="column-grid">
         <ng-container *ngIf="(currentBoard$ | async) !== undefined">
           <ng-container
@@ -35,13 +42,17 @@
               [columnOrder]="indexOfColumn"
             ></app-column>
             <div class="add-wrapper">
-              <button (click)="onAddColumn()"><mat-icon>add</mat-icon> add column</button>
+              <button (click)="onAddColumn()">
+                <mat-icon>add</mat-icon> add column
+              </button>
             </div>
           </ng-container>
           <ng-template #emptyColumns>
             <div class="add-wrapper">
               <div>add your first column</div>
-              <button (click)="onAddColumn()"><mat-icon>add</mat-icon> add column</button>
+              <button (click)="onAddColumn()">
+                <mat-icon>add</mat-icon> add column
+              </button>
             </div>
           </ng-template>
         </ng-container>
