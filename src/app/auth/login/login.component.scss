@@ -1,5 +1,9 @@
-body{
-  background: linear-gradient(179.61deg, rgba(255, 229, 210, 0.629261) 21.33%, rgba(255, 244, 229, 0.0001) 55.67%);
+body {
+  background: linear-gradient(
+    179.61deg,
+    rgba(255, 229, 210, 0.629261) 21.33%,
+    rgba(255, 244, 229, 0.0001) 55.67%
+  );
 }
 
 .wrapper {
@@ -14,19 +18,19 @@ body{
     padding: 25px 40px;
     box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
   }
-  .btn{
+  .btn {
     display: grid;
     justify-content: center;
     margin-top: 20px;
     background-color: #ff9800;
     width: 70px;
   }
-  .wrap-btn{
+  .wrap-btn {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
   }
-  .input-text{
+  .input-text {
     width: 250px;
   }
 }

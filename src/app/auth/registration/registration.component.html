@@ -1,32 +1,137 @@
 <div class="registration-form content">
   <div class="content">
-    <h2>Sign in</h2>
-    <form class="size-form" novalidate (ngSubmit)="onSubmit()" [formGroup]="signInForm">
+    <h2>{{ lang === 'ru' ? 'Регистрация' : 'Sign in' }}</h2>
+    <form
+      class="size-form"
+      novalidate
+      (ngSubmit)="onSubmit()"
+      [formGroup]="signInForm"
+    >
       <div class="form-group">
-        <label for="name">User name</label>
-        <input id="name" type="text" autocomplete="off" formControlName="name" [ngClass]="{'invalid': signInForm.get('name').invalid && signInForm.get('name').touched}">
-        <span class="red-text helper-text" *ngIf="signInForm.get('name').invalid && signInForm.get('name').errors['required'] && signInForm.get('name').touched">The name is not be empty</span>
+        <label for="name">{{ lang === 'ru' ? 'Имя' : 'User name' }}</label>
+        <input
+          id="name"
+          type="text"
+          autocomplete="off"
+          formControlName="name"
+          [ngClass]="{
+            invalid:
+              signInForm.get('name').invalid && signInForm.get('name').touched
+          }"
+        />
+        <span
+          class="red-text helper-text"
+          *ngIf="
+            signInForm.get('name').invalid &&
+            signInForm.get('name').errors['required'] &&
+            signInForm.get('name').touched
+          "
+          >{{ lang === 'ru' ? 'Имя не должно быть пустым' : 'The name is not be empty' }}</span
+        >
       </div>
       <div class="form-group">
-        <label for="login">User email</label>
-        <input id="login" class="border" type="email" autocomplete="off" formControlName="login" [ngClass]="{'invalid': signInForm.get('login').invalid && signInForm.get('login').touched}">
-        <span class="red-text" *ngIf="signInForm.get('login').invalid && signInForm.get('login').touched">
-          <span class="red-text" *ngIf="signInForm.get('login').errors['required']">The email is not be empty</span>
-          <span class="red-text" *ngIf="signInForm.get('login').errors['pattern']">Please enter a valid email</span>
+        <label for="login">{{
+          lang === 'ru' ? 'Электронная почта' : 'User email'
+        }}</label>
+        <input
+          id="login"
+          class="border"
+          type="email"
+          autocomplete="off"
+          formControlName="login"
+          [ngClass]="{
+            invalid:
+              signInForm.get('login').invalid && signInForm.get('login').touched
+          }"
+        />
+        <span
+          class="red-text"
+          *ngIf="
+            signInForm.get('login').invalid && signInForm.get('login').touched
+          "
+        >
+          <span
+            class="red-text"
+            *ngIf="signInForm.get('login').errors['required']"
+            >{{
+              lang === 'ru'
+                ? 'Электронная почта не должна быть пустой'
+                : 'The email is not be empty'
+            }}</span
+          >
+          <span
+            class="red-text"
+            *ngIf="signInForm.get('login').errors['pattern']"
+            >{{
+              lang === 'ru'
+                ? 'Введите верную электронную почту'
+                : 'Please enter a valid email'
+            }}</span
+          >
         </span>
       </div>
       <div class="form-group">
-        <label for="password">User password</label>
-        <input id="password" type="password" autocomplete="off" formControlName="password" [ngClass]="{'invalid': signInForm.get('password').invalid && signInForm.get('password').touched}">
-        <span class="red-text" *ngIf="signInForm.get('password').invalid && signInForm.get('password').touched">
-          <span class="red-text" *ngIf="signInForm.get('password').errors['required']">The password is not be empty</span>
+        <label for="password">{{
+          lang === 'ru'
+            ? 'Пароль'
+            : 'User password'
+        }}</label>
+        <input
+          id="password"
+          type="password"
+          autocomplete="off"
+          formControlName="password"
+          [ngClass]="{
+            invalid:
+              signInForm.get('password').invalid &&
+              signInForm.get('password').touched
+          }"
+        />
+        <span
+          class="red-text"
+          *ngIf="
+            signInForm.get('password').invalid &&
+            signInForm.get('password').touched
+          "
+        >
+          <span
+            class="red-text"
+            *ngIf="signInForm.get('password').errors['required']"
+            >{{
+              lang === 'ru'
+                ? 'Пароль не должен быть пустым'
+                : 'The password is not be empty'
+            }}</span
+          >
         </span>
-        <span class="red-text" *ngIf="signInForm.get('password').invalid && signInForm.get('password').errors['minlength']">
-          Enter characters {{count}}</span>
+        <span
+          class="red-text"
+          *ngIf="
+            signInForm.get('password').invalid &&
+            signInForm.get('password').errors['minlength']
+          "
+        >
+        {{
+          lang === 'ru'
+            ? 'Введите ещё'
+            : 'Enter characters'
+        }} {{ count }}</span
+        >
       </div>
       <div class="wrap-btn">
-        <button class="btn btn-back" [routerLink]="['/']" >Back</button>
-        <button type="submit" class="btn" [disabled]="signInForm.invalid">Submit</button>
+        <button class="btn btn-back" [routerLink]="['/']">
+          {{
+            lang === 'ru'
+              ? 'Назад'
+              : 'back'
+          }}</button>
+        <button type="submit" class="btn" [disabled]="signInForm.invalid">
+          {{
+            lang === 'ru'
+              ? 'Отправить'
+              : 'Submit'
+          }}
+        </button>
       </div>
     </form>
   </div>

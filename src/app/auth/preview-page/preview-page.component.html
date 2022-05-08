@@ -6,27 +6,46 @@
   <div class="switch">
     <label>
       EN
-      <input type="checkbox" (change)="checkLang()">
+      <input
+        type="checkbox"
+        [(ngModel)]="name"
+        (change)="checkLang($event)"
+      />
       <span class="lever"></span>
       RU
     </label>
   </div>
   <div class="registration-wrap">
-    <button class="sigh-in btn" [routerLink]="['/login']" routerLinkActive="router-link-active">Login</button>
-    <button class="btn waves-effect waves-light" [routerLink]="['/registration']">Sign up</button>
+    <button
+      class="sigh-in btn"
+      [routerLink]="['/login']"
+      routerLinkActive="router-link-active"
+    >
+    {{ lang === 'ru' ? 'Войти' : 'Login' }}
+    </button>
+    <button
+      class="btn waves-effect waves-light"
+      [routerLink]="['/registration']"
+    >
+    {{ lang === 'ru' ? 'Регистрация' : 'Sign up' }}
+    </button>
   </div>
 </header>
 <main>
   <div class="wrap-video back-image">
-      <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/SeAd200FIPs"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-      </iframe>
-      <p class="summary-video">Save your time. Check out the features of the application!</p>
+    <iframe
+      width="560"
+      height="315"
+      src="https://www.youtube.com/embed/SeAd200FIPs"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    >
+    </iframe>
+    <p class="summary-video">
+      Save your time. Check out the features of the application!
+    </p>
   </div>
   <div class="wrap-persons">
     <div>

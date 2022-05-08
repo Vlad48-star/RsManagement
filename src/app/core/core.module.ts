@@ -8,10 +8,9 @@ import { FormValidatorService } from './services/form-validator.service';
 import { ApiInterceptorService } from './services/app-interceptor.service';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { LangPipe } from './pipe/lang.pipe';
 
 @NgModule({
-  declarations: [NotFoundComponent, HeaderComponent, FooterComponent, LangPipe],
+  declarations: [NotFoundComponent, HeaderComponent, FooterComponent],
   imports: [CommonModule, HttpClientModule],
   providers: [
     FormValidatorService,
@@ -23,6 +22,6 @@ import { LangPipe } from './pipe/lang.pipe';
       multi: true,
     },
   ],
-  exports: [HeaderComponent, FooterComponent, LangPipe],
+  exports: [HeaderComponent, FooterComponent],
 })
 export class CoreModule {}

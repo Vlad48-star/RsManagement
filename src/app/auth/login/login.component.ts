@@ -2,8 +2,6 @@ import { Router } from '@angular/router';
 import { AuthService } from './../../core/services/auth.service';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { first } from 'rxjs';
-import { MaterialService } from './../class/material.service';
 
 @Component({
   selector: 'app-login',
@@ -29,13 +27,7 @@ export class LoginComponent {
       return;
     }
     this.errorOnsubmit = false;
-    this.authService
-      .login(this.loginForm.value)
-      .pipe(first())
-      .subscribe(
-        () => this.router.navigate(['/board']),
-        err => MaterialService.toast(err.error.message)
-      )
+    this.authService.login(this.loginForm.value);
   }
 
   private createForm() {

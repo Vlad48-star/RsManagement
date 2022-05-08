@@ -14,6 +14,4 @@ export class AppComponent {
     router: Router,
     private dialogServise: DialogService
   ) {}
-
-  title: any;
 }
