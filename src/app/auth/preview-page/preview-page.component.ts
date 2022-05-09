@@ -7,13 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./preview-page.component.scss'],
 })
 export class PreviewPageComponent {
+  lang!: string | null;
+  name!: boolean;
 
   constructor(public router: Router) {}
 
-<<<<<<< HEAD
-  checkLang() {
-    localStorage.getItem('lang') === 'ru' ? localStorage.setItem('lang', 'en') : localStorage.setItem('lang', 'ru');
-=======
   ngOnInit() {
     this.lang = localStorage.getItem('lang');
     if (localStorage.getItem('lang') === null) {
@@ -37,6 +35,5 @@ export class PreviewPageComponent {
     event.target.checked === false
       ? localStorage.setItem('lang', 'en')
       : localStorage.setItem('lang', 'ru');
->>>>>>> 7e00d73e488159b3f1c0871b279556ab6d2e5c08
   }
 }

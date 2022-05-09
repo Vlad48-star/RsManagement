@@ -56,40 +56,21 @@
             lang === 'ru' ? 'Введите пароль' : 'Please enter a password'
           }}</span>
           <span class="red-text" *ngIf="password!.errors?.['minlength']"
-<<<<<<< HEAD
-            >Please enter a password at least 8 characters
-          </span>
-          <span class="red-text" *ngIf="password!.errors?.['haveUpperCaseAndLowerCase']"
-            >Please enter a password a mixture of both uppercase and lowercase
-            letters
-          </span>
-          <span class="red-text" *ngIf="password!.errors?.['hasNumber']"
-            >Please enter a password a mixture of letters and numbers
-          </span>
-          <span class="red-text" *ngIf="password!.errors?.['specialCharacter']"
-            >Please enter a password a least one special character
-=======
             >{{
               lang === 'ru'
                 ? 'Введите пароль более 8 символов'
                 : 'Please enter a password at least 8 characters'
             }}
->>>>>>> 7e00d73e488159b3f1c0871b279556ab6d2e5c08
           </span>
         </ng-container>
       </label>
       <div class="wrap-btn">
-<<<<<<< HEAD
-        <button class="btn btn-back" [routerLink]="['/']" >Back</button>
-        <button type="submit" class="btn" [disabled]="loginForm.invalid">Submit</button>
-=======
         <button class="btn btn-back" [routerLink]="['/']">
           {{ lang === 'ru' ? 'Назад' : 'Back' }}
         </button>
         <button type="submit" class="btn" [disabled]="loginForm.invalid">
           {{ lang === 'ru' ? 'Отправить' : 'Submit' }}
         </button>
->>>>>>> 7e00d73e488159b3f1c0871b279556ab6d2e5c08
       </div>
     </form>
   </div>
