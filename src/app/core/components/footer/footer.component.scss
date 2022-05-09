@@ -1,15 +1,15 @@
-p{
+p {
   margin: 0;
 }
 
-a{
+a {
   color: #000;
 }
-.logo-container{
+.logo-container {
   display: flex;
   align-items: center;
   gap: 5px;
-  .logo-footer{
+  .logo-footer {
     width: 40px;
     height: 40px;
   }
@@ -30,7 +30,7 @@ a{
   .footer-row {
     display: flex;
     align-items: center;
-    gap: 20PX;
+    gap: 20px;
   }
   .github-username {
     display: block;
@@ -39,8 +39,15 @@ a{
     transition: 0.3s;
   }
 
-  .footer-logo-title{
+  .footer-logo-title {
     font-size: 25px;
     font-weight: 900;
+  }
+
+  .footer-logo__rss {
+    width: 100px;
+    height: 80px;
+    background: no-repeat center;
+    background-image: url(/assets/svg/logo.svg);
   }
 }

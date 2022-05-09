@@ -11,17 +11,16 @@ import { MaterialService } from './../class/material.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
+  errorOnsubmit = false;
+  loginForm!: any;
+  lang = localStorage.getItem('lang');
+
   constructor(
     private authService: AuthService,
     private router: Router
   ) {
     this.createForm();
   }
-  title = 'Login';
-
-  loginForm!: any;
-
-  errorOnsubmit = false;
 
   formSubmit() {
     this.errorOnsubmit = true;
