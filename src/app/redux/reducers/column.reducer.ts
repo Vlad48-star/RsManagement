@@ -14,5 +14,10 @@ export const columnReducer = createReducer(
   on(
     ColumnActions.addSuccess,
     (state, { response }): TColumnState => [...state, response]
+  ),
+  on(
+    ColumnActions.deleteSuccess,
+    (state, { response }): TColumnState =>
+      state.filter((board) => board.id !== response.id)
   )
 );

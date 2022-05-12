@@ -1,5 +1,6 @@
 <div class="wrapper">
   <div>{{ columnInfo.title }} + {{ columnOrder }}</div>
+  <button mat-button (click)="onDeleteColumn()">delete</button>
   <app-task *ngFor="let task of columnInfo.tasks" [task]="task"></app-task>
   <app-add-task
     [taskOrder]="columnInfo.tasks !== undefined ? columnInfo.tasks.length : 0"

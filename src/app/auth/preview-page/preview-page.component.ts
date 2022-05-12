@@ -7,9 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./preview-page.component.scss'],
 })
 export class PreviewPageComponent {
-  lang!: string | null;
-  name!: boolean;
-
+  name: boolean | undefined;
+  lang: string | null = null;
   constructor(public router: Router) {}
 
   ngOnInit() {

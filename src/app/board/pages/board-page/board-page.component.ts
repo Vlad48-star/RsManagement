@@ -57,7 +57,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
     this.dialog
       .confirmDialog({
         title: 'Вы уверены?',
-        message: 'Вы собираетесь удалить этот таск(эту колонку)?',
+        message: 'Вы собираетесь удалить эту доску?',
         confirmText: 'да',
         cancelText: 'нет',
       })

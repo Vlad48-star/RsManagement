@@ -1,3 +1,4 @@
+import { Store } from '@ngrx/store';
 import { TaskActions } from './../actions/task.action';
 import { BoardActions } from './../actions/board.action';
 import { RequestsService } from './../../core/services/requests.service';
@@ -5,9 +6,20 @@ import { ColumnActions } from './../actions/column.action';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { retry, map, catchError, EMPTY, mergeMap, withLatestFrom } from 'rxjs';
+import { selectCurrentBoard } from '../selectors/board.selector';
 
 @Injectable()
 export class ColumnEffects {
+  currentBoardId!: string;
+
+  getCurrentBoardId() {
+    this.store.select(selectCurrentBoard).subscribe((res) => {
+      if (res) {
+        this.currentBoardId = res!.id;
+      }
+    });
+  }
+
   loadColumns$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ColumnActions.load),
@@ -52,9 +64,33 @@ export class ColumnEffects {
       map((actions) => BoardActions.get({ response: actions.id }))
     );
   });
+  updateCurrentColumn$ = createEffect(() => {
+    this.getCurrentBoardId();
+    return this.actions$.pipe(
+      ofType(ColumnActions.deleteSuccess),
+      map(() => BoardActions.get({ response: { id: this.currentBoardId } }))
+    );
+  });
+  deleteColumn$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ColumnActions.delete),
+      mergeMap((actions) =>
+        this.requestsService.deleteColumn(actions.response).pipe(
+          map(() => {
+            return ColumnActions.deleteSuccess({ response: actions.response });
+          }),
+          catchError((error) => {
+            console.log('[ERROR]: ', error);
+            return EMPTY;
+          })
+        )
+      )
+    );
+  });
 
   constructor(
     private actions$: Actions,
-    private requestsService: RequestsService
+    private requestsService: RequestsService,
+    private store: Store
   ) {}
 }

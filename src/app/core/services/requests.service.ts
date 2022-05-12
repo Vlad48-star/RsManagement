@@ -1,3 +1,5 @@
+import { selectCurrentBoard } from './../../redux/selectors/board.selector';
+import { Store } from '@ngrx/store';
 import { INewTask, ITaskRes } from './../../redux/actions/task.action';
 import { IColumnID } from './../../column/components/models/column.model';
 import { IBoardID } from './../../board/components/crate-board/model/newBoard.model';
@@ -14,9 +16,16 @@ import { IUser } from 'src/app/redux/actions/user.action';
 
 @Injectable()
 export class RequestsService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: Store) {}
   private url = 'https://still-waters-55383.herokuapp.com/';
   // private url = '/api/';
+  currentBoardId!: string;
+
+  getCurrentBoardId() {
+    this.store
+      .select(selectCurrentBoard)
+      .subscribe((res) => (this.currentBoardId = res!.id));
+  }
 
   public login({ login, password }: ILogin) {
     return this.http.post<IToken>(this.url + 'signin', {
@@ -65,6 +74,13 @@ export class RequestsService {
       title,
       order,
     });
+  }
+
+  public deleteColumn({ id }: IBoardID) {
+    this.getCurrentBoardId();
+    return this.http.delete<IBoard>(
+      this.url + 'boards/' + this.currentBoardId + '/columns/' + id
+    );
   }
 
   public addTask(taskData: INewTask, boardId: IBoardID, columnId: IColumnID) {

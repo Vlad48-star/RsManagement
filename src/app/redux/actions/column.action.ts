@@ -25,11 +25,14 @@ export const ColumnActions = {
   //   '[BOARD] success update board',
   //   props<{ response: IBoard }>()
   // ),
-  // delete: createAction('[BOARD] delete board', props<{ response: IBoardID }>()),
-  // deleteSuccess: createAction(
-  //   '[BOARD] success delete board',
-  //   props<{ response: IBoardID }>()
-  // ),
+  delete: createAction(
+    '[COLUMN] delete column',
+    props<{ response: IBoardID }>()
+  ),
+  deleteSuccess: createAction(
+    '[COLUMN] success delete column',
+    props<{ response: IBoardID }>()
+  ),
   // get: createAction('[BOARD] get board data', props<{ response: IBoardID }>()),
   // getSuccess: createAction(
   //   '[BOARD] success get board data',
