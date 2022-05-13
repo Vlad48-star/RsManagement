@@ -2,6 +2,15 @@ export interface IBoard {
   id: string;
   title: string;
 }
+export interface IColumnUpdate {
+  order: number;
+  title: string;
+}
+export interface IColumnUpdateResponse {
+  order: number;
+  title: string;
+  id: string;
+}
 
 export interface IBoardData {
   id: string;

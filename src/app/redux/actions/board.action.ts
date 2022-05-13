@@ -36,7 +36,7 @@ export const BoardActions = {
 };
 
 export const initialBoardState: TBoardState = [];
-export const initialCurrentBorderState: TCurrentBoardState = undefined;
+export const initialCurrentBoardState: TCurrentBoardState = undefined;
 
 export type TBoardState = IBoard[];
 export type TCurrentBoardState = IBoardData | undefined;

@@ -1,3 +1,4 @@
+import { IColumn } from './../../board/model/board.model';
 import { Store } from '@ngrx/store';
 import { TaskActions } from './../actions/task.action';
 import { BoardActions } from './../actions/board.action';
@@ -5,7 +6,7 @@ import { RequestsService } from './../../core/services/requests.service';
 import { ColumnActions } from './../actions/column.action';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { retry, map, catchError, EMPTY, mergeMap, withLatestFrom } from 'rxjs';
+import { retry, map, catchError, EMPTY, mergeMap, exhaustMap } from 'rxjs';
 import { selectCurrentBoard } from '../selectors/board.selector';
 
 @Injectable()
@@ -16,6 +17,14 @@ export class ColumnEffects {
     this.store.select(selectCurrentBoard).subscribe((res) => {
       if (res) {
         this.currentBoardId = res!.id;
+      }
+    });
+  }
+
+  updateColumnsOrder(columnList: IColumn[]) {
+    columnList.map((column: IColumn) => {
+      if (column.order !== columnList.indexOf(column)) {
+        console.log('do smth');
       }
     });
   }
@@ -57,7 +66,20 @@ export class ColumnEffects {
       })
     );
   });
-
+  updateColumn$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ColumnActions.update),
+      exhaustMap((actions) => {
+        return this.requestsService.updateColumn(actions.response);
+      }),
+      retry(4),
+      map((response) => ColumnActions.updateSuccess({ response })),
+      catchError((error) => {
+        console.log('[ERROR]: ', error);
+        return EMPTY;
+      })
+    );
+  });
   updateCurrentBoard$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ColumnActions.addSuccess),
@@ -68,6 +90,13 @@ export class ColumnEffects {
     this.getCurrentBoardId();
     return this.actions$.pipe(
       ofType(ColumnActions.deleteSuccess),
+      map(() => BoardActions.get({ response: { id: this.currentBoardId } }))
+    );
+  });
+  updateCurrentBoardColumn$ = createEffect(() => {
+    this.getCurrentBoardId();
+    return this.actions$.pipe(
+      ofType(ColumnActions.updateSuccess),
       map(() => BoardActions.get({ response: { id: this.currentBoardId } }))
     );
   });

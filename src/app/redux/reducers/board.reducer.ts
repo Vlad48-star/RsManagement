@@ -2,7 +2,7 @@ import {
   initialBoardState,
   BoardActions,
   TBoardState,
-  initialCurrentBorderState,
+  initialCurrentBoardState,
   TCurrentBoardState,
 } from './../actions/board.action';
 import { createReducer, on } from '@ngrx/store';
@@ -29,8 +29,8 @@ export const boardReducer = createReducer(
       state.filter((board) => board.id !== response.id)
   )
 );
-export const borderItemReducer = createReducer(
-  initialCurrentBorderState,
+export const boardItemReducer = createReducer(
+  initialCurrentBoardState,
   on(
     BoardActions.getSuccess,
     (state, { response }): TCurrentBoardState => response

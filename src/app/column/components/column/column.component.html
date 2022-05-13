@@ -1,9 +1,17 @@
 <div class="wrapper">
-  <div>{{ columnInfo.title }} + {{ columnOrder }}</div>
-  <button mat-button (click)="onDeleteColumn()">delete</button>
+  <h2 style="border: 1px solid #797979;;" *ngIf="!isEditTaskActive; else editActive" (click)="onEditColumn()">{{ columnInfo.title }}  {{ columnOrder }}</h2>
+  <ng-template #editActive>
+    <input (click)="updateCurrentColumnId()" style="border: 1px dashed green;" type="text" [(ngModel)]="editingTitle">
+    <button style="background-color: red; color:#fff"(click)="isEditTaskActive = !isEditTaskActive">cancel</button>
+    <button style="background-color: green; color:#fff" (click)="updateColumn()">submit</button>
+  </ng-template>
+  
+  
+  <button style="background-color: red; color:#fff" mat-button (click)="onDeleteColumn()">delete</button>
   <app-task *ngFor="let task of columnInfo.tasks" [task]="task"></app-task>
   <app-add-task
     [taskOrder]="columnInfo.tasks !== undefined ? columnInfo.tasks.length : 0"
     [columnInfo]="columnInfo.id"
   ></app-add-task>
+  <button mat-button (click)="qwe()">qwe</button>
 </div>

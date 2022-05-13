@@ -76,7 +76,7 @@ export class BoardEffects {
     );
   });
 
-  getBorderData$ = createEffect(() => {
+  getBoardData$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(BoardActions.get),
       mergeMap((actions) =>
