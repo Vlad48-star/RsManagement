@@ -4,11 +4,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MainPageComponent } from './main-page/main-page.component';
 import { ConfirmModalComponent } from './components/confirm-modal/confirm-modal.component';
 
 @NgModule({
-  declarations: [MainPageComponent, ConfirmModalComponent],
+  declarations: [ConfirmModalComponent],
   imports: [
     CommonModule,
     MatDialogModule,

@@ -14,6 +14,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { selectAllColumn } from 'src/app/redux/selectors/column.selector';
 import { DialogService } from 'src/app/shared/services/dialog.service';
+import { LangChangeService } from 'src/app/core/services/lang-change.service';
 
 @Component({
   selector: 'app-board-page',
@@ -24,7 +25,8 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   constructor(
     public route: ActivatedRoute,
     private store: Store,
-    private dialog: DialogService
+    private dialog: DialogService,
+    public auth: LangChangeService
   ) {
     this.createForm();
   }
@@ -80,6 +82,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
     console.log('init');
     this.routeSubscription = this.route.paramMap.subscribe((params) => {
       this.stateBoardSubscription = this.store

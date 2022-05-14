@@ -1,27 +1,17 @@
-import { AuthService } from './../../core/services/auth.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { LangChangeService } from 'src/app/core/services/lang-change.service';
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss'],
+  selector: 'app-edit',
+  templateUrl: './edit.component.html',
+  styleUrls: ['./edit.component.scss']
 })
-export class RegistrationComponent {
+export class EditComponent implements OnInit {
   signInForm: any;
+  constructor(public auth: LangChangeService) { }
 
-  constructor(private register: AuthService, private router: Router, public auth: LangChangeService) {
-    this.createForm();
-  }
-
-  onSubmit() {
-    this.register.person = this.signInForm.value.login;
-    this.register.register(this.signInForm.value);
-  }
-
-  private createForm() {
+  ngOnInit(): void {
     this.signInForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       login: new FormControl('', [
@@ -51,5 +41,9 @@ export class RegistrationComponent {
     const count =
       8 - this.signInForm.get('password').errors['minlength']['actualLength'];
     return count;
+  }
+
+  editSubmit(){
+
   }
 }

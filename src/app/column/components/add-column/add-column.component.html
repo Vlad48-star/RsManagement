@@ -21,7 +21,7 @@
       "
     >
       <span *ngIf="title!.errors?.['required']"
-        >Пожалуйста, введите имя колонки</span
+        >{{ auth.lang === 'ru' ? 'Пожалуйста, введите имя колонки' : 'Please enter a column name' }}</span
       >
     </ng-container>
   </form>

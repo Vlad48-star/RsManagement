@@ -21,7 +21,7 @@
       "
     >
       <span *ngIf="title!.errors?.['required']"
-        >Пожалуйста, введите имя доски</span
+        >{{ auth.lang === 'ru' ? 'Пожалуйста, введите имя доски' : 'Please enter board name' }}</span
       >
     </ng-container>
   </form>

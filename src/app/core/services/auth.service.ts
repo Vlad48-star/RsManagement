@@ -6,13 +6,13 @@ import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectUser } from 'src/app/redux/selectors/user.selector';
-import { first } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  person: string | null = localStorage.getItem('login');
+
   constructor(
     private router: Router,
     private requestsService: RequestsService,
@@ -39,6 +39,7 @@ export class AuthService {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     localStorage.removeItem('login');
+    this.router.navigate(['/']);
   }
 
   public isLoggedIn() {

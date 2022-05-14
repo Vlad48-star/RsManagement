@@ -1,0 +1,20 @@
+.switch {
+  display: flex;
+  justify-self: end;
+}
+
+.switch label .lever {
+  background-color: #fce3bd;
+}
+
+.switch label .lever:after {
+  background-color: #ff9800;
+}
+
+.switch label input[type='checkbox']:checked + .lever {
+  background-color: #fce3bd;
+}
+
+.switch label input[type='checkbox']:checked + .lever:after {
+  background-color: #ff9800;
+}
