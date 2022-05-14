@@ -24,12 +24,12 @@ export class RequestsService {
   // private url = '/api/';
   currentBoardId?: string;
   currentColumnId?: string;
-qwe() {
-  this.getCurrentBoardId();
-  this.getCurrentColumnsId();
-  console.log(this.currentColumnId);
-  console.log(this.currentBoardId);
-}
+  qwe() {
+    this.getCurrentBoardId();
+    this.getCurrentColumnsId();
+    console.log(this.currentColumnId);
+    console.log(this.currentBoardId);
+  }
   getCurrentBoardId() {
     this.store
       .select(selectCurrentBoard)
