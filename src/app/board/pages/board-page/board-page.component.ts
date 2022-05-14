@@ -15,6 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 import { selectAllColumn } from 'src/app/redux/selectors/column.selector';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { LangChangeService } from 'src/app/core/services/lang-change.service';
+import { IConfirmDialogData } from 'src/app/shared/models/confirmModal';
 
 @Component({
   selector: 'app-board-page',
@@ -30,6 +31,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   ) {
     this.createForm();
   }
+  objectLanguage!: IConfirmDialogData;
   boardNameForm!: FormGroup;
   data!: IBoard;
 
@@ -55,14 +57,25 @@ export class BoardPageComponent implements OnInit, OnDestroy {
     this.boardNameForm.patchValue({ title: newData.title });
     this.store.dispatch(BoardActions.get({ response: { id: this.data.id } }));
   }
+
   public delBoardHandler() {
-    this.dialog
-      .confirmDialog({
+    if(this.auth.lang === 'ru'){
+      this.objectLanguage = {
         title: 'Вы уверены?',
         message: 'Вы собираетесь удалить этот таск(эту колонку)?',
         confirmText: 'да',
         cancelText: 'нет',
-      })
+      }
+    } else {
+      this.objectLanguage = {
+        title: 'Are you sure?',
+        message: 'Are you going to delete this task (this column)?',
+        confirmText: 'Yes',
+        cancelText: 'No',
+      }
+    }
+    this.dialog
+      .confirmDialog(this.objectLanguage)
       .subscribe((res) => {
         if (res)
           this.store.dispatch(
