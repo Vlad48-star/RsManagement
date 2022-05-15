@@ -2,8 +2,7 @@ import { AuthService } from './../../core/services/auth.service';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { MaterialService } from '../class/material.service';
-import * as language from 'src/assets/data/language.json';
+import { LangChangeService } from 'src/app/core/services/lang-change.service';
 
 @Component({
   selector: 'app-registration',
@@ -13,12 +12,17 @@ import * as language from 'src/assets/data/language.json';
 export class RegistrationComponent {
   signInForm: any;
 
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(
+    private register: AuthService,
+    private router: Router,
+    public auth: LangChangeService
+  ) {
     this.createForm();
   }
 
   onSubmit() {
-    this.auth.register(this.signInForm.value);
+    this.register.person = this.signInForm.value.login;
+    this.register.register(this.signInForm.value);
   }
 
   private createForm() {

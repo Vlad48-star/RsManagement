@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { LangChangeService } from 'src/app/core/services/lang-change.service';
 
 @Component({
   selector: 'app-add-column',
@@ -13,7 +14,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./add-column.component.scss'],
 })
 export class AddColumnComponent implements OnInit, OnDestroy {
-  constructor(private store: Store, private dialog: DialogService) {
+  constructor(private store: Store, private dialog: DialogService, public auth: LangChangeService) {
     this.createForm();
   }
   newColumnForm!: FormGroup;

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { LangChangeService } from 'src/app/core/services/lang-change.service';
 
 @Component({
   selector: 'app-preview-page',
@@ -7,32 +7,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./preview-page.component.scss'],
 })
 export class PreviewPageComponent {
-  name: boolean | undefined;
-  lang: string | null = null;
-  constructor(public router: Router) {}
+  constructor(public auth: LangChangeService) {}
 
   ngOnInit() {
-    this.lang = localStorage.getItem('lang');
-    if (localStorage.getItem('lang') === null) {
-      this.lang = 'ru';
-      localStorage.setItem('lang', 'ru');
-      this.name = true;
-      return;
-    }
-
-    if (localStorage.getItem('lang') === 'en' || this.name === false) {
-      localStorage.setItem('lang', 'en');
-      this.name = false;
-    } else {
-      localStorage.setItem('lang', 'ru');
-      this.name = true;
-    }
-  }
-
-  checkLang(event: any) {
-    this.lang = event.target.checked === false ? 'en' : 'ru';
-    event.target.checked === false
-      ? localStorage.setItem('lang', 'en')
-      : localStorage.setItem('lang', 'ru');
+    this.auth.lang = localStorage.getItem('lang');
   }
 }

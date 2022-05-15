@@ -14,6 +14,7 @@ import { ListItemComponent } from './components/list-item/list-item.component';
 import { BoardPageComponent } from './pages/board-page/board-page.component';
 import { BoardMenuComponent } from './components/board-menu/board-menu.component';
 import { ColumnModule } from '../column/column.module';
+import { EditComponent } from './components/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { ColumnModule } from '../column/column.module';
     ListItemComponent,
     BoardPageComponent,
     BoardMenuComponent,
+    EditComponent,
   ],
   imports: [
     CommonModule,

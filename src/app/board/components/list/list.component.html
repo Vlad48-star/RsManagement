@@ -7,6 +7,5 @@
   </div>
 </ng-container>
 <ng-template #addFirstBoard>
-  <div>У вас пока что нету досок, попробуй создать первую</div>
+  <div>{{ auth.lang === 'ru' ? 'У вас пока что нету досок, попробуй создать первую' : 'You don\'t have boards yet, try to create the first one' }}</div>
 </ng-template>
-<button (click)="onCreateNewBoard()">Create new board</button>

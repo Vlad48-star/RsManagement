@@ -1,3 +1,31 @@
-<p>header works!</p>
-<button (click)="onCreateBoard()">Create Board</button>
-<hr>
+<header>
+  <div class="logo-container">
+    <img class="logo" src="./assets/svg/rs.svg" alt="" />
+    <p class="logo-title">Managment</p>
+  </div>
+  <div class="wrap-add-board">
+    <h2>{{ langService.lang === 'ru' ? 'Создать доску' : 'Create Board' }}</h2>
+    <a
+      class="btn-floating btn-large waves-effect waves-light orange"
+      (click)="onCreateBoard()"
+      ><i class="material-icons">add</i></a
+    >
+  </div>
+  <div class="wrap-mat-menu">
+    <h3>{{ auth.person }}</h3>
+    <button class="no-hover" mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>how_to_reg</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <div class="pos-toggler">
+        <app-toggler></app-toggler>
+      </div>
+      <button mat-menu-item class="btn" [routerLink]="['/board/edit']">
+        {{ langService.lang === 'ru' ? 'Редактировать' : 'Edit' }}
+      </button>
+      <button mat-menu-item class="btn" (click)="exit()">
+        {{ langService.lang === 'ru' ? 'Выйти' : 'Logout' }}
+      </button>
+    </mat-menu>
+  </div>
+</header>

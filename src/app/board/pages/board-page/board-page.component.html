@@ -16,7 +16,13 @@
           (blur)="onBlurMethod()"
         />
         <input type="submit" hidden />
-        <button style="background-color: red; color: white" type="button" (click)="delBoardHandler()">Del</button>
+        <button
+          style="background-color: red; color: white"
+          type="button"
+          (click)="delBoardHandler()"
+        >
+          {{ auth.lang === 'ru' ? 'Удалить' : 'Delete' }}
+        </button>
       </form>
       <hr>
       <div class="column-grid">
@@ -36,13 +42,25 @@
               [columnOrder]="indexOfColumn"
             ></app-column>
             <div class="add-wrapper">
-              <button (click)="onAddColumn()"><mat-icon>add</mat-icon> add column</button>
+              <button (click)="onAddColumn()">
+                <mat-icon>add</mat-icon>
+                {{ auth.lang === 'ru' ? 'Добавить колонку' : 'Add column' }}
+              </button>
             </div>
           </ng-container>
           <ng-template #emptyColumns>
             <div class="add-wrapper">
-              <div>add your first column</div>
-              <button (click)="onAddColumn()"><mat-icon>add</mat-icon> add column</button>
+              <div>
+                {{
+                  auth.lang === 'ru'
+                    ? 'Добавить первую колонку'
+                    : 'Add your first column'
+                }}
+              </div>
+              <button (click)="onAddColumn()">
+                <mat-icon>add</mat-icon
+                >{{ auth.lang === 'ru' ? 'Добавить колонку' : 'Add column' }}
+              </button>
             </div>
           </ng-template>
         </ng-container>

@@ -3,6 +3,7 @@ import { BoardActions } from './../../../redux/actions/board.action';
 import { Store } from '@ngrx/store';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
+import { LangChangeService } from 'src/app/core/services/lang-change.service';
 
 @Component({
   selector: 'app-crate-board',
@@ -10,7 +11,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./crate-board.component.scss'],
 })
 export class CrateBoardComponent {
-  constructor(private store: Store, private dialog: DialogService) {
+  constructor(private store: Store, private dialog: DialogService, public auth: LangChangeService) {
     this.createForm();
   }
   newBoardForm!: FormGroup;

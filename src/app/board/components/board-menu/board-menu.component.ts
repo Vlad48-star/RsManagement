@@ -2,6 +2,7 @@ import { IBoardMenu } from './model/board-menu.model';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { LangChangeService } from 'src/app/core/services/lang-change.service';
 
 @Component({
   selector: 'app-board-menu',
@@ -9,7 +10,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./board-menu.component.scss'],
 })
 export class BoardMenuComponent implements OnInit, OnDestroy {
-  constructor(private activateRoute: ActivatedRoute) {}
+  constructor(private activateRoute: ActivatedRoute, public auth: LangChangeService) {}
   urlSubscription!: Subscription;
 
   urlParams: IBoardMenu = {};

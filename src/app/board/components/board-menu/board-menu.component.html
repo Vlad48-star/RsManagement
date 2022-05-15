@@ -4,5 +4,5 @@
   >
     <app-list></app-list>
   </ng-container>
-  <ng-template #elseTemplate> Выберите доску </ng-template>
+  <ng-template #elseTemplate>{{ auth.lang === 'ru' ? 'Выберите доску' : 'Choose a board' }}</ng-template>
 </div>
