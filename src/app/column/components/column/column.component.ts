@@ -24,13 +24,10 @@ export class ColumnComponent implements OnInit {
   }
   editingTitle!: string;
   isEditTaskActive = false;
-  qwe() {
-    this.requestService.qwe();
-  }
 
   updateCurrentColumn() {
     this.store.dispatch(
-      ColumnActions.updateColumn({ currentColumn: this.columnInfo })
+      ColumnActions.updateCurrentColumn({ currentColumn: this.columnInfo })
     );
   }
   onEditColumn() {

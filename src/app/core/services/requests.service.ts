@@ -27,8 +27,6 @@ export class RequestsService {
   qwe() {
     this.getCurrentBoardId();
     this.getCurrentColumnsId();
-    console.log(this.currentColumnId);
-    console.log(this.currentBoardId);
   }
   getCurrentBoardId() {
     this.store
@@ -99,8 +97,6 @@ export class RequestsService {
   public updateColumn({ title, order }: IColumnUpdate) {
     this.getCurrentBoardId();
     this.getCurrentColumnsId();
-    console.log(this.currentBoardId);
-    console.log(this.currentColumnId);
     return this.http.put<IColumnUpdate>(
       this.url +
         'boards/' +

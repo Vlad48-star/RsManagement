@@ -42,8 +42,8 @@ export const ColumnActions = {
     '[COLUMN] success delete column',
     props<{ response: IBoardID }>()
   ),
-  updateColumn: createAction(
-    '[COLUMN] update column',
+  updateCurrentColumn: createAction(
+    '[CURRENT_COLUMN] update column',
     props<{ currentColumn: IColumn }>()
   ),
   // get: createAction('[BOARD] get board data', props<{ response: IBoardID }>()),

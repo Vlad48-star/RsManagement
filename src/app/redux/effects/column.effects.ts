@@ -70,6 +70,7 @@ export class ColumnEffects {
     return this.actions$.pipe(
       ofType(ColumnActions.update),
       exhaustMap((actions) => {
+        console.log(actions);
         return this.requestsService.updateColumn(actions.response);
       }),
       retry(4),

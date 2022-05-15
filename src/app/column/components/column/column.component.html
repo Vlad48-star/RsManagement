@@ -8,7 +8,6 @@
   </h2>
   <ng-template #editActive>
     <input
-      (click)="updateCurrentColumn()"
       style="border: 1px dashed green"
       type="text"
       [(ngModel)]="editingTitle"
@@ -39,5 +38,4 @@
     [taskOrder]="columnInfo.tasks !== undefined ? columnInfo.tasks.length : 0"
     [columnInfo]="columnInfo.id"
   ></app-add-task>
-  <button mat-button (click)="qwe()">qwe</button>
 </div>
