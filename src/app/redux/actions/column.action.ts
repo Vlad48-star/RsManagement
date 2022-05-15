@@ -42,7 +42,7 @@ export const ColumnActions = {
     '[COLUMN] success delete column',
     props<{ response: IBoardID }>()
   ),
-  updateColumnId: createAction(
+  updateColumn: createAction(
     '[COLUMN] update column',
     props<{ currentColumn: IColumn }>()
   ),

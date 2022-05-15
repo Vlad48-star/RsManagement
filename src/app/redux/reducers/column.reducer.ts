@@ -27,7 +27,7 @@ export const columnReducer = createReducer(
 export const columnItemReducer = createReducer(
   initialCurrentColumnState,
   on(
-    ColumnActions.updateColumnId,
+    ColumnActions.updateColumn,
     (state, { currentColumn }): IColumn | TCurrentColumnState =>
       currentColumn !== undefined ? currentColumn : state
   )

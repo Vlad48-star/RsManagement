@@ -4,11 +4,11 @@
     *ngIf="!isEditTaskActive; else editActive"
     (click)="onEditColumn()"
   >
-    {{ columnInfo.title }} {{ columnOrder }}
+    {{ columnInfo?.title }} {{ columnOrder }}
   </h2>
   <ng-template #editActive>
     <input
-      (click)="updateCurrentColumnId()"
+      (click)="updateCurrentColumn()"
       style="border: 1px dashed green"
       type="text"
       [(ngModel)]="editingTitle"

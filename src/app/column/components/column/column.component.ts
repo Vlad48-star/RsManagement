@@ -28,14 +28,14 @@ export class ColumnComponent implements OnInit {
     this.requestService.qwe();
   }
 
-  updateCurrentColumnId() {
+  updateCurrentColumn() {
     this.store.dispatch(
-      ColumnActions.updateColumnId({ currentColumn: this.columnInfo })
+      ColumnActions.updateColumn({ currentColumn: this.columnInfo })
     );
   }
   onEditColumn() {
     this.isEditTaskActive = true;
-    this.updateCurrentColumnId();
+    this.updateCurrentColumn();
   }
 
   updateColumn() {
