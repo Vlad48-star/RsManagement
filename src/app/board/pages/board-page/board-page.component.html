@@ -21,7 +21,7 @@
           type="button"
           (click)="delBoardHandler()"
         >
-          Del
+          {{ auth.lang === 'ru' ? 'Удалить' : 'Delete' }}
         </button>
       </form>
       <hr />
@@ -43,15 +43,23 @@
             ></app-column>
             <div class="add-wrapper">
               <button (click)="onAddColumn()">
-                <mat-icon>add</mat-icon> add column
+                <mat-icon>add</mat-icon>
+                {{ auth.lang === 'ru' ? 'Добавить колонку' : 'Add column' }}
               </button>
             </div>
           </ng-container>
           <ng-template #emptyColumns>
             <div class="add-wrapper">
-              <div>add your first column</div>
+              <div>
+                {{
+                  auth.lang === 'ru'
+                    ? 'Добавить первую колонку'
+                    : 'Add your first column'
+                }}
+              </div>
               <button (click)="onAddColumn()">
-                <mat-icon>add</mat-icon> add column
+                <mat-icon>add</mat-icon
+                >{{ auth.lang === 'ru' ? 'Добавить колонку' : 'Add column' }}
               </button>
             </div>
           </ng-template>

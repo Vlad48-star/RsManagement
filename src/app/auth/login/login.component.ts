@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './../../core/services/auth.service';
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { LangChangeService } from 'src/app/core/services/lang-change.service';
 
 @Component({
   selector: 'app-login',
@@ -11,11 +12,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class LoginComponent {
   errorOnsubmit = false;
   loginForm!: any;
-  lang = localStorage.getItem('lang');
 
   constructor(
-    private authService: AuthService,
-    private router: Router
+    private register: AuthService,
+    private router: Router,
+    public auth: LangChangeService
   ) {
     this.createForm();
   }
@@ -26,7 +27,8 @@ export class LoginComponent {
       return;
     }
     this.errorOnsubmit = false;
-    this.authService.login(this.loginForm.value);
+    this.register.person = this.loginForm.value.login;
+    this.register.login(this.loginForm.value);
   }
 
   private createForm() {

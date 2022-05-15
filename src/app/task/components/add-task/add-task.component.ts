@@ -7,6 +7,7 @@ import {
 import { Component, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { LangChangeService } from 'src/app/core/services/lang-change.service';
 
 @Component({
   selector: 'app-add-task',
@@ -14,7 +15,7 @@ import { Store } from '@ngrx/store';
   styleUrls: ['./add-task.component.scss'],
 })
 export class AddTaskComponent {
-  constructor(private store: Store, private dialog: DialogService) {
+  constructor(private store: Store, private dialog: DialogService, public auth: LangChangeService) {
     this.createForm();
   }
   @Input() taskOrder!: number;

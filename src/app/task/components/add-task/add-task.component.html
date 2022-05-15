@@ -1,6 +1,6 @@
 <div class="add-task">
   <ng-container *ngIf="!showAddTask; else elseTemplate">
-    <div (click)="toggleNewTaskForm()">add task</div>
+    <div (click)="toggleNewTaskForm()">{{ auth.lang === 'ru' ? 'Добавить задачу' : 'Add task' }}</div>
   </ng-container>
   <ng-template #elseTemplate>
     <form
@@ -17,8 +17,8 @@
           (blur)="formSubmit()"
           required
         />
-      <button class="btn btn-text" style="background-color: red;" [mat-dialog-close]="false">{{ 'cancel' | titlecase }}</button>
-      <button class="btn btn-text">{{ 'Добавить' | titlecase }}</button>
+      <button class="btn btn-text" style="background-color: red;" [mat-dialog-close]="false">{{ auth.lang === 'ru' ? 'Отменить' : 'Cancel' }}</button>
+      <button class="btn btn-text">{{ auth.lang === 'ru' ? 'Добавить' : 'Add' }}</button>
       </div>
       <ng-container
         *ngIf="
@@ -26,7 +26,7 @@
         "
       >
         <span *ngIf="title!.errors?.['required']"
-          >Пожалуйста, введите имя колонки</span
+          >{{ auth.lang === 'ru' ? 'Пожалуйста, введите имя колонки' : 'Please enter a column name' }}</span
         >
       </ng-container>
     </form>
