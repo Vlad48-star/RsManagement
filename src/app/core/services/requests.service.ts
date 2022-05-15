@@ -24,10 +24,7 @@ export class RequestsService {
   // private url = '/api/';
   currentBoardId?: string;
   currentColumnId?: string;
-  qwe() {
-    this.getCurrentBoardId();
-    this.getCurrentColumnsId();
-  }
+
   getCurrentBoardId() {
     this.store
       .select(selectCurrentBoard)

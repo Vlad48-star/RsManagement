@@ -4,10 +4,11 @@
     *ngIf="!isEditTaskActive; else editActive"
     (click)="onEditColumn()"
   >
-    {{ columnInfo?.title }} {{ columnOrder }}
+    {{ columnInfo?.title }} {{ columnInfo?.order }}
   </h2>
   <ng-template #editActive>
     <input
+      (click)="updateCurrentColumn()"
       style="border: 1px dashed green"
       type="text"
       [(ngModel)]="editingTitle"
@@ -34,8 +35,9 @@
     delete
   </button>
   <app-task *ngFor="let task of columnInfo.tasks" [task]="task"></app-task>
-  <app-add-task
+  <!-- <app-add-task
     [taskOrder]="columnInfo.tasks !== undefined ? columnInfo.tasks.length : 0"
     [columnInfo]="columnInfo.id"
-  ></app-add-task>
+  ></app-add-task> -->
+  <button mat-button (click)="onAddTask()">add task</button>
 </div>
