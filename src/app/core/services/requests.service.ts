@@ -1,4 +1,8 @@
-import { selectCurrentColumn } from './../../redux/selectors/column.selector';
+import { Observable, retry } from 'rxjs';
+import {
+  selectCurrentColumn,
+  selectCurrentColumnID,
+} from './../../redux/selectors/column.selector';
 import { selectAllColumn } from 'src/app/redux/selectors/column.selector';
 import { selectCurrentBoard } from './../../redux/selectors/board.selector';
 import { Store } from '@ngrx/store';
@@ -22,6 +26,7 @@ export class RequestsService {
   constructor(private http: HttpClient, private store: Store) {}
   private url = 'https://still-waters-55383.herokuapp.com/';
   // private url = '/api/';
+
   currentBoardId?: string;
   currentColumnId?: string;
 
@@ -31,9 +36,7 @@ export class RequestsService {
       .subscribe((res) => (this.currentBoardId = res!.id));
   }
   getCurrentColumnsId() {
-    this.store
-      .select(selectCurrentColumn)
-      .subscribe((res) => (this.currentColumnId = res!.id));
+    this.store.select(selectCurrentColumnID).subscribe(console.log);
   }
 
   public login({ login, password }: ILogin) {
@@ -91,15 +94,17 @@ export class RequestsService {
       this.url + 'boards/' + this.currentBoardId + '/columns/' + id
     );
   }
-  public updateColumn({ title, order }: IColumnUpdate) {
+
+  public updateColumn({ title, order, id }: IColumnUpdate) {
     this.getCurrentBoardId();
     this.getCurrentColumnsId();
+    console.log(id);
+    console.log(this.url + 'boards/' + this.currentBoardId + '/columns/' + id, {
+      title,
+      order,
+    });
     return this.http.put<IColumnUpdate>(
-      this.url +
-        'boards/' +
-        this.currentBoardId +
-        '/columns/' +
-        this.currentColumnId,
+      this.url + 'boards/' + this.currentBoardId + '/columns/' + id,
       { title, order }
     );
   }

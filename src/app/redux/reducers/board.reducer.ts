@@ -31,8 +31,10 @@ export const boardReducer = createReducer(
 );
 export const boardItemReducer = createReducer(
   initialCurrentBoardState,
-  on(
-    BoardActions.getSuccess,
-    (state, { response }): TCurrentBoardState => response
-  )
+  on(BoardActions.getSuccess, (state, { response }): TCurrentBoardState => {
+    return {
+      ...response,
+      columns: [...response.columns].sort((a, b) => a.order - b.order),
+    };
+  })
 );

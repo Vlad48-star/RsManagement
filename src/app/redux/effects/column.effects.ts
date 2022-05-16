@@ -1,13 +1,29 @@
 import { IColumn } from './../../board/model/board.model';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { TaskActions } from './../actions/task.action';
 import { BoardActions } from './../actions/board.action';
 import { RequestsService } from './../../core/services/requests.service';
 import { ColumnActions } from './../actions/column.action';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { retry, map, catchError, EMPTY, mergeMap, exhaustMap } from 'rxjs';
+import {
+  retry,
+  map,
+  catchError,
+  EMPTY,
+  mergeMap,
+  exhaustMap,
+  first,
+  concatMap,
+  withLatestFrom,
+  of,
+  tap,
+  debounce,
+  debounceTime,
+  switchMap,
+} from 'rxjs';
 import { selectCurrentBoard } from '../selectors/board.selector';
+import { selectAllColumn } from '../selectors/column.selector';
 
 @Injectable()
 export class ColumnEffects {
@@ -87,13 +103,7 @@ export class ColumnEffects {
       map((actions) => BoardActions.get({ response: actions.id }))
     );
   });
-  updateCurrentColumn$ = createEffect(() => {
-    this.getCurrentBoardId();
-    return this.actions$.pipe(
-      ofType(ColumnActions.deleteSuccess),
-      map(() => BoardActions.get({ response: { id: this.currentBoardId } }))
-    );
-  });
+
   updateCurrentBoardColumn$ = createEffect(() => {
     this.getCurrentBoardId();
     return this.actions$.pipe(
@@ -101,6 +111,7 @@ export class ColumnEffects {
       map(() => BoardActions.get({ response: { id: this.currentBoardId } }))
     );
   });
+
   deleteColumn$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ColumnActions.delete),
@@ -118,6 +129,41 @@ export class ColumnEffects {
     );
   });
 
+  updateCurrentColumn$ = createEffect(() => {
+    this.getCurrentBoardId();
+    return this.actions$.pipe(
+      ofType(ColumnActions.deleteSuccess),
+      withLatestFrom(this.store.select(selectAllColumn)),
+      mergeMap(([deleteResponse, columnSelector]) =>
+        columnSelector.map((el, index) => {
+          console.log(el.order, index + 1);
+          if (el.order == index + 1) {
+            return null;
+          }
+          return this.requestsService
+            .updateColumn({
+              title: el.title,
+              order: index + 1,
+              id: el.id,
+            })
+            .pipe(first())
+            .subscribe();
+        })
+      ),
+      debounceTime(300),
+      map((param) => {
+        return ColumnActions.successUpdateCurrentColumnOrder();
+      })
+    );
+  });
+
+  updateCurrentBoardAfterOrderUpdate$ = createEffect(() => {
+    this.getCurrentBoardId();
+    return this.actions$.pipe(
+      ofType(ColumnActions.successUpdateCurrentColumnOrder),
+      map(() => BoardActions.get({ response: { id: this.currentBoardId } }))
+    );
+  });
   constructor(
     private actions$: Actions,
     private requestsService: RequestsService,
