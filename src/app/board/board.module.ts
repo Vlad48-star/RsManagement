@@ -15,6 +15,7 @@ import { BoardPageComponent } from './pages/board-page/board-page.component';
 import { BoardMenuComponent } from './components/board-menu/board-menu.component';
 import { ColumnModule } from '../column/column.module';
 import { EditComponent } from './components/edit/edit.component';
+import { MainComponent } from './pages/main/main.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { EditComponent } from './components/edit/edit.component';
     BoardPageComponent,
     BoardMenuComponent,
     EditComponent,
+    MainComponent,
   ],
   imports: [
     CommonModule,

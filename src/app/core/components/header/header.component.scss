@@ -82,3 +82,47 @@ button:hover{
 button:focus {
   background-color: transparent;
 }
+
+@media (max-width: 768px) {
+  header{
+    height: 60px;
+    padding: 0 5px;
+    h3{
+      font-size: 14px;
+      font-weight: 900;
+    }
+    h2{
+      text-align: center;
+      font-size: 16px;
+      font-weight: 900;
+      line-height: 0.8;
+      margin-bottom: 25px;
+    }
+    .logo{
+      width: 30px;
+      height: 30px;
+    }
+    .logo-container{
+      .logo-title {
+        font-size: 14px;
+        font-weight: 900;
+      }
+    }
+    mat-icon{
+      background: center;
+      height: 35px;
+      width: 45px;
+      font-size: 35px;
+      color:#ff9800;
+    }
+    .wrap-mat-menu{
+      gap: 5px;
+      display: flex;
+    }
+    .wrap-add-board{
+      .btn-floating{
+        right: 22%;
+      }
+    }
+  }
+}

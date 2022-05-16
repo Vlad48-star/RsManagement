@@ -3,7 +3,6 @@ import { IBoard } from './../../model/board.model';
 import { Observable } from 'rxjs';
 import { selectAllBoard } from './../../../redux/selectors/board.selector';
 import { Store } from '@ngrx/store';
-import { DataService } from 'src/app/core/services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { LangChangeService } from 'src/app/core/services/lang-change.service';
 
@@ -14,7 +13,6 @@ import { LangChangeService } from 'src/app/core/services/lang-change.service';
 })
 export class ListComponent {
   constructor(
-    public dataService: DataService,
     private store: Store,
     private dialog: DialogService,
     public auth: LangChangeService

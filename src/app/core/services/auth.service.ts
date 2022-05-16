@@ -24,7 +24,7 @@ export class AuthService {
     localStorage.setItem('id_token', authResult.token);
     localStorage.setItem('expires_at', JSON.stringify(expiresAt.valueOf()));
     localStorage.setItem('login', login);
-    this.router.navigate(['/board']);
+    this.router.navigate(['/main/board']);
   }
   public login(formData: ILogin) {
     this.store.dispatch(UserActions.loginUser({ response: formData }));

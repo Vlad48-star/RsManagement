@@ -1,6 +1,5 @@
 import { RequestsService } from './services/requests.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { DataService } from './services/data.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -33,7 +32,6 @@ import { RouterModule } from '@angular/router';
   ],
   providers: [
     FormValidatorService,
-    DataService,
     RequestsService,
     {
       provide: HTTP_INTERCEPTORS,
