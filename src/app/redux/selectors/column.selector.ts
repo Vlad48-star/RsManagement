@@ -18,3 +18,7 @@ export const selectCurrentColumn = createSelector(
   selectCurrentColumnFeature,
   (state) => state
 );
+export const selectCurrentColumnID = createSelector(
+  selectCurrentColumnFeature,
+  (state) => state?.id
+);

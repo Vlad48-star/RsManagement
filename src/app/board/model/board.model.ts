@@ -5,6 +5,7 @@ export interface IBoard {
 export interface IColumnUpdate {
   order: number;
   title: string;
+  id: string;
 }
 export interface IColumnUpdateResponse {
   order: number;

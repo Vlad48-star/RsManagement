@@ -46,9 +46,12 @@ export const ColumnActions = {
     '[CURRENT_COLUMN] update column',
     props<{ currentColumn: IColumn }>()
   ),
-  updateColumnsOrder: createAction(
-    '[COLUMN_ORDER] column order update',
-    props<{ column: IColumn }>()
+  updateCurrentColumnOrder: createAction(
+    '[CURRENT_COLUMN] update order column',
+    props<{ currentColumn: IColumnUpdate; index: number }>()
+  ),
+  successUpdateCurrentColumnOrder: createAction(
+    '[CURRENT_COLUMN] update order column success'
   ),
   // get: createAction('[BOARD] get board data', props<{ response: IBoardID }>()),
   // getSuccess: createAction(

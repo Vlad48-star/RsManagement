@@ -42,6 +42,7 @@ export class ColumnComponent implements OnInit {
           response: {
             title: this.editingTitle,
             order: this.columnInfo.order,
+            id: this.columnInfo.id,
           },
         })
       );
