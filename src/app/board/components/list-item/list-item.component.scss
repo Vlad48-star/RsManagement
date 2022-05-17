@@ -1,7 +1,18 @@
 .item-wrapper {
-  padding: 5px 10px;
-  border: 1px solid transparent;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.87);
+  .board-title {
+    display: flex;
+    width: 200px;
+    box-sizing: border-box;
+  }
   &.active {
-    border-color: rebeccapurple;
+    color: #ff9800;
+    padding-left: 10px;
+    font-size: 26px;
+    font-weight: 800;
+    border: 1px solid transparent;
+    text-decoration: solid;
+    // border-color: rebeccapurple;
   }
 }
