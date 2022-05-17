@@ -6,9 +6,10 @@ import { CommonModule } from '@angular/common';
 import { ColumnComponent } from './components/column/column.component';
 import { AddColumnComponent } from './components/add-column/add-column.component';
 import { TaskModule } from '../task/task.module';
+import { AutofocusDirective } from './directives/autofocus.directive';
 
 @NgModule({
-  declarations: [ColumnComponent, AddColumnComponent],
+  declarations: [ColumnComponent, AddColumnComponent, AutofocusDirective],
   imports: [
     CommonModule,
     FormsModule,

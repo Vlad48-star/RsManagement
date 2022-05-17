@@ -1,10 +1,11 @@
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RequestsService } from './../../../core/services/requests.service';
 import { ColumnActions } from './../../../redux/actions/column.action';
 import { Store } from '@ngrx/store';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { IColumn } from './../../../board/model/board.model';
-import { Component, Input, OnInit } from '@angular/core';
 import { LangChangeService } from 'src/app/core/services/lang-change.service';
+import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-column',
@@ -18,12 +19,22 @@ export class ColumnComponent implements OnInit {
     private requestService: RequestsService,
     public auth: LangChangeService
   ) {}
+  @ViewChild('input', { static: false })
+  set input(element: ElementRef<HTMLInputElement>) {
+    if (element) {
+      element.nativeElement.focus();
+    }
+  }
   @Input() columnInfo!: IColumn;
   @Input() columnOrder!: number;
+  editColumnForm!: FormGroup;
   ngOnInit(): void {
-    this.editingTitle = this.columnInfo.title;
+    this.editColumnForm = new FormGroup({
+      columnTitle: new FormControl(this.columnInfo.title, [
+        Validators.required,
+      ]),
+    });
   }
-  editingTitle!: string;
   isEditTaskActive = false;
 
   updateCurrentColumn() {
@@ -38,19 +49,22 @@ export class ColumnComponent implements OnInit {
 
   updateColumn() {
     const oldTitle = this.columnInfo.title;
-    if (this.editingTitle !== oldTitle) {
+    if (this.editColumnForm.get('columnTitle')?.value !== oldTitle) {
       this.store.dispatch(
         ColumnActions.update({
           response: {
-            title: this.editingTitle,
+            title: this.editColumnForm.get('columnTitle')?.value,
             order: this.columnInfo.order,
             id: this.columnInfo.id,
           },
         })
       );
+      this.isEditTaskActive = false;
     }
-    this.isEditTaskActive = !this.isEditTaskActive;
+    console.log(this.editColumnForm.get('columnTitle')?.value);
+    this.isEditTaskActive = false;
   }
+
   onAddTask() {
     this.dialog.addTaskDialog();
     this.updateCurrentColumn();

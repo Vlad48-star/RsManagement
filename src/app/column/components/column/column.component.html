@@ -7,17 +7,21 @@
     {{ columnInfo?.title }}
   </h2>
   <ng-template #editActive>
-    <input
-      (click)="updateCurrentColumn()"
-      type="text"
-      [(ngModel)]="editingTitle"
-    />
-    <button class="btn red" (click)="isEditTaskActive = !isEditTaskActive">
-      {{ auth.lang === 'ru' ? 'Назад' : 'Back' }}
+
+    <form [formGroup]="editColumnForm" class="login-form" (ngSubmit)="updateColumn()">
+
+      <input formControlName="columnTitle"
+      style="border: 1px dashed green"
+       type="text" placeholder="title" (blur)="updateColumn()" #input/>
+
+      <button type="button"
+      style="background-color: red; color: #fff"
+      (click)="isEditTaskActive = !isEditTaskActive"
+    >
+      cancel
     </button>
-    <button class="btn green" (click)="updateColumn()">
-      {{ auth.lang === 'ru' ? 'Отправить' : 'Submit' }}
-    </button>
+    <button type="submit" type="submit" mat-button>Submit</button>
+    </form>
   </ng-template>
 
   <button class="btn red" (click)="onDeleteColumn()">{{ auth.lang === 'ru' ? 'Удалить' : 'Delete' }}</button>

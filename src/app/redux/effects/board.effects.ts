@@ -66,7 +66,7 @@ export class BoardEffects {
           map(() => {
             return BoardActions.deleteSuccess({ response: actions.response });
           }),
-          tap(() => this.router.navigate(['board'])),
+          tap(() => this.router.navigate(['main/board'])),
           catchError((error) => {
             console.log('[ERROR]: ', error);
             return EMPTY;
