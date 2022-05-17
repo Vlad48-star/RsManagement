@@ -8,11 +8,11 @@
   </h2>
   <ng-template #editActive>
     
-    <form [formGroup]="editColumnForm" class="login-form" (ngSubmit)="onBlurMethod()">
+    <form [formGroup]="editColumnForm" class="login-form" (ngSubmit)="updateColumn()">
       
       <input formControlName="columnTitle" 
       style="border: 1px dashed green"
-       type="text" placeholder="title" (blur)="onBlurMethod()" #input/>
+       type="text" placeholder="title" (blur)="updateColumn()" #input/>
       
       <button type="button"
       style="background-color: red; color: #fff"
@@ -22,12 +22,6 @@
     </button>
     <button type="submit" type="submit" mat-button>Submit</button>
     </form>
-    
-    <!-- <input
-      (click)="updateCurrentColumn()"
-      type="text"
-      [(ngModel)]="editingTitle"
-    /> -->
 
   </ng-template>
 

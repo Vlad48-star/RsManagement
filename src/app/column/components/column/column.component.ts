@@ -45,7 +45,7 @@ export class ColumnComponent implements OnInit {
     this.updateCurrentColumn();
   }
 
-  onBlurMethod() {
+  updateColumn() {
     const oldTitle = this.columnInfo.title;
     if (this.editColumnForm.get('columnTitle')?.value !== oldTitle) {
       this.store.dispatch(
