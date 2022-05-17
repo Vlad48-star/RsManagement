@@ -1,0 +1,12 @@
+<form [formGroup]="editTaskForm" class="login-form" (ngSubmit)="onSubmit()">
+  
+  <div class="header">
+    <h2>{{ auth.lang === 'ru' ? 'Форма для изменения задания' : 'Editing Task Form' }}</h2>
+    <button mat-raised-button [mat-dialog-close]="false"><mat-icon>close</mat-icon></button>
+  </div>
+  
+  <input formControlName="taskTitle" type="text" placeholder="title"/>
+  
+  <input formControlName="taskDescription" type="text" placeholder="description"/>
+  <button type="submit" mat-button>Submit</button>
+</form>

@@ -59,29 +59,27 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   }
 
   public delBoardHandler() {
-    if(this.auth.lang === 'ru'){
+    if (this.auth.lang === 'ru') {
       this.objectLanguage = {
         title: 'Вы уверены?',
-        message: 'Вы собираетесь удалить этот таск(эту колонку)?',
+        message: 'Вы собираетесь удалить эту доску?',
         confirmText: 'да',
         cancelText: 'нет',
-      }
+      };
     } else {
       this.objectLanguage = {
         title: 'Are you sure?',
         message: 'Are you going to delete this task (this column)?',
         confirmText: 'Yes',
         cancelText: 'No',
-      }
+      };
     }
-    this.dialog
-      .confirmDialog(this.objectLanguage)
-      .subscribe((res) => {
-        if (res)
-          this.store.dispatch(
-            BoardActions.delete({ response: { id: this.data.id } })
-          );
-      });
+    this.dialog.confirmDialog(this.objectLanguage).subscribe((res) => {
+      if (res)
+        this.store.dispatch(
+          BoardActions.delete({ response: { id: this.data.id } })
+        );
+    });
   }
   public onBlurMethod() {
     if (this.boardNameForm.value.title == '') {
@@ -95,7 +93,6 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     console.log('init');
     this.routeSubscription = this.route.paramMap.subscribe((params) => {
       this.stateBoardSubscription = this.store

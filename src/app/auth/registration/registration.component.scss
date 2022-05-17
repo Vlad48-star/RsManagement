@@ -1,8 +1,8 @@
-.size-form {
+.size-form{
   width: 300px;
 }
 
-.registration-form {
+.registration-form{
   display: grid;
   justify-items: center;
   width: 100%;
@@ -14,17 +14,18 @@
     padding: 25px 40px;
     box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
   }
-  .wrap-btn {
+  .wrap-btn{
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
   }
 }
-.btn {
+.btn{
   background-color: #ff9800;
 }
 
-.form-group {
+.form-group{
   display: grid;
   margin-bottom: 10px;
 }
+

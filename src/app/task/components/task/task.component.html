@@ -1,1 +1,5 @@
-<div>{{ task.title }}</div>
+<div class="task">
+  <div (click)="onEditTask()" style="padding: 5px; border: 1px dashed rgb(255, 191, 191); margin-bottom: 2px;">{{ task.title }}
+  </div>
+  <button mat-button (click)="onDeleteTask()">delete</button>
+</div>

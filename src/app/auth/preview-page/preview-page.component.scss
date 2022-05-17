@@ -1,4 +1,4 @@
-.wrap-header {
+.wrap-header{
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -6,7 +6,7 @@
   padding: 0 20px;
 }
 
-.switch {
+.switch{
   display: flex;
   justify-self: end;
 }
@@ -18,52 +18,52 @@
   background-color: #ff9800;
 }
 
-.switch label input[type='checkbox']:checked + .lever {
+.switch label input[type=checkbox]:checked+.lever {
   background-color: #fce3bd;
 }
 
-.switch label input[type='checkbox']:checked + .lever:after {
+.switch label input[type=checkbox]:checked+.lever:after {
   background-color: #ff9800;
 }
 
-.position-logo {
+.position-logo{
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 5px
 }
 
-.logo {
+.logo{
   height: 50px;
   width: 50px;
 }
 
-.text-logo {
+.text-logo{
   color: black;
   font-size: 25px;
   font-weight: 900;
 }
 
-.registration-wrap {
+.registration-wrap{
   display: flex;
   gap: 20px;
 }
 
-.btn {
+.btn{
   background-color: #ff9800;
 }
 
-.sigh-in {
+.sigh-in{
   color: black;
   background-color: white;
 }
 
-.wrap-video {
+.wrap-video{
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0 200px;
   gap: 20px;
-  .summary-video {
+  .summary-video{
     font-weight: 500;
     font-size: 44px;
     line-height: 54px;
@@ -73,7 +73,7 @@
   }
 }
 
-.back-image {
+.back-image{
   height: 500px;
   max-width: 100%;
   background: no-repeat;
@@ -81,13 +81,13 @@
   background-image: url(/assets/back.png);
 }
 
-.wrap-persons {
+.wrap-persons{
   display: flex;
   padding: 0 20px;
   margin-bottom: 80px;
   text-align: center;
   justify-content: space-around;
-  .person-max {
+  .person-max{
     border: solid 4px #ff9800;
     width: 200px;
     height: 200px;
@@ -96,7 +96,7 @@
     background-size: 116%;
     border-radius: 50%;
   }
-  .person-vlad {
+  .person-vlad{
     border: solid 4px #ff9800;
     width: 200px;
     height: 200px;
@@ -107,7 +107,7 @@
     background-position-x: 50%;
     border-radius: 50%;
   }
-  .person-dmitri {
+  .person-dmitri{
     border: solid 4px #ff9800;
     width: 200px;
     height: 200px;

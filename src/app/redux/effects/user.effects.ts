@@ -3,10 +3,8 @@ import { UserActions } from './../actions/user.action';
 import { RequestsService } from '../../core/services/requests.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, catchError, EMPTY, mergeMap } from 'rxjs';
+import { map, catchError, EMPTY, mergeMap, retry } from 'rxjs';
 import { MaterialService } from 'src/app/auth/class/material.service';
-
-
 
 @Injectable()
 export class UserEffects {
@@ -15,13 +13,14 @@ export class UserEffects {
       ofType(UserActions.registerUser),
       mergeMap((actions) => {
         return this.requestsService.register({ ...actions.response }).pipe(
+          retry(4),
           map(() => {
             return UserActions.registerUserSuccess({
               response: { ...actions.response },
             });
           }),
           catchError((error) => {
-            MaterialService.toast(error.error.message)
+            console.log('[ERROR]: ', error);
             return EMPTY;
           })
         );
@@ -34,6 +33,7 @@ export class UserEffects {
       ofType(UserActions.loginUser),
       mergeMap((actions) => {
         return this.requestsService.login({ ...actions.response }).pipe(
+          retry(4),
           map((token) => {
             this.authService.setSession(token, actions.response.login);
             return UserActions.loginUserSuccess({
@@ -41,7 +41,7 @@ export class UserEffects {
             });
           }),
           catchError((error) => {
-            MaterialService.toast(error.error.message);
+            console.log('[ERROR]: ', error);
             return EMPTY;
           })
         );
@@ -54,6 +54,7 @@ export class UserEffects {
       ofType(UserActions.load),
       mergeMap(() =>
         this.requestsService.loadAllUsers().pipe(
+          retry(4),
           map((response) => {
             const item = response.find(
               (response) => response.login == localStorage.getItem('login')
@@ -64,7 +65,7 @@ export class UserEffects {
             return UserActions.loadSuccess({ response: item });
           }),
           catchError((error) => {
-            MaterialService.toast(error.error.message);
+            console.log('[ERROR]: ', error);
             return EMPTY;
           })
         )
@@ -87,17 +88,19 @@ export class UserEffects {
     return this.actions$.pipe(
       ofType(UserActions.update),
       mergeMap((actions) => {
-        return this.requestsService.update({ ...actions.response }, actions.id).pipe(
-          map((response) => {
-            return UserActions.updateSuccess({
-              response: { ...actions.response },
-            });
-          }),
-          catchError((error) => {
-            MaterialService.toast(error.error.message);
-            return EMPTY;
-          })
-        );
+        return this.requestsService
+          .update({ ...actions.response }, actions.id)
+          .pipe(
+            map((response) => {
+              return UserActions.updateSuccess({
+                response: { ...actions.response },
+              });
+            }),
+            catchError((error) => {
+              MaterialService.toast(error.error.message);
+              return EMPTY;
+            })
+          );
       })
     );
   });

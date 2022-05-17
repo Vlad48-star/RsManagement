@@ -1,4 +1,9 @@
-import { TColumnState, COLUMN_KEY } from './../actions/column.action';
+import {
+  TColumnState,
+  COLUMN_KEY,
+  CURRENT_COLUMN_KEY,
+  TCurrentColumnState,
+} from './../actions/column.action';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
 export const selectColumnFeature =
@@ -6,4 +11,14 @@ export const selectColumnFeature =
 export const selectAllColumn = createSelector(
   selectColumnFeature,
   (state) => state
+);
+export const selectCurrentColumnFeature =
+  createFeatureSelector<TCurrentColumnState>(CURRENT_COLUMN_KEY);
+export const selectCurrentColumn = createSelector(
+  selectCurrentColumnFeature,
+  (state) => state
+);
+export const selectCurrentColumnID = createSelector(
+  selectCurrentColumnFeature,
+  (state) => state?.id
 );

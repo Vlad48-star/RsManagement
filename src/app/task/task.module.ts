@@ -5,9 +5,10 @@ import { CommonModule } from '@angular/common';
 import { TaskComponent } from './components/task/task.component';
 import { AddTaskComponent } from './components/add-task/add-task.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditTaskComponent } from './components/edit-task/edit-task.component';
 
 @NgModule({
-  declarations: [TaskComponent, AddTaskComponent],
+  declarations: [TaskComponent, AddTaskComponent, EditTaskComponent],
   imports: [
     CommonModule,
     FormsModule,

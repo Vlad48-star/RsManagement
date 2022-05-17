@@ -1,10 +1,23 @@
-import { INewTask, ITaskRes } from './../../redux/actions/task.action';
+import { Observable, retry } from 'rxjs';
+import {
+  selectCurrentColumn,
+  selectCurrentColumnID,
+} from './../../redux/selectors/column.selector';
+import { selectAllColumn } from 'src/app/redux/selectors/column.selector';
+import { selectCurrentBoard } from './../../redux/selectors/board.selector';
+import { Store } from '@ngrx/store';
+import {
+  INewTask,
+  ITaskRes,
+  ITaskUpdate,
+} from './../../redux/actions/task.action';
 import { IColumnID } from './../../column/components/models/column.model';
 import { IBoardID } from './../../board/components/crate-board/model/newBoard.model';
 import {
   IBoard,
   IBoardData,
   IColumn,
+  IColumnUpdate,
   INewColumn,
 } from './../../board/model/board.model';
 import { HttpClient } from '@angular/common/http';
@@ -14,8 +27,20 @@ import { IUser } from 'src/app/redux/actions/user.action';
 
 @Injectable()
 export class RequestsService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: Store) {}
   private url = 'https://still-waters-55383.herokuapp.com/';
+
+  currentBoardId?: string;
+  currentColumnId?: string;
+
+  getCurrentBoardId() {
+    this.store
+      .select(selectCurrentBoard)
+      .subscribe((res) => (this.currentBoardId = res!.id));
+  }
+  getCurrentColumnsId() {
+    this.store.select(selectCurrentColumnID).subscribe(console.log);
+  }
 
   public login({ login, password }: ILogin) {
     return this.http.post<IToken>(this.url + 'signin', {
@@ -78,12 +103,65 @@ export class RequestsService {
     });
   }
 
+  public deleteColumn({ id }: IBoardID) {
+    this.getCurrentBoardId();
+    return this.http.delete<IBoard>(
+      this.url + 'boards/' + this.currentBoardId + '/columns/' + id
+    );
+  }
+
+  public updateColumn({ title, order, id }: IColumnUpdate) {
+    this.getCurrentBoardId();
+    this.getCurrentColumnsId();
+    console.log(id);
+    console.log(this.url + 'boards/' + this.currentBoardId + '/columns/' + id, {
+      title,
+      order,
+    });
+    return this.http.put<IColumnUpdate>(
+      this.url + 'boards/' + this.currentBoardId + '/columns/' + id,
+      { title, order }
+    );
+  }
+
   public addTask(taskData: INewTask, boardId: IBoardID, columnId: IColumnID) {
     return this.http.post<ITaskRes>(
       this.url + 'boards/' + boardId.id + '/columns/' + columnId.id + '/tasks',
       {
         ...taskData,
       }
+    );
+  }
+  public updateTask({ ...response }: ITaskUpdate) {
+    this.getCurrentBoardId();
+    return this.http.put<ITaskRes>(
+      this.url +
+        'boards/' +
+        this.currentBoardId +
+        '/columns/' +
+        response.columnId +
+        '/tasks/' +
+        response.id,
+      {
+        title: response.title,
+        order: response.order,
+        description: response.description,
+        userId: response.userId,
+        columnId: response.columnId,
+        boardId: this.currentBoardId,
+      }
+    );
+  }
+  public deleteTask({ ...response }: { columnId: string; taskId: string }) {
+    this.getCurrentBoardId();
+    return this.http.delete<{ columnId: string; taskId: string }>(
+      this.url +
+        'boards/' +
+        this.currentBoardId +
+        '/columns/' +
+        response.columnId +
+        '/tasks/' +
+        response.taskId
     );
   }
 }

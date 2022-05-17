@@ -1,3 +1,5 @@
+import { IColumn } from './../../../board/model/board.model';
+import { selectCurrentColumn } from './../../../redux/selectors/column.selector';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import {
   INewTask,
@@ -15,17 +17,29 @@ import { LangChangeService } from 'src/app/core/services/lang-change.service';
   styleUrls: ['./add-task.component.scss'],
 })
 export class AddTaskComponent {
-  constructor(private store: Store, private dialog: DialogService, public auth: LangChangeService) {
+  constructor(
+    private store: Store,
+    private dialog: DialogService,
+    public auth: LangChangeService
+  ) {
     this.createForm();
   }
-  @Input() taskOrder!: number;
-  @Input() columnInfo!: string;
+  currentColumn!: IColumn;
+
+  getCurrentColumn() {
+    this.store.select(selectCurrentColumn).subscribe((res) => {
+      if (res) {
+        this.currentColumn = res;
+      }
+    });
+  }
 
   newTaskForm!: FormGroup;
   showAddTask = false;
   errorOnsubmit = false;
 
   formSubmit() {
+    this.getCurrentColumn();
     this.errorOnsubmit = true;
 
     if (!this.newTaskForm.valid) {
@@ -36,10 +50,10 @@ export class AddTaskComponent {
       TaskActions.createTask({
         response: {
           title: this.newTaskForm.value.title,
-          order: this.taskOrder,
-          description: 'descriptions',
+          order: this.currentColumn.tasks?.length,
+          description: this.newTaskForm.value.description,
         },
-        columnId: this.columnInfo,
+        columnId: this.currentColumn.id,
       })
     );
 
@@ -52,6 +66,7 @@ export class AddTaskComponent {
     this.newTaskForm = new FormGroup(
       {
         title: new FormControl('', [Validators.required]),
+        description: new FormControl('', [Validators.required]),
       },
       { updateOn: 'blur' }
     );
@@ -61,5 +76,8 @@ export class AddTaskComponent {
   }
   get title() {
     return this.newTaskForm.get('title');
+  }
+  get description() {
+    return this.newTaskForm.get('description');
   }
 }

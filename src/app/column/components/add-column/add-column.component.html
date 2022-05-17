@@ -17,7 +17,7 @@
     </div>
     <ng-container
       *ngIf="
-        (title!.invalid && (title!.touched || title!.dirty)) || errorOnsubmit
+        (title!.invalid && title!.dirty) || errorOnsubmit
       "
     >
       <span *ngIf="title!.errors?.['required']"

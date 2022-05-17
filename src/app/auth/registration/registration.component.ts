@@ -12,7 +12,11 @@ import { LangChangeService } from 'src/app/core/services/lang-change.service';
 export class RegistrationComponent {
   signInForm: any;
 
-  constructor(private register: AuthService, private router: Router, public auth: LangChangeService) {
+  constructor(
+    private register: AuthService,
+    private router: Router,
+    public auth: LangChangeService
+  ) {
     this.createForm();
   }
 

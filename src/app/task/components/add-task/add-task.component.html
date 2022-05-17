@@ -1,8 +1,4 @@
 <div class="add-task">
-  <ng-container *ngIf="!showAddTask; else elseTemplate">
-    <div (click)="toggleNewTaskForm()">{{ auth.lang === 'ru' ? 'Добавить задачу' : 'Add task' }}</div>
-  </ng-container>
-  <ng-template #elseTemplate>
     <form
       [formGroup]="newTaskForm"
       (ngSubmit)="formSubmit()"
@@ -14,21 +10,29 @@
           class="input-text"
           name="title"
           formControlName="title"
-          (blur)="formSubmit()"
           required
+          placeholder="{{ auth.lang === 'ru' ? 'Название' : 'Title' }}"
+        />
+        <input
+          type="text"
+          class="input-text"
+          name="description"
+          formControlName="description"
+          required
+          placeholder="{{ auth.lang === 'ru' ? 'Описание' : 'Description' }}"
         />
       <button class="btn btn-text" style="background-color: red;" [mat-dialog-close]="false">{{ auth.lang === 'ru' ? 'Отменить' : 'Cancel' }}</button>
       <button class="btn btn-text">{{ auth.lang === 'ru' ? 'Добавить' : 'Add' }}</button>
       </div>
       <ng-container
         *ngIf="
-          (title!.invalid && (title!.touched || title!.dirty)) || errorOnsubmit
+          (title!.invalid && title!.dirty) || (description!.invalid && description!.dirty) || errorOnsubmit
         "
       >
         <span *ngIf="title!.errors?.['required']"
-          >{{ auth.lang === 'ru' ? 'Пожалуйста, введите имя колонки' : 'Please enter a column name' }}</span
+          >{{ auth.lang === 'ru' ? 'Пожалуйста, введите название задания' : 'Please enter a task name' }}</span
         >
+        <span *ngIf="description!.errors?.['required']">{{ auth.lang === 'ru' ? 'Пожалуйста, введите описание колонки задания' : 'Please enter a task description' }}</span>
       </ng-container>
     </form>
-  </ng-template>
 </div>

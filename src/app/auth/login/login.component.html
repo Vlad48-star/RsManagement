@@ -10,10 +10,7 @@
       <label class="flex-column">
         <span>{{ auth.lang === 'ru' ? 'Электронная почта' : 'Email' }}</span>
         <input
-          [ngClass]="{
-            invalid:
-              loginForm.get('login').invalid && loginForm.get('login').touched
-          }"
+          [ngClass]="{'invalid': loginForm.get('login').invalid && loginForm.get('login').touched}"
           type="text"
           autocomplete="off"
           class="input-text"
@@ -41,11 +38,7 @@
       <label class="flex-column">
         <span>{{ auth.lang === 'ru' ? 'Пароль' : 'Password' }}</span>
         <input
-          [ngClass]="{
-            invalid:
-              loginForm.get('password').invalid &&
-              loginForm.get('password').touched
-          }"
+          [ngClass]="{'invalid': loginForm.get('password').invalid && loginForm.get('password').touched}"
           type="password"
           autocomplete="off"
           class="input-text"
