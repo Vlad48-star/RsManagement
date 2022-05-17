@@ -20,6 +20,14 @@ export const TaskActions = {
     '[TASK] update task success',
     props<{ response: ITaskUpdate }>()
   ),
+  deleteTask: createAction(
+    '[TASK] delete task',
+    props<{ response: { columnId: string; taskId: string } }>()
+  ),
+  deleteTaskSuccess: createAction(
+    '[TASK] delete task success',
+    props<{ response: { columnId: string; taskId: string } }>()
+  ),
 };
 
 export type TUserState = INewTask | object;

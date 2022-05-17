@@ -71,13 +71,33 @@ export class TaskEffects {
       })
     );
   });
+  deleteTask$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(TaskActions.deleteTask),
+      mergeMap((actions) =>
+        this.requestsService.deleteTask(actions.response).pipe(
+          map(() => {
+            return TaskActions.deleteTaskSuccess({
+              response: actions.response,
+            });
+          }),
+          catchError((error) => {
+            console.log('[ERROR]: ', error);
+            return EMPTY;
+          })
+        )
+      )
+    );
+  });
   updateCurrentBoard$ = createEffect(() => {
     this.getCurrentBoardId();
     return this.actions$.pipe(
-      ofType(TaskActions.createTaskSuccess, TaskActions.updateTaskSuccess),
-      map((actions) =>
-        BoardActions.get({ response: { id: this.currentBoardId } })
-      )
+      ofType(
+        TaskActions.createTaskSuccess,
+        TaskActions.updateTaskSuccess,
+        TaskActions.deleteTaskSuccess
+      ),
+      map(() => BoardActions.get({ response: { id: this.currentBoardId } }))
     );
   });
 

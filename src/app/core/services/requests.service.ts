@@ -141,4 +141,16 @@ export class RequestsService {
       }
     );
   }
+  public deleteTask({ ...response }: { columnId: string; taskId: string }) {
+    this.getCurrentBoardId();
+    return this.http.delete<{ columnId: string; taskId: string }>(
+      this.url +
+        'boards/' +
+        this.currentBoardId +
+        '/columns/' +
+        response.columnId +
+        '/tasks/' +
+        response.taskId
+    );
+  }
 }
