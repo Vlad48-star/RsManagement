@@ -29,3 +29,12 @@ body{
     width: 250px;
   }
 }
+
+@media (max-width: 500px) {
+  .wrapper {
+    margin-top: 2%;
+    .content {
+      padding: 15px 15px;
+    }
+  }
+}

@@ -1,5 +1,5 @@
-<h2>{{ auth.lang === 'ru' ? 'Задачи:' : 'Boards:' }}</h2>
 <div class="wrapper">
+  <h2>{{ auth.lang === 'ru' ? 'Задачи:' : 'Boards:' }}</h2>
   <ng-container
     *ngIf="urlParams.id !== undefined ? true : false; else elseTemplate"
   >

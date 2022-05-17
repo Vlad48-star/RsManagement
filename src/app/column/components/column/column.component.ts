@@ -4,6 +4,7 @@ import { ColumnActions } from './../../../redux/actions/column.action';
 import { Store } from '@ngrx/store';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { IColumn } from './../../../board/model/board.model';
+import { LangChangeService } from 'src/app/core/services/lang-change.service';
 import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
@@ -15,7 +16,8 @@ export class ColumnComponent implements OnInit {
   constructor(
     private dialog: DialogService,
     private store: Store,
-    private requestService: RequestsService
+    private requestService: RequestsService,
+    public auth: LangChangeService
   ) {}
   @ViewChild('input', { static: false })
   set input(element: ElementRef<HTMLInputElement>) {
