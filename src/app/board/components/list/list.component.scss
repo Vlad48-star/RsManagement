@@ -1,0 +1,9 @@
+.list-wrapper{
+  max-width: 200px;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    max-width: 120px;
+  }
+}

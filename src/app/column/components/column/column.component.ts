@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { IColumn } from './../../../board/model/board.model';
 import { Component, Input, OnInit } from '@angular/core';
+import { LangChangeService } from 'src/app/core/services/lang-change.service';
 
 @Component({
   selector: 'app-column',
@@ -14,7 +15,8 @@ export class ColumnComponent implements OnInit {
   constructor(
     private dialog: DialogService,
     private store: Store,
-    private requestService: RequestsService
+    private requestService: RequestsService,
+    public auth: LangChangeService
   ) {}
   @Input() columnInfo!: IColumn;
   @Input() columnOrder!: number;

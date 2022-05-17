@@ -4,7 +4,7 @@
     (ngSubmit)="formSubmit()"
     class="flex-column"
   >
-    <div class="flex-row">
+    <div class="grid-row">
       <input
         type="text"
         class="input-text"
@@ -12,17 +12,21 @@
         formControlName="title"
         required
       />
-      <button class="btn btn-text" style="background-color: red;" [mat-dialog-close]="false">{{ auth.lang === 'ru' ? 'Отменить' : 'Cancel' }}</button>
-      <button class="btn btn-text">{{ auth.lang === 'ru' ? 'Добавить' : 'Add' }}</button>
+      <ng-container *ngIf="(title!.invalid && title!.dirty) || errorOnsubmit">
+        <span class="text-center" *ngIf="title!.errors?.['required']">{{
+          auth.lang === 'ru'
+            ? 'Пожалуйста, введите имя доски'
+            : 'Please enter board name'
+        }}</span>
+      </ng-container>
+      <div class="wrap-flex">
+        <button class="btn red" [mat-dialog-close]="false">
+          {{ auth.lang === 'ru' ? 'Отменить' : 'Back' }}
+        </button>
+        <button class="btn">
+          {{ auth.lang === 'ru' ? 'Добавить' : 'Add' }}
+        </button>
+      </div>
     </div>
-    <ng-container
-      *ngIf="
-        (title!.invalid && title!.dirty) || errorOnsubmit
-      "
-    >
-      <span *ngIf="title!.errors?.['required']"
-        >{{ auth.lang === 'ru' ? 'Пожалуйста, введите имя доски' : 'Please enter board name' }}</span
-      >
-    </ng-container>
   </form>
 </div>
