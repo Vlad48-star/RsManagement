@@ -1,70 +1,70 @@
 <div class="wrapper flex-column">
-  <app-header></app-header>
   <div class="content">
     <app-board-menu></app-board-menu>
-    <div>
+    <div class="line-vertical"></div>
+    <div class="wrap-current-board">
       <form
+        class="wrap-form"
         action=""
         [formGroup]="boardNameForm"
         [class.err_on_submit]="errorOnsubmit"
         (ngSubmit)="onBlurMethod()"
       >
+        <h3>{{ auth.lang === 'ru' ? 'Текущая доска:' : 'Current board:' }}</h3>
         <input
+          class="change-board"
           type="text"
           name="title"
           formControlName="title"
           (blur)="onBlurMethod()"
         />
+        <div class="pos-btn">
+          <button class="btn red" type="button" (click)="delBoardHandler()">
+            {{ auth.lang === 'ru' ? 'Удалить' : 'Delete' }}
+          </button>
+        </div>
         <input type="submit" hidden />
-        <button
-          style="background-color: red; color: white"
-          type="button"
-          (click)="delBoardHandler()"
-        >
-          {{ auth.lang === 'ru' ? 'Удалить' : 'Delete' }}
-        </button>
       </form>
-      <hr>
-      <div class="column-grid">
-        <ng-container *ngIf="(currentBoard$ | async) !== undefined">
-          <ng-container
-            *ngIf="
-              (currentBoard$ | async)!.columns.length > 0;
-              else emptyColumns
+    </div>
+    <div class="column-grid">
+      <ng-container *ngIf="(currentBoard$ | async) !== undefined">
+        <ng-container
+          *ngIf="
+            (currentBoard$ | async)!.columns.length > 0;
+            else emptyColumns
+          "
+        >
+          <app-column
+            *ngFor="
+              let column of (currentBoard$ | async)?.columns;
+              let indexOfColumn = index
             "
-          >
-            <app-column
-              *ngFor="
-                let column of (currentBoard$ | async)?.columns;
-                let indexOfColumn = index
-              "
-              [columnInfo]="column"
-              [columnOrder]="indexOfColumn"
-            ></app-column>
-            <div class="add-wrapper">
-              <button (click)="onAddColumn()">
-                <mat-icon>add</mat-icon>
-                {{ auth.lang === 'ru' ? 'Добавить колонку' : 'Add column' }}
-              </button>
-            </div>
-          </ng-container>
-          <ng-template #emptyColumns>
-            <div class="add-wrapper">
-              <div>
-                {{
-                  auth.lang === 'ru'
-                    ? 'Добавить первую колонку'
-                    : 'Add your first column'
-                }}
-              </div>
-              <button (click)="onAddColumn()">
-                <mat-icon>add</mat-icon
-                >{{ auth.lang === 'ru' ? 'Добавить колонку' : 'Add column' }}
-              </button>
-            </div>
-          </ng-template>
+            [columnInfo]="column"
+            [columnOrder]="indexOfColumn"
+          ></app-column>
+          <div class="add-wrapper">
+            <button (click)="onAddColumn()">
+              <mat-icon>add</mat-icon>
+              {{ auth.lang === 'ru' ? 'Добавить колонку' : 'Add column' }}
+            </button>
+          </div>
         </ng-container>
-      </div>
+        <ng-template #emptyColumns>
+          <div class="add-wrapper">
+            <div>
+              {{
+                auth.lang === 'ru'
+                  ? 'Добавить первую колонку'
+                  : 'Add your first column'
+              }}
+            </div>
+            <button (click)="onAddColumn()">
+              <mat-icon>add</mat-icon
+              >{{ auth.lang === 'ru' ? 'Добавить колонку' : 'Add column' }}
+            </button>
+          </div>
+        </ng-template>
+      </ng-container>
     </div>
   </div>
 </div>

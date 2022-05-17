@@ -2,8 +2,13 @@
   width: 100%;
   .content {
     display: grid;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 1fr 1px 4fr;
     width: 100%;
+    .line-vertical{
+      width: max-content;
+      border: 1px solid;
+      transform: rotate(90);
+    }
   }
   .column-grid {
     display: grid;
@@ -12,5 +17,27 @@
   }
   .add-wrapper {
     padding: 10px;
+  }
+  .wrap-current-board{
+    padding: 25px 10px 0;
+    .wrap-form{
+      display: grid;
+      grid-template-columns: 190px 1fr 3fr;
+      align-items: center;
+      h3{
+        margin-bottom: 5px;
+        color: #ff9800;
+        font-size: 25px;
+        font-weight: 900;
+      }
+      .pos-btn{
+        justify-self: end;
+      }
+      .change-board{
+        width: 200px;
+        margin-bottom: 5px;
+        font-size: 25px;
+      }
+    }
   }
 }
