@@ -1,8 +1,11 @@
 import { selectCurrentColumn } from './../../redux/selectors/column.selector';
-import { selectAllColumn } from 'src/app/redux/selectors/column.selector';
 import { selectCurrentBoard } from './../../redux/selectors/board.selector';
 import { Store } from '@ngrx/store';
-import { INewTask, ITaskRes } from './../../redux/actions/task.action';
+import {
+  INewTask,
+  ITaskRes,
+  ITaskUpdate,
+} from './../../redux/actions/task.action';
 import { IColumnID } from './../../column/components/models/column.model';
 import { IBoardID } from './../../board/components/crate-board/model/newBoard.model';
 import {
@@ -109,6 +112,26 @@ export class RequestsService {
       this.url + 'boards/' + boardId.id + '/columns/' + columnId.id + '/tasks',
       {
         ...taskData,
+      }
+    );
+  }
+  public updateTask({ ...response }: ITaskUpdate) {
+    this.getCurrentBoardId();
+    return this.http.put<ITaskRes>(
+      this.url +
+        'boards/' +
+        this.currentBoardId +
+        '/columns/' +
+        response.columnId +
+        '/tasks/' +
+        response.id,
+      {
+        title: response.title,
+        order: response.order,
+        description: response.description,
+        userId: response.userId,
+        columnId: response.columnId,
+        boardId: this.currentBoardId,
       }
     );
   }

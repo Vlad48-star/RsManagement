@@ -19,7 +19,6 @@ export class ColumnComponent implements OnInit {
   @Input() columnInfo!: IColumn;
   @Input() columnOrder!: number;
   ngOnInit(): void {
-    console.log(this.columnInfo);
     this.editingTitle = this.columnInfo.title;
   }
   editingTitle!: string;
@@ -51,6 +50,7 @@ export class ColumnComponent implements OnInit {
   }
   onAddTask() {
     this.dialog.addTaskDialog();
+    this.updateCurrentColumn();
   }
 
   onDeleteColumn() {

@@ -46,15 +46,15 @@ export const ColumnActions = {
     '[CURRENT_COLUMN] update column',
     props<{ currentColumn: IColumn }>()
   ),
+  updateColumnsOrder: createAction(
+    '[COLUMN_ORDER] column order update',
+    props<{ column: IColumn }>()
+  ),
   // get: createAction('[BOARD] get board data', props<{ response: IBoardID }>()),
   // getSuccess: createAction(
   //   '[BOARD] success get board data',
   //   props<{ response: IBoardData }>()
   // ),
-  // updateColumnsOrder: createAction(
-  //   'COLUMN order updated',
-  //   props<{}>
-  // )
 };
 
 export const initialColumnState: TColumnState = [];

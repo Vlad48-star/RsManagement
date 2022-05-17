@@ -28,9 +28,12 @@ export const BoardActions = {
     '[BOARD] success delete board',
     props<{ response: IBoardID }>()
   ),
-  get: createAction('[BOARD] get board data', props<{ response: IBoardID }>()),
+  get: createAction(
+    '[CURRENT_BOARD] get board data',
+    props<{ response: IBoardID }>()
+  ),
   getSuccess: createAction(
-    '[BOARD] success get board data',
+    '[CURRENT_BOARD] success get board data',
     props<{ response: IBoardData }>()
   ),
 };

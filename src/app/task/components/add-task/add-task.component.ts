@@ -1,3 +1,5 @@
+import { IColumn } from './../../../board/model/board.model';
+import { selectCurrentColumn } from './../../../redux/selectors/column.selector';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import {
   INewTask,
@@ -22,14 +24,22 @@ export class AddTaskComponent {
   ) {
     this.createForm();
   }
-  @Input() taskOrder!: number;
-  @Input() columnInfo!: string;
+  currentColumn!: IColumn;
+
+  getCurrentColumn() {
+    this.store.select(selectCurrentColumn).subscribe((res) => {
+      if (res) {
+        this.currentColumn = res;
+      }
+    });
+  }
 
   newTaskForm!: FormGroup;
   showAddTask = false;
   errorOnsubmit = false;
 
   formSubmit() {
+    this.getCurrentColumn();
     this.errorOnsubmit = true;
 
     if (!this.newTaskForm.valid) {
@@ -40,10 +50,10 @@ export class AddTaskComponent {
       TaskActions.createTask({
         response: {
           title: this.newTaskForm.value.title,
-          order: this.taskOrder,
+          order: this.currentColumn.tasks?.length,
           description: this.newTaskForm.value.description,
         },
-        columnId: this.columnInfo,
+        columnId: this.currentColumn.id,
       })
     );
 

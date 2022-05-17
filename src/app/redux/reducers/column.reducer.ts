@@ -12,7 +12,8 @@ export const columnReducer = createReducer(
   initialColumnState,
   on(
     ColumnActions.loadSuccess,
-    (state, { response }): TColumnState => response
+    (state, { response }): TColumnState =>
+      [...response].sort((a, b) => a.order - b.order)
   ),
   on(
     ColumnActions.addSuccess,
