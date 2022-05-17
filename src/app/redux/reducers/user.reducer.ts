@@ -14,5 +14,10 @@ export const userReducer = createReducer(
 
   on(UserActions.loadSuccess, (state, { response }): TUserState => {
     return response;
-  })
+  }),
+
+  on(UserActions.deleteSuccess,(state): TUserState => {
+    return initialUserState
+  }),
+
 );

@@ -9,9 +9,10 @@ import { LangChangeService } from 'src/app/core/services/lang-change.service';
   styleUrls: ['./confirm-modal.component.scss'],
 })
 export class ConfirmModalComponent implements OnInit {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: IConfirmDialogData, public auth: LangChangeService) {}
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: IConfirmDialogData,
+    public auth: LangChangeService
+  ) {}
 
-  ngOnInit(): void {
-    console.log(this.auth)
-  }
+  ngOnInit(): void {}
 }

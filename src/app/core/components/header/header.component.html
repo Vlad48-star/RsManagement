@@ -20,7 +20,7 @@
       <div class="pos-toggler">
         <app-toggler></app-toggler>
       </div>
-      <button mat-menu-item class="btn" [routerLink]="['/board/edit']">
+      <button mat-menu-item class="btn" [routerLink]="['/main/edit']">
         {{ langService.lang === 'ru' ? 'Редактировать' : 'Edit' }}
       </button>
       <button mat-menu-item class="btn" (click)="exit()">

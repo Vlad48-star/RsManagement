@@ -3,7 +3,8 @@ import { UserActions } from './../actions/user.action';
 import { RequestsService } from '../../core/services/requests.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { retry, map, catchError, EMPTY, mergeMap } from 'rxjs';
+import { map, catchError, EMPTY, mergeMap, retry } from 'rxjs';
+import { MaterialService } from 'src/app/auth/class/material.service';
 
 @Injectable()
 export class UserEffects {
@@ -80,6 +81,44 @@ export class UserEffects {
           response: action.response,
         })
       )
+    );
+  });
+
+  updateUser$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.update),
+      mergeMap((actions) => {
+        return this.requestsService
+          .update({ ...actions.response }, actions.id)
+          .pipe(
+            map((response) => {
+              return UserActions.updateSuccess({
+                response: { ...actions.response },
+              });
+            }),
+            catchError((error) => {
+              MaterialService.toast(error.error.message);
+              return EMPTY;
+            })
+          );
+      })
+    );
+  });
+
+  deleteUser$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.delete),
+      mergeMap((actions) => {
+        return this.requestsService.delete(actions.id).pipe(
+          map(() => {
+            return UserActions.deleteSuccess();
+          }),
+          catchError((error) => {
+            MaterialService.toast(error.error.message);
+            return EMPTY;
+          })
+        );
+      })
     );
   });
 

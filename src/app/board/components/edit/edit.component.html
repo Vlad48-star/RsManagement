@@ -1,10 +1,16 @@
-<div class="registration-form content">
+<div class="edit-form content">
   <div class="content">
-    <h2>{{ auth.lang === 'ru' ? 'Регистрация' : 'Sign in' }}</h2>
+    <h2>{{ auth.lang === 'ru' ? 'Управление учётной записью' : 'Account Management' }}</h2>
+    <div class="wrap-delete">
+      <span>{{ auth.lang === 'ru' ? 'Удаление аккаунта' : 'Account deleting' }}</span>
+      <button class="btn red" (click)="deleteHandler()">
+        {{ auth.lang === 'ru' ? 'Удалить' : 'Delete' }}
+      </button>
+    </div>
     <form
       class="size-form"
       novalidate
-      (ngSubmit)="updatePerson()"
+      (ngSubmit)="editHandler()"
       [formGroup]="signInForm"
     >
       <div class="form-group">
@@ -26,7 +32,11 @@
             signInForm.get('name').errors['required'] &&
             signInForm.get('name').touched
           "
-          >{{ auth.lang === 'ru' ? 'Имя не должно быть пустым' : 'The name is not be empty' }}</span
+          >{{
+            auth.lang === 'ru'
+              ? 'Имя не должно быть пустым'
+              : 'The name is not be empty'
+          }}</span
         >
       </div>
       <div class="form-group">
@@ -72,9 +82,7 @@
       </div>
       <div class="form-group">
         <label for="password">{{
-          auth.lang === 'ru'
-            ? 'Пароль'
-            : 'User password'
+          auth.lang === 'ru' ? 'Пароль' : 'User password'
         }}</label>
         <input
           id="password"
@@ -111,26 +119,16 @@
             signInForm.get('password').errors['minlength']
           "
         >
-        {{
-          auth.lang === 'ru'
-            ? 'Введите ещё'
-            : 'Enter characters'
-        }} {{ count }}</span
+          {{ auth.lang === 'ru' ? 'Введите ещё' : 'Enter characters' }}
+          {{ count }}</span
         >
       </div>
       <div class="wrap-btn">
-        <button class="btn btn-back" [routerLink]="['/']">
-          {{
-            auth.lang === 'ru'
-              ? 'Назад'
-              : 'back'
-          }}</button>
-        <button type="submit" class="btn" [disabled]="signInForm.invalid">
-          {{
-            auth.lang === 'ru'
-              ? 'Отправить'
-              : 'Submit'
-          }}
+        <button class="btn btn-back" [routerLink]="['/main/board']">
+          {{ auth.lang === 'ru' ? 'Назад' : 'Back' }}
+        </button>
+        <button class="btn" type="submit" [disabled]="signInForm.invalid">
+          {{ auth.lang === 'ru' ? 'Изменить' : 'Change' }}
         </button>
       </div>
     </form>

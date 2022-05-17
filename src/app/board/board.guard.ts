@@ -31,7 +31,7 @@ export class BoardGuard implements CanActivate {
     if (!isLogin) {
       return true;
     }
-    this.router.navigate(['/board']);
+    this.router.navigate(['/main/board']);
     return false;
   }
 }

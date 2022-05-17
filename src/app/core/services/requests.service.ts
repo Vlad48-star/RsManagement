@@ -29,7 +29,6 @@ import { IUser } from 'src/app/redux/actions/user.action';
 export class RequestsService {
   constructor(private http: HttpClient, private store: Store) {}
   private url = 'https://still-waters-55383.herokuapp.com/';
-  // private url = '/api/';
 
   currentBoardId?: string;
   currentColumnId?: string;
@@ -56,6 +55,18 @@ export class RequestsService {
       login,
       password,
     });
+  }
+
+  public update({ name, login, password }: IPerson, id: string) {
+    return this.http.put<IPerson>(this.url + 'users/' + id, {
+      name,
+      login,
+      password,
+    });
+  }
+
+  public delete(id: string) {
+    return this.http.delete(this.url + 'users/' + id);
   }
 
   public loadAllUsers() {

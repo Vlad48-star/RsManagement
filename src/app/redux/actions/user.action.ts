@@ -22,12 +22,24 @@ export const UserActions = {
     '[USER] success get all user data',
     props<{ response: IUser }>()
   ),
+  update: createAction(
+    '[USER] update current user',
+    props<{ response: IPerson; id: string }>()
+  ),
+  updateSuccess: createAction(
+    '[USER] success get all user data',
+    props<{ response: IPerson }>()
+  ),
+  delete: createAction('[USER] delete', props<{ id: string }>()),
+  deleteSuccess: createAction('[USER] success delete'),
 };
+
 export const initialUserState: TUserState = {
   login: localStorage.getItem('login') || null,
 };
 
 export type TUserState = IUser | object;
+
 export interface IUser {
   login: string;
   name?: string;
