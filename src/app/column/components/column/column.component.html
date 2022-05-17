@@ -7,24 +7,28 @@
     {{ columnInfo?.title }}
   </h2>
   <ng-template #editActive>
-    <input
-      (click)="updateCurrentColumn()"
+    
+    <form [formGroup]="editColumnForm" class="login-form" (ngSubmit)="onBlurMethod()">
+      
+      <input formControlName="columnTitle" 
       style="border: 1px dashed green"
-      type="text"
-      [(ngModel)]="editingTitle"
-    />
-    <button
+       type="text" placeholder="title" (blur)="onBlurMethod()" #input/>
+      
+      <button type="button"
       style="background-color: red; color: #fff"
       (click)="isEditTaskActive = !isEditTaskActive"
     >
       cancel
     </button>
-    <button
-      style="background-color: green; color: #fff"
-      (click)="updateColumn()"
-    >
-      submit
-    </button>
+    <button type="submit" type="submit" mat-button>Submit</button>
+    </form>
+    
+    <!-- <input
+      (click)="updateCurrentColumn()"
+      type="text"
+      [(ngModel)]="editingTitle"
+    /> -->
+
   </ng-template>
 
   <button
