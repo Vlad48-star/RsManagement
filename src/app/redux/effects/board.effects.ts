@@ -6,6 +6,7 @@ import { RequestsService } from './../../core/services/requests.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { exhaustMap, catchError, EMPTY, map, retry, mergeMap, tap } from 'rxjs';
+import { MaterialService } from 'src/app/auth/class/material.service';
 
 @Injectable()
 export class BoardEffects {
@@ -19,7 +20,7 @@ export class BoardEffects {
             return BoardActions.loadSuccess({ response });
           }),
           catchError((error) => {
-            console.log('[ERROR]: ', error);
+            MaterialService.toast(error.error.message);
             return EMPTY;
           })
         )
@@ -35,7 +36,7 @@ export class BoardEffects {
           retry(4),
           map((response) => BoardActions.addSuccess({ response })),
           catchError((error) => {
-            console.log('[ERROR]: ', error);
+            MaterialService.toast(error.error.message);
             return EMPTY;
           })
         );
@@ -52,7 +53,7 @@ export class BoardEffects {
       retry(4),
       map((response) => BoardActions.updateSuccess({ response })),
       catchError((error) => {
-        console.log('[ERROR]: ', error);
+        MaterialService.toast(error.error.message);
         return EMPTY;
       })
     );
@@ -68,7 +69,7 @@ export class BoardEffects {
           }),
           tap(() => this.router.navigate(['main/board'])),
           catchError((error) => {
-            console.log('[ERROR]: ', error);
+            MaterialService.toast(error.error.message);
             return EMPTY;
           })
         )
@@ -84,7 +85,7 @@ export class BoardEffects {
           retry(4),
           map((response) => BoardActions.getSuccess({ response })),
           catchError((error) => {
-            console.log('[ERROR]: ', error);
+            MaterialService.toast(error.error.message);
             return EMPTY;
           })
         )

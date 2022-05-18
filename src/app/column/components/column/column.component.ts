@@ -11,6 +11,7 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
+import { IConfirmDialogData } from 'src/app/shared/models/confirmModal';
 
 @Component({
   selector: 'app-column',
@@ -34,6 +35,7 @@ export class ColumnComponent implements OnInit {
   @Input() columnOrder!: number;
   editColumnForm!: FormGroup;
   _tempTaskColumn: ITask[] = [];
+  objectLanguage!: IConfirmDialogData;
   ngOnInit(): void {
     this.editColumnForm = new FormGroup({
       columnTitle: new FormControl(this.columnInfo.title, [
@@ -78,13 +80,23 @@ export class ColumnComponent implements OnInit {
   }
 
   onDeleteColumn() {
-    this.dialog
-      .confirmDialog({
+    if (this.auth.lang === 'ru') {
+      this.objectLanguage = {
         title: 'Вы уверены?',
         message: 'Вы собираетесь удалить эту колонку?',
         confirmText: 'да',
         cancelText: 'нет',
-      })
+      };
+    } else {
+      this.objectLanguage = {
+        title: 'Are you sure?',
+        message: 'Are you going to delete this column?',
+        confirmText: 'Yes',
+        cancelText: 'No',
+      };
+    }
+    this.dialog
+      .confirmDialog(this.objectLanguage)
       .subscribe((res) => {
         if (res)
           this.store.dispatch(
