@@ -181,6 +181,31 @@ export class ColumnEffects {
       map(() => BoardActions.get({ response: { id: this.currentBoardId } }))
     );
   });
+
+  updateColumnsAfterDnD$ = createEffect(() => {
+    this.getCurrentBoardId();
+    return this.actions$.pipe(
+      ofType(BoardActions.dropColumn),
+      mergeMap(({ response }) =>
+        response.map((el, index) => {
+          console.log(el.order, index + 1);
+          return this.requestsService
+            .updateColumn({
+              title: el.title,
+              order: response[response.length - 1].order + index + 1,
+              id: el.id,
+            })
+            .pipe(first())
+            .subscribe();
+        })
+      ),
+      debounceTime(300),
+      map((param) => {
+        return ColumnActions.successUpdateCurrentColumnOrder();
+      })
+    );
+  });
+
   constructor(
     private actions$: Actions,
     private requestsService: RequestsService,

@@ -60,7 +60,7 @@
                 class="column-box"
                 cdkDrag
                 *ngFor="
-                  let column of (currentBoard$ | async)?.columns;
+                  let column of this.columnArray;
                   let indexOfColumn = index
                 "
                 [columnInfo]="column"

@@ -95,14 +95,12 @@ export class ColumnComponent implements OnInit {
         cancelText: 'No',
       };
     }
-    this.dialog
-      .confirmDialog(this.objectLanguage)
-      .subscribe((res) => {
-        if (res)
-          this.store.dispatch(
-            ColumnActions.delete({ response: { id: this.columnInfo.id } })
-          );
-      });
+    this.dialog.confirmDialog(this.objectLanguage).subscribe((res) => {
+      if (res)
+        this.store.dispatch(
+          ColumnActions.delete({ response: { id: this.columnInfo.id } })
+        );
+    });
   }
   drop(event: CdkDragDrop<ITask[]>) {
     // if (event.previousContainer === event.container) {
