@@ -1,9 +1,9 @@
 <header class="wrap-header">
   <div class="position-logo">
     <img class="logo" src="./assets/svg/rs.svg" alt="" />
-    <div class="text-logo">Managment</div>
+    <div class="text-logo">Management</div>
   </div>
-  <div class="wrap-registration">
+  <div class="wrap-toggle">
     <app-toggler></app-toggler>
     <div class="registration-wrap">
       <button
@@ -22,11 +22,9 @@
     </div>
   </div>
 </header>
-<main>
-  <div class="wrap-video back-image">
-    <iframe
-      width="560"
-      height="315"
+<main class="back-image">
+  <div class="wrap-video">
+    <iframe class="video"
       src="https://www.youtube.com/embed/SeAd200FIPs"
       title="YouTube video player"
       frameborder="0"
@@ -43,7 +41,7 @@
     </p>
   </div>
   <div class="wrap-persons">
-    <div>
+    <div class="center-position">
       <div class="person-max"></div>
       <p>Perdebaev Abdikhamid</p>
       <p>{{ auth.lang === 'ru' ? 'Возраст' : 'Age' }} 26</p>
@@ -51,7 +49,7 @@
         <p>{{ auth.lang === 'ru' ? 'Подробнее в резюме' : 'More about in CV' }}</p>
       </a>
     </div>
-    <div>
+    <div class="center-position">
       <div class="person-vlad"></div>
       <p>Vlad Hitrikov</p>
       <p>{{ auth.lang === 'ru' ? 'Возраст' : 'Age' }} 26</p>
@@ -59,7 +57,7 @@
         <p>{{ auth.lang === 'ru' ? 'Подробнее в резюме' : 'More about in CV' }}</p>
       </a>
     </div>
-    <div>
+    <div class="center-position">
       <div class="person-dmitri"></div>
       <p>Dmitry Legankov</p>
       <p>{{ auth.lang === 'ru' ? 'Возраст' : 'Age' }} 26</p>

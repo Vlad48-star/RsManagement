@@ -1,43 +1,58 @@
 <div class="wrapper">
-  <h2
-    style="border: 1px solid #797979"
-    *ngIf="!isEditTaskActive; else editActive"
-    (click)="onEditColumn()"
-  >
-    {{ columnInfo?.title }}
-  </h2>
-  <ng-template #editActive>
-
-    <form [formGroup]="editColumnForm" class="login-form" (ngSubmit)="updateColumn()">
-
-      <input formControlName="columnTitle"
-      style="border: 1px dashed green"
-       type="text" placeholder="title" (blur)="updateColumn()" #input/>
-
-      <button type="button"
-      style="background-color: red; color: #fff"
-      (click)="isEditTaskActive = !isEditTaskActive"
-    >
-      cancel
+  <div class="wrap-column">
+    <h2 *ngIf="!isEditTaskActive; else editActive" (click)="onEditColumn()">
+      {{ columnInfo?.title }}
+    </h2>
+    <button class="btn red" (click)="onDeleteColumn()">
+      {{ auth.lang === 'ru' ? 'Удалить' : 'Delete' }}
     </button>
-    <button type="submit" type="submit" mat-button>Submit</button>
+  </div>
+  <ng-template #editActive>
+    <form class="grid-row"
+      [formGroup]="editColumnForm"
+      class="login-form"
+      (ngSubmit)="updateColumn()"
+    >
+      <input
+        class="text-column-title"
+        formControlName="columnTitle"
+        type="text"
+        placeholder="title"
+        (blur)="updateColumn()"
+        #input
+      />
+      <div class="wrap-column">
+        <button
+          class="btn red"
+          type="button"
+          (click)="isEditTaskActive = !isEditTaskActive"
+        >
+          {{ auth.lang === 'ru' ? 'Назад' : 'Back' }}
+        </button>
+        <button class="btn" type="submit">
+          {{ auth.lang === 'ru' ? 'Отправить' : 'Change' }}
+        </button>
+      </div>
     </form>
   </ng-template>
-
-  <button class="btn red" (click)="onDeleteColumn()">{{ auth.lang === 'ru' ? 'Удалить' : 'Delete' }}</button>
-    <div
+  <div
     cdkDropList
     [cdkDropListData]="columnInfo.tasks"
     class="task-list"
     (cdkDropListDropped)="drop($event)"
-    class="task-list">
-      <app-task
+    class="task-list"
+  >
+    <app-task
       [columnInfo]="columnInfo"
       *ngFor="let task of columnInfo.tasks"
       [task]="task"
       cdkDrag
       class="task-box"
     ></app-task>
-    </div>
-  <button class="btn green" (click)="onAddTask()">{{ auth.lang === 'ru' ? 'Добавить' : 'Add task' }}</button>
+  </div>
+  <div class="wrap-btn-add-task">
+    <button class="btn" (click)="onAddTask()">
+      {{ auth.lang === 'ru' ? 'Добавить' : 'Add task' }}
+    </button>
+  </div>
 </div>
