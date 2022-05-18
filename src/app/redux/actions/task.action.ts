@@ -36,29 +36,20 @@ export interface INewTaskForm {
   title: string;
   order: number;
   description: string;
+  done: boolean;
 }
-export interface INewTask {
+export interface INewTask extends INewTaskForm {
   title: string;
   order: number;
   description: string;
   userId: string;
 }
 
-export interface ITaskUpdate {
+export interface ITaskUpdate extends INewTask {
   id: string;
-  title: string;
-  order: number;
-  description: string;
-  userId: string;
   columnId?: string;
 }
 
-export interface ITaskRes {
-  id: string;
-  title: string;
-  order: number;
-  description: string;
-  userId: string;
-  boardId: string;
+export interface ITaskRes extends ITaskUpdate {
   columnId: string;
 }

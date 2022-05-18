@@ -12,7 +12,10 @@ import {
   ITaskUpdate,
 } from './../../redux/actions/task.action';
 import { IColumnID } from './../../column/components/models/column.model';
-import { IBoardID } from './../../board/components/crate-board/model/newBoard.model';
+import {
+  IBoardID,
+  INewBoard,
+} from './../../board/components/crate-board/model/newBoard.model';
 import {
   IBoard,
   IBoardData,
@@ -28,10 +31,13 @@ import { IUser } from 'src/app/redux/actions/user.action';
 @Injectable()
 export class RequestsService {
   constructor(private http: HttpClient, private store: Store) {}
-  private url = 'https://still-waters-55383.herokuapp.com/';
+  private url = 'https://calm-beach-54874.herokuapp.com/';
+  // private url = 'https://still-waters-55383.herokuapp.com/';
 
   currentBoardId?: string;
   currentColumnId?: string;
+
+  //TODO убрать эту дичь
 
   getCurrentBoardId() {
     this.store
@@ -81,12 +87,15 @@ export class RequestsService {
     return this.http.get<IBoardData>(this.url + 'boards/' + id);
   }
 
-  public addBoard(title: string) {
-    return this.http.post<IBoard>(this.url + 'boards', { title });
+  public addBoard({ title, description }: INewBoard) {
+    return this.http.post<IBoard>(this.url + 'boards', { title, description });
   }
 
-  public updateBoard({ title, id }: IBoard) {
-    return this.http.put<IBoard>(this.url + 'boards/' + id, { title });
+  public updateBoard({ title, id, description }: IBoard) {
+    return this.http.put<IBoard>(this.url + 'boards/' + id, {
+      title,
+      description,
+    });
   }
 
   public deleteBoard({ id }: IBoardID) {
@@ -133,21 +142,23 @@ export class RequestsService {
     );
   }
   public updateTask({ ...response }: ITaskUpdate) {
+    const { title, order, description, userId, columnId, done, id } = response;
     this.getCurrentBoardId();
     return this.http.put<ITaskRes>(
       this.url +
         'boards/' +
         this.currentBoardId +
         '/columns/' +
-        response.columnId +
+        columnId +
         '/tasks/' +
-        response.id,
+        id,
       {
-        title: response.title,
-        order: response.order,
-        description: response.description,
-        userId: response.userId,
-        columnId: response.columnId,
+        title,
+        order,
+        description,
+        userId,
+        columnId,
+        done,
         boardId: this.currentBoardId,
       }
     );

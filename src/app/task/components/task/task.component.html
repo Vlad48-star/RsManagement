@@ -1,5 +1,10 @@
 <div class="task">
-  <div class="title-column" (click)="onEditTask()">{{ task.title }}</div>
+  <div
+    (click)="onEditTask()"
+    [ngClass]="{ complete: task.done, 'title-column': true }"
+  >
+    {{ task.title }} = {{ task.order }}
+  </div>
   <button class="btn" (click)="onDeleteTask()">
     <mat-icon>delete_forever</mat-icon>
   </button>

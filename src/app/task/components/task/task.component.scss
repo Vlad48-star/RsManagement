@@ -3,17 +3,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  .title-column{
+  .title-column {
     padding-left: 5px;
     word-break: break-all;
     font-weight: 500;
   }
 }
-.task-box{
+.task-box {
   display: flex;
   justify-content: flex-end;
 }
-.btn{
+.btn {
   display: grid;
   align-items: center;
   background-color: grey;
@@ -21,7 +21,11 @@
   height: 24px;
 }
 
-.btn:hover{
-  background-color: #F44336;
+.btn:hover {
+  background-color: #f44336;
   transition: all 0.6s;
+}
+
+.complete {
+  text-decoration: line-through;
 }

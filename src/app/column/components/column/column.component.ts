@@ -33,12 +33,14 @@ export class ColumnComponent implements OnInit {
   @Input() columnInfo!: IColumn;
   @Input() columnOrder!: number;
   editColumnForm!: FormGroup;
+  _tempTaskColumn: ITask[] = [];
   ngOnInit(): void {
     this.editColumnForm = new FormGroup({
       columnTitle: new FormControl(this.columnInfo.title, [
         Validators.required,
       ]),
     });
+    this._tempTaskColumn = [...this.columnInfo.tasks];
   }
   isEditTaskActive = false;
 

@@ -1,7 +1,7 @@
-declare var M: { toast: (arg0: { html: string }) => void }
+declare let M: { toast: (arg0: { html: string }) => void };
 
 export class MaterialService {
   static toast(message: string) {
-    M.toast({html: message})
+    M.toast({ html: message });
   }
 }

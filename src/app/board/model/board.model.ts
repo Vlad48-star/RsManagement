@@ -1,21 +1,18 @@
 export interface IBoard {
   id: string;
   title: string;
+  description: string;
 }
 export interface IColumnUpdate {
   order: number;
   title: string;
   id: string;
 }
-export interface IColumnUpdateResponse {
+export interface IColumnUpdateResponse extends IBoard {
   order: number;
-  title: string;
-  id: string;
 }
 
-export interface IBoardData {
-  id: string;
-  title: string;
+export interface IBoardData extends IBoard {
   columns: IColumn[];
 }
 

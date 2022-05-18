@@ -52,6 +52,7 @@ export class AddTaskComponent {
           title: this.newTaskForm.value.title,
           order: this.currentColumn.tasks?.length,
           description: this.newTaskForm.value.description,
+          done: false,
         },
         columnId: this.currentColumn.id,
       })

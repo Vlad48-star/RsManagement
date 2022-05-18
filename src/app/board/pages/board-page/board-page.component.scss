@@ -1,4 +1,4 @@
-.btn{
+.btn {
   margin: 0 5px 10px;
   margin-bottom: 10px;
   padding: 0 6px 0 0;
@@ -9,12 +9,18 @@
   width: max-content;
   line-height: 1;
   letter-spacing: 0;
-  mat-icon{
+  mat-icon {
     font-size: 20px;
   }
 }
 
-
+.board-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: baseline;
+  height: 100%;
+}
 .wrapper {
   height: 100%;
   padding-left: 20px;
@@ -22,7 +28,7 @@
     display: grid;
     grid-template-columns: 180px 1px 4fr;
     height: 100%;
-    .line-vertical{
+    .line-vertical {
       height: 100%;
       border: 1px solid;
       transform: rotate(90);
@@ -41,27 +47,27 @@
     gap: 5px;
     padding: 10px;
   }
-  .wrap-current-board{
+  .wrap-current-board {
     padding: 25px 10px 0;
     overflow: hidden;
-    .wrap-form{
+    .wrap-form {
       display: grid;
       grid-template-columns: 190px 1fr 3fr;
       align-items: center;
-      h3{
+      h3 {
         margin-bottom: 5px;
         color: #ff9800;
         font-size: 25px;
         font-weight: 900;
       }
-      .pos-btn{
+      .pos-btn {
         justify-self: end;
-        .btn{
+        .btn {
           padding: 0 5px;
           height: 25px;
         }
       }
-      .change-board{
+      .change-board {
         min-width: 100px;
         margin-bottom: 5px;
         font-size: 25px;
@@ -103,8 +109,7 @@
   box-sizing: border-box;
   border-radius: 4px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-              0 8px 10px 1px rgba(0, 0, 0, 0.14),
-              0 3px 14px 2px rgba(0, 0, 0, 0.12);
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
 .cdk-drag-placeholder {
@@ -124,10 +129,10 @@
 }
 
 @media (max-width: 768px) {
-  .btn{
+  .btn {
     padding: 0 3px;
     font-size: 12px;
-    mat-icon{
+    mat-icon {
       font-size: 20px;
     }
   }
@@ -141,21 +146,21 @@
     .add-wrapper {
       padding: 5px;
     }
-    .wrap-current-board{
+    .wrap-current-board {
       padding: 20px 5px 0;
       overflow: hidden;
-      .wrap-form{
+      .wrap-form {
         display: grid;
         grid-template-columns: auto 1fr 3fr;
         align-items: center;
         gap: 2px;
-        h3{
+        h3 {
           font-size: 14px;
         }
-        .pos-btn{
+        .pos-btn {
           justify-self: end;
         }
-        .change-board{
+        .change-board {
           margin-bottom: 5px;
           font-size: 12px;
         }

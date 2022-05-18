@@ -11,7 +11,11 @@ import { LangChangeService } from 'src/app/core/services/lang-change.service';
   styleUrls: ['./crate-board.component.scss'],
 })
 export class CrateBoardComponent {
-  constructor(private store: Store, private dialog: DialogService, public auth: LangChangeService) {
+  constructor(
+    private store: Store,
+    private dialog: DialogService,
+    public auth: LangChangeService
+  ) {
     this.createForm();
   }
   newBoardForm!: FormGroup;
@@ -32,9 +36,13 @@ export class CrateBoardComponent {
   private createForm() {
     this.newBoardForm = new FormGroup({
       title: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
     });
   }
   get title() {
     return this.newBoardForm.get('title');
+  }
+  get description() {
+    return this.newBoardForm.get('description');
   }
 }
