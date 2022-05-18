@@ -18,3 +18,10 @@
 .switch label input[type='checkbox']:checked + .lever:after {
   background-color: #ff9800;
 }
+
+
+@media (max-width: 500px) {
+  .switch label .lever {
+    margin: 0;
+  }
+}
