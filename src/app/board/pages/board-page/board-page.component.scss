@@ -31,6 +31,7 @@
   .column-grid {
     display: flex;
     overflow-x: auto;
+    overflow-y: hidden;
   }
   .add-wrapper {
     display: grid;
@@ -41,6 +42,7 @@
     padding: 10px;
   }
   .wrap-current-board{
+    display: grid;
     padding: 25px 10px 0;
     overflow: hidden;
     .wrap-form{
@@ -69,11 +71,29 @@
   }
 }
 
+.wrapper ::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+  cursor: pointer;
+}
+
+.wrapper ::-webkit-scrollbar-thumb {
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background-color: transparent;
+  background-clip: content-box;
+}
+
+.wrapper ::-webkit-scrollbar-thumb:hover {
+  background-color: #26a69a;
+}
+
 .column-list {
   max-width: max-content;
   border: solid 1px #ccc;
   min-height: 60px;
   display: flex;
+  overflow: auto;
   background: white;
   border-radius: 4px;
 }
