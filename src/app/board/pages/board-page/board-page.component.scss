@@ -31,7 +31,6 @@
   .column-grid {
     display: flex;
     overflow-x: auto;
-    overflow-y: hidden;
   }
   .add-wrapper {
     display: grid;
@@ -77,7 +76,6 @@
   display: flex;
   background: white;
   border-radius: 4px;
-  overflow: hidden;
 }
 .column-drag-container {
   max-width: 100%;

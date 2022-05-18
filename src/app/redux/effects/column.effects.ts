@@ -25,6 +25,7 @@ import {
   debounceTime,
   switchMap,
 } from 'rxjs';
+import { MaterialService } from 'src/app/auth/class/material.service';
 
 @Injectable()
 export class ColumnEffects {
@@ -64,7 +65,7 @@ export class ColumnEffects {
             return ColumnActions.loadSuccess({ response });
           }),
           catchError((error) => {
-            console.log('[ERROR]: ', error);
+            MaterialService.toast(error.error.message);
             return EMPTY;
           })
         )
@@ -84,7 +85,7 @@ export class ColumnEffects {
               ColumnActions.addSuccess({ response, id: action.id })
             ),
             catchError((error) => {
-              console.log('[ERROR]: ', error);
+              MaterialService.toast(error.error.message);
               return EMPTY;
             })
           );
@@ -100,7 +101,7 @@ export class ColumnEffects {
       retry(4),
       map((response) => ColumnActions.updateSuccess({ response })),
       catchError((error) => {
-        console.log('[ERROR]: ', error);
+        MaterialService.toast(error.error.message);
         return EMPTY;
       })
     );
@@ -137,7 +138,7 @@ export class ColumnEffects {
             });
           }),
           catchError((error) => {
-            console.log('[ERROR]: ', error);
+            MaterialService.toast(error.error.message);
             return EMPTY;
           })
         )

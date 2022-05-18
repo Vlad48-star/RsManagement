@@ -37,9 +37,9 @@ h2{
   min-height: 60px;
   background: white;
   border-radius: 4px;
-  overflow: hidden;
   display: grid;
   grid-gap: 5px;
+  overflow: auto;
 }
 
 .task-box {
