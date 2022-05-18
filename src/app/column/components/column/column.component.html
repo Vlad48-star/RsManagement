@@ -25,10 +25,19 @@
   </ng-template>
 
   <button class="btn red" (click)="onDeleteColumn()">{{ auth.lang === 'ru' ? 'Удалить' : 'Delete' }}</button>
-  <app-task
-    [columnInfo]="columnInfo"
-    *ngFor="let task of columnInfo.tasks"
-    [task]="task"
-  ></app-task>
+    <div
+    cdkDropList
+    [cdkDropListData]="columnInfo.tasks"
+    class="task-list"
+    (cdkDropListDropped)="drop($event)"
+    class="task-list">
+      <app-task
+      [columnInfo]="columnInfo"
+      *ngFor="let task of columnInfo.tasks"
+      [task]="task"
+      cdkDrag
+      class="task-box"
+    ></app-task>
+    </div>
   <button class="btn green" (click)="onAddTask()">{{ auth.lang === 'ru' ? 'Добавить' : 'Add task' }}</button>
 </div>

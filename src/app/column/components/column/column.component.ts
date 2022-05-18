@@ -3,9 +3,14 @@ import { RequestsService } from './../../../core/services/requests.service';
 import { ColumnActions } from './../../../redux/actions/column.action';
 import { Store } from '@ngrx/store';
 import { DialogService } from 'src/app/shared/services/dialog.service';
-import { IColumn } from './../../../board/model/board.model';
+import { IColumn, ITask } from './../../../board/model/board.model';
 import { LangChangeService } from 'src/app/core/services/lang-change.service';
 import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-column',
@@ -84,5 +89,21 @@ export class ColumnComponent implements OnInit {
             ColumnActions.delete({ response: { id: this.columnInfo.id } })
           );
       });
+  }
+  drop(event: CdkDragDrop<ITask[]>) {
+    // if (event.previousContainer === event.container) {
+    //   moveItemInArray(
+    //     event.container.data,
+    //     event.previousIndex,
+    //     event.currentIndex
+    //   );
+    // } else {
+    //   transferArrayItem(
+    //     event.previousContainer.data,
+    //     event.container.data,
+    //     event.previousIndex,
+    //     event.currentIndex
+    //   );
+    // }
   }
 }
