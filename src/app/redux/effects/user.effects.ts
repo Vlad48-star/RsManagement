@@ -20,7 +20,7 @@ export class UserEffects {
             });
           }),
           catchError((error) => {
-            console.log('[ERROR]: ', error);
+            MaterialService.toast(error.error.message);
             return EMPTY;
           })
         );
@@ -41,7 +41,7 @@ export class UserEffects {
             });
           }),
           catchError((error) => {
-            console.log('[ERROR]: ', error);
+            MaterialService.toast(error.error.message);
             return EMPTY;
           })
         );
@@ -65,7 +65,7 @@ export class UserEffects {
             return UserActions.loadSuccess({ response: item });
           }),
           catchError((error) => {
-            console.log('[ERROR]: ', error);
+            MaterialService.toast(error.error.message);
             return EMPTY;
           })
         )

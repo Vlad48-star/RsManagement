@@ -88,13 +88,15 @@ export class EditComponent implements OnInit {
       };
     }
     this.dialog.confirmDialog(this.objectLanguage).subscribe((res) => {
-      if (res && this.signInForm.value)
+      if (res && this.signInForm.value) {
         this.store.dispatch(
           UserActions.update({
             response: this.signInForm.value as IPerson,
             id: this.personData,
           })
         );
+        this.router.navigate(['/main/board']);
+      }
     });
   }
 

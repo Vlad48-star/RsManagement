@@ -7,6 +7,7 @@ import { RequestsService } from '../../core/services/requests.service';
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { retry, map, catchError, EMPTY, mergeMap, exhaustMap } from 'rxjs';
+import { MaterialService } from 'src/app/auth/class/material.service';
 
 @Injectable()
 export class TaskEffects {
@@ -50,7 +51,7 @@ export class TaskEffects {
               });
             }),
             catchError((error) => {
-              console.log('[ERROR]: ', error);
+              MaterialService.toast(error.error.message);
               return EMPTY;
             })
           );
@@ -66,7 +67,7 @@ export class TaskEffects {
       retry(4),
       map((response) => TaskActions.updateTaskSuccess({ response })),
       catchError((error) => {
-        console.log('[ERROR]: ', error);
+        MaterialService.toast(error.error.message);
         return EMPTY;
       })
     );
@@ -82,7 +83,7 @@ export class TaskEffects {
             });
           }),
           catchError((error) => {
-            console.log('[ERROR]: ', error);
+            MaterialService.toast(error.error.message);
             return EMPTY;
           })
         )
