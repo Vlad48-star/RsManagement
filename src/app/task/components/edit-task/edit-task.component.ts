@@ -26,29 +26,31 @@ export class EditTaskComponent implements OnInit {
   editTaskForm!: FormGroup;
 
   ngOnInit(): void {
+    console.log(this.data);
     this.editTaskForm = new FormGroup({
       taskTitle: new FormControl(this.oldTaskData.title, [Validators.required]),
       taskDescription: new FormControl(this.oldTaskData.description, [
         Validators.required,
       ]),
+      taskDone: new FormControl(this.oldTaskData.done, [Validators.required]),
     });
   }
 
   onSubmit() {
-    if (this.editTaskForm.get('taskTitle')?.value !== this.oldTaskData.title) {
-      this.store.dispatch(
-        TaskActions.updateTask({
-          response: {
-            title: this.editTaskForm.get('taskTitle')?.value,
-            description: this.editTaskForm.get('taskDescription')?.value,
-            id: this.data.task.id,
-            order: this.data.task.order,
-            userId: this.data.task.userId,
-            columnId: this.data.column.id,
-          },
-        })
-      );
-    }
+    //TODO Добавить проверку на наличие ошибок при сабите
+    this.store.dispatch(
+      TaskActions.updateTask({
+        response: {
+          title: this.editTaskForm.get('taskTitle')?.value,
+          description: this.editTaskForm.get('taskDescription')?.value,
+          done: this.editTaskForm.get('taskDone')?.value,
+          id: this.data.task.id,
+          order: this.data.task.order,
+          userId: this.data.task.userId,
+          columnId: this.data.column.id,
+        },
+      })
+    );
     this.dialog.close();
   }
 }

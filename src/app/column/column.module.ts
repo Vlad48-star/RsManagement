@@ -1,3 +1,5 @@
+import { CoreModule } from './../core/core.module';
+import { SortByPipe } from './../core/pipe/sort-by.pipe';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -19,6 +21,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     TaskModule,
     MatDialogModule,
     MatIconModule,
+    CoreModule,
   ],
   exports: [ColumnComponent, AddColumnComponent],
 })

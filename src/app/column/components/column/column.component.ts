@@ -34,6 +34,7 @@ export class ColumnComponent implements OnInit {
   @Input() columnInfo!: IColumn;
   @Input() columnOrder!: number;
   editColumnForm!: FormGroup;
+  _tempTaskColumn: ITask[] = [];
   objectLanguage!: IConfirmDialogData;
   ngOnInit(): void {
     this.editColumnForm = new FormGroup({
@@ -41,6 +42,7 @@ export class ColumnComponent implements OnInit {
         Validators.required,
       ]),
     });
+    this._tempTaskColumn = [...this.columnInfo.tasks];
   }
   isEditTaskActive = false;
 

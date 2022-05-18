@@ -32,7 +32,7 @@ export class BoardEffects {
     return this.actions$.pipe(
       ofType(BoardActions.add),
       exhaustMap((action) => {
-        return this.requestsService.addBoard(action.response.title).pipe(
+        return this.requestsService.addBoard(action.response).pipe(
           retry(4),
           map((response) => BoardActions.addSuccess({ response })),
           catchError((error) => {

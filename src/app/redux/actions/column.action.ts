@@ -2,7 +2,6 @@ import { IBoardID } from './../../board/components/crate-board/model/newBoard.mo
 import {
   IColumn,
   INewColumn,
-  IBoard,
   IColumnUpdate,
 } from './../../board/model/board.model';
 import { createAction, props } from '@ngrx/store';
@@ -53,11 +52,6 @@ export const ColumnActions = {
   successUpdateCurrentColumnOrder: createAction(
     '[CURRENT_COLUMN] update order column success'
   ),
-  // get: createAction('[BOARD] get board data', props<{ response: IBoardID }>()),
-  // getSuccess: createAction(
-  //   '[BOARD] success get board data',
-  //   props<{ response: IBoardData }>()
-  // ),
 };
 
 export const initialColumnState: TColumnState = [];

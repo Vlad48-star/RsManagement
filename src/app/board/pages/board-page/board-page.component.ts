@@ -35,7 +35,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   objectLanguage!: IConfirmDialogData;
   boardNameForm!: FormGroup;
   data!: IBoard;
-  currentBoardData?: IBoardData;
+  currentBoardData?: IBoardData | TCurrentBoardState;
   stateBoardSubscription!: Subscription;
   routeSubscription!: Subscription;
 
@@ -46,6 +46,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   private createForm() {
     this.boardNameForm = new FormGroup({
       title: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
     });
   }
 
@@ -56,6 +57,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
     this.data = newData;
     this.errorOnsubmit = false;
     this.boardNameForm.patchValue({ title: newData.title });
+    this.boardNameForm.patchValue({ description: newData.description });
     this.store.dispatch(BoardActions.get({ response: { id: this.data.id } }));
   }
 
@@ -84,11 +86,18 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   }
   public onBlurMethod() {
     if (this.boardNameForm.value.title == '') {
-      this.boardNameForm.patchValue({ title: this.data.title });
+      this.boardNameForm.patchValue({
+        title: this.data.title,
+        description: this.data.description,
+      });
     }
     this.store.dispatch(
       BoardActions.update({
-        response: { title: this.boardNameForm.value.title, id: this.data.id },
+        response: {
+          title: this.boardNameForm.value.title,
+          id: this.data.id,
+          description: this.boardNameForm.value.description,
+        },
       })
     );
   }
@@ -103,7 +112,9 @@ export class BoardPageComponent implements OnInit, OnDestroy {
         });
     });
     this.currentBoard$ = this.store.select(selectCurrentBoard);
-    this.currentBoard$.subscribe((res) => (this.currentBoardData = res));
+    this.currentBoard$.subscribe(
+      (res) => (this.currentBoardData = Object.assign({}, res))
+    );
   }
   ngOnDestroy(): void {
     this.stateBoardSubscription.unsubscribe();
@@ -114,6 +125,8 @@ export class BoardPageComponent implements OnInit, OnDestroy {
     this.dialog.createColumnDialog();
   }
   drop(event: CdkDragDrop<IColumn[]>) {
+    // console.log(this.currentBoardData!.columns.pop());
+    console.log(event.previousIndex, event.currentIndex);
     // moveItemInArray(
     //   this.currentBoardData!.columns,
     //   event.previousIndex,

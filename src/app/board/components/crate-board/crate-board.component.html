@@ -4,12 +4,24 @@
     (ngSubmit)="formSubmit()"
     class="flex-column"
   >
+    <!-- TODO Сделай пожалуйста красивые input, что бы placeholder поднимался вверх при клике на поле -->
+    <!-- https://material.angular.io/components/input/overview -->
+
     <div class="grid-row">
       <input
         type="text"
         class="input-text"
         name="title"
         formControlName="title"
+        [placeholder]="auth.lang === 'ru' ? 'Заголовок' : 'title'"
+        required
+      />
+      <input
+        type="text"
+        class="input-text"
+        name="description"
+        formControlName="description"
+        [placeholder]="auth.lang === 'ru' ? 'Описание' : 'description'"
         required
       />
       <ng-container *ngIf="(title!.invalid && title!.dirty) || errorOnsubmit">
@@ -17,6 +29,15 @@
           auth.lang === 'ru'
             ? 'Пожалуйста, введите имя доски'
             : 'Please enter board name'
+        }}</span>
+      </ng-container>
+      <ng-container
+        *ngIf="(description!.invalid && description!.dirty) || errorOnsubmit"
+      >
+        <span class="text-center" *ngIf="description!.errors?.['required']">{{
+          auth.lang === 'ru'
+            ? 'Пожалуйста, описание для доски'
+            : 'Please enter board descriptions'
         }}</span>
       </ng-container>
       <div class="wrap-flex">

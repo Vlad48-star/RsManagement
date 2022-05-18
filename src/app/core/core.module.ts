@@ -13,6 +13,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { SortByPipe } from './pipe/sort-by.pipe';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     FooterComponent,
     TogglerComponent,
+    SortByPipe,
   ],
   imports: [
     CommonModule,
@@ -39,6 +41,6 @@ import { RouterModule } from '@angular/router';
       multi: true,
     },
   ],
-  exports: [HeaderComponent, FooterComponent, TogglerComponent],
+  exports: [HeaderComponent, FooterComponent, TogglerComponent, SortByPipe],
 })
 export class CoreModule {}

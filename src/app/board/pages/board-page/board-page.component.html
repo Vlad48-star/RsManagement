@@ -10,14 +10,30 @@
         [class.err_on_submit]="errorOnsubmit"
         (ngSubmit)="onBlurMethod()"
       >
-        <h3>{{ auth.lang === 'ru' ? 'Текущая доска:' : 'Current board:' }}</h3>
-        <input
-          class="change-board"
-          type="text"
-          name="title"
-          formControlName="title"
-          (blur)="onBlurMethod()"
-        />
+        <div class="board-title-wrapper">
+          <h3>
+            {{ auth.lang === 'ru' ? 'Текущая доска:' : 'Current board:' }}
+          </h3>
+          <h3>
+            {{ auth.lang === 'ru' ? 'Описание:' : 'Description:' }}
+          </h3>
+        </div>
+        <div>
+          <input
+            class="change-board"
+            type="text"
+            name="title"
+            formControlName="title"
+            (blur)="onBlurMethod()"
+          />
+          <input
+            class="change-board"
+            type="text"
+            name="description"
+            formControlName="description"
+            (blur)="onBlurMethod()"
+          />
+        </div>
         <div class="pos-btn">
           <button class="btn red" type="button" (click)="delBoardHandler()">
             {{ auth.lang === 'ru' ? 'Удалить' : 'Delete' }}
@@ -26,48 +42,53 @@
         <input type="submit" hidden />
       </form>
 
-    <div class="column-list" cdkDropList cdkDropListOrientation="horizontal" (cdkDropListDropped)="drop($event)">
-      <div class="column-grid column-drag-container" cdkDropListGroup>
-        <ng-container *ngIf="(currentBoard$ | async) !== undefined">
-          <ng-container
-            *ngIf="
-              (currentBoard$ | async)!.columns.length > 0;
-              else emptyColumns
-            "
-          >
-            <app-column
-              class="column-box"
-              cdkDrag
-              *ngFor="
-                let column of (currentBoard$ | async)?.columns;
-                let indexOfColumn = index
+      <div
+        class="column-list"
+        cdkDropList
+        cdkDropListOrientation="horizontal"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div class="column-grid column-drag-container" cdkDropListGroup>
+          <ng-container *ngIf="(currentBoard$ | async) !== undefined">
+            <ng-container
+              *ngIf="
+                (currentBoard$ | async)!.columns.length > 0;
+                else emptyColumns
               "
-              [columnInfo]="column"
-              [columnOrder]="indexOfColumn"
-            ></app-column>
-            <button class="btn" (click)="onAddColumn()">
-              <mat-icon>add</mat-icon>
-              {{ auth.lang === 'ru' ? 'Добавить колонку' : 'Add column' }}
-            </button>
-          </ng-container>
-          <ng-template #emptyColumns>
-            <div class="add-wrapper">
-              <div>
-                {{
-                  auth.lang === 'ru'
-                    ? 'Добавте первую колонку'
-                    : 'Add your first column'
-                }}
-              </div>
+            >
+              <app-column
+                class="column-box"
+                cdkDrag
+                *ngFor="
+                  let column of (currentBoard$ | async)?.columns;
+                  let indexOfColumn = index
+                "
+                [columnInfo]="column"
+                [columnOrder]="indexOfColumn"
+              ></app-column>
               <button class="btn" (click)="onAddColumn()">
-                <mat-icon>add</mat-icon
-                >{{ auth.lang === 'ru' ? 'Добавить колонку' : 'Add column' }}
+                <mat-icon>add</mat-icon>
+                {{ auth.lang === 'ru' ? 'Добавить колонку' : 'Add column' }}
               </button>
-            </div>
-          </ng-template>
-        </ng-container>
+            </ng-container>
+            <ng-template #emptyColumns>
+              <div class="add-wrapper">
+                <div>
+                  {{
+                    auth.lang === 'ru'
+                      ? 'Добавте первую колонку'
+                      : 'Add your first column'
+                  }}
+                </div>
+                <button class="btn" (click)="onAddColumn()">
+                  <mat-icon>add</mat-icon
+                  >{{ auth.lang === 'ru' ? 'Добавить колонку' : 'Add column' }}
+                </button>
+              </div>
+            </ng-template>
+          </ng-container>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
