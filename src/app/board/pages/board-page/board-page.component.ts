@@ -1,10 +1,11 @@
 import { Subscription, Observable } from 'rxjs';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {
   BoardActions,
   TCurrentBoardState,
 } from './../../../redux/actions/board.action';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { IBoard, IColumn } from './../../model/board.model';
+import { IBoard, IColumn, IBoardData } from './../../model/board.model';
 import {
   selectBoard,
   selectCurrentBoard,
@@ -34,7 +35,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   objectLanguage!: IConfirmDialogData;
   boardNameForm!: FormGroup;
   data!: IBoard;
-
+  currentBoardData?: IBoardData;
   stateBoardSubscription!: Subscription;
   routeSubscription!: Subscription;
 
@@ -102,6 +103,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
         });
     });
     this.currentBoard$ = this.store.select(selectCurrentBoard);
+    this.currentBoard$.subscribe((res) => (this.currentBoardData = res));
   }
   ngOnDestroy(): void {
     this.stateBoardSubscription.unsubscribe();
@@ -110,5 +112,12 @@ export class BoardPageComponent implements OnInit, OnDestroy {
 
   onAddColumn() {
     this.dialog.createColumnDialog();
+  }
+  drop(event: CdkDragDrop<IColumn[]>) {
+    // moveItemInArray(
+    //   this.currentBoardData!.columns,
+    //   event.previousIndex,
+    //   event.currentIndex
+    // );
   }
 }

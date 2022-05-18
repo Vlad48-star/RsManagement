@@ -7,6 +7,7 @@ import { ColumnComponent } from './components/column/column.component';
 import { AddColumnComponent } from './components/add-column/add-column.component';
 import { TaskModule } from '../task/task.module';
 import { AutofocusDirective } from './directives/autofocus.directive';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [ColumnComponent, AddColumnComponent, AutofocusDirective],
@@ -14,6 +15,7 @@ import { AutofocusDirective } from './directives/autofocus.directive';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    DragDropModule,
     TaskModule,
     MatDialogModule,
     MatIconModule,
