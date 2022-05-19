@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EditComponent } from './components/edit/edit.component';
 import { MainComponent } from './pages/main/main.component';
-import { TestComponent } from '../shared/components/test/test.component';
 
 const editRout: Routes = [{ path: 'edit', component: EditComponent }];
 
@@ -13,10 +12,14 @@ const boardRout: Routes = [{ path: 'board', component: AllBoardPageComponent }];
 const idBoard: Routes = [{ path: 'board/:id', component: BoardPageComponent }];
 
 const routes: Routes = [
+  {
+    path: 'main',
+    redirectTo: 'main/board',
+    pathMatch: 'full',
+  },
   { path: 'main', component: MainComponent, children: editRout },
   { path: 'main', component: MainComponent, children: boardRout },
   { path: 'main', component: MainComponent, children: idBoard },
-  { path: 'test', component: TestComponent },
 ];
 
 @NgModule({

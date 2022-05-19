@@ -30,7 +30,7 @@
         >
           {{ auth.lang === 'ru' ? 'Назад' : 'Back' }}
         </button>
-        <button class="btn" type="submit">
+        <button class="btn" type="submit" [disabled]="editColumnForm.invalid">
           {{ auth.lang === 'ru' ? 'Отправить' : 'Change' }}
         </button>
       </div>
