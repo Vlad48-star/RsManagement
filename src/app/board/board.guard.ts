@@ -27,7 +27,6 @@ export class BoardGuard implements CanActivate {
   }
   checkLogin(url: string): boolean {
     const isLogin = this.authService.isLoggedIn();
-    console.log(url);
     if (!isLogin) {
       return true;
     }

@@ -92,6 +92,7 @@ export class UserEffects {
           .update({ ...actions.response }, actions.id)
           .pipe(
             map((response) => {
+              localStorage.setItem('login', response.login);
               return UserActions.updateSuccess({
                 response: { ...actions.response },
               });

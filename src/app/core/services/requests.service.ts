@@ -1,10 +1,4 @@
-import { IUsers } from './../../redux/actions/user.action';
-import { Observable, retry } from 'rxjs';
-import {
-  selectCurrentColumn,
-  selectCurrentColumnID,
-} from './../../redux/selectors/column.selector';
-import { selectAllColumn } from 'src/app/redux/selectors/column.selector';
+import { selectCurrentColumnID } from './../../redux/selectors/column.selector';
 import { selectCurrentBoard } from './../../redux/selectors/board.selector';
 import { Store } from '@ngrx/store';
 import {
@@ -27,18 +21,15 @@ import {
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ILogin, IToken, IPerson } from './models/request.model';
-import { IUser } from 'src/app/redux/actions/user.action';
+import { IUser, IUsers } from 'src/app/redux/actions/user.action';
 
 @Injectable()
 export class RequestsService {
   constructor(private http: HttpClient, private store: Store) {}
   private url = 'https://calm-beach-54874.herokuapp.com/';
-  // private url = 'https://still-waters-55383.herokuapp.com/';
 
   currentBoardId?: string;
   currentColumnId?: string;
-
-  //TODO убрать эту дичь
 
   getCurrentBoardId() {
     this.store
@@ -46,7 +37,7 @@ export class RequestsService {
       .subscribe((res) => (this.currentBoardId = res!.id));
   }
   getCurrentColumnsId() {
-    this.store.select(selectCurrentColumnID).subscribe(console.log);
+    this.store.select(selectCurrentColumnID).subscribe();
   }
 
   public login({ login, password }: ILogin) {
@@ -123,11 +114,6 @@ export class RequestsService {
   public updateColumn({ title, order, id }: IColumnUpdate) {
     this.getCurrentBoardId();
     this.getCurrentColumnsId();
-    console.log(id);
-    console.log(this.url + 'boards/' + this.currentBoardId + '/columns/' + id, {
-      title,
-      order,
-    });
     return this.http.put<IColumnUpdate>(
       this.url + 'boards/' + this.currentBoardId + '/columns/' + id,
       { title, order }
@@ -147,7 +133,6 @@ export class RequestsService {
     newColumnId = response.columnId
   ) {
     const { title, order, description, userId, columnId, done, id } = response;
-    console.log(response);
     this.getCurrentBoardId();
     return this.http.put<ITaskRes>(
       this.url +

@@ -1,4 +1,4 @@
-import { ITaskRes, ITaskUpdate } from './../../redux/actions/task.action';
+import { ITaskUpdate } from './../../redux/actions/task.action';
 import { EditTaskComponent } from './../../task/components/edit-task/edit-task.component';
 import { AddTaskComponent } from './../../task/components/add-task/add-task.component';
 import { AddColumnComponent } from './../../column/components/add-column/add-column.component';

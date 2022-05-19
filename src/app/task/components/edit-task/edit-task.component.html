@@ -5,24 +5,30 @@
         auth.lang === 'ru' ? 'Форма для изменения задания' : 'Editing Task Form'
       }}
     </h2>
-    <button mat-raised-button [mat-dialog-close]="false">
+    <button class="btn" mat-icon-button [mat-dialog-close]="false">
       <mat-icon>close</mat-icon>
     </button>
   </div>
-
-  <input formControlName="taskTitle" type="text" placeholder="title" />
-
   <input
-    formControlName="taskDescription"
+    class="text-title"
+    formControlName="taskTitle"
     type="text"
-    placeholder="description"
+    placeholder="{{ auth.lang === 'ru' ? 'Название' : 'Title' }}"
   />
-  <div>
+  <textarea
+    class="description"
+    name="description"
+    formControlName="taskDescription"
+    placeholder="{{ auth.lang === 'ru' ? 'Описание' : 'Description' }}"
+  >
+  </textarea>
+  <div class="position-done">
     <label for="done">
       <input type="checkbox" formControlName="taskDone" id="done" />
-      <span>done</span>
+      <span>{{ auth.lang === 'ru' ? 'Выполнено' : 'Done' }}</span>
     </label>
   </div>
-
-  <button type="submit" mat-button>Submit</button>
+  <button class="btn" type="submit" mat-button>
+    {{ auth.lang === 'ru' ? 'Отправить' : 'Submit' }}
+  </button>
 </form>

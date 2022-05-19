@@ -27,13 +27,13 @@
             formControlName="title"
             (blur)="onBlurMethod()"
           />
-          <input
-            class="change-board"
-            type="text"
+          <textarea
+            class="description"
             name="description"
             formControlName="description"
             (blur)="onBlurMethod()"
-          />
+          >
+          </textarea>
         </div>
         <div class="pos-btn">
           <button class="btn red" type="button" (click)="delBoardHandler()">

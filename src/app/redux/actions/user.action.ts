@@ -2,6 +2,7 @@ import { ILogin, IPerson } from './../../core/services/models/request.model';
 import { createAction, props } from '@ngrx/store';
 
 export const USER_KEY = 'user';
+export const USER_SEARCH = 'user_search';
 
 export const UserActions = {
   loginUser: createAction('[USER] login user', props<{ response: ILogin }>()),
@@ -41,12 +42,11 @@ export const UserActions = {
 };
 
 export const initialUserState: TUserState = {
-  login: localStorage.getItem('login') || null,
+  login: localStorage.getItem('login') || 'login',
 };
 
 export const initialAllUsersState: TAllUsersState = [];
-
-export type TUserState = IUser | object;
+export type TUserState = IUser;
 export type TAllUsersState = IUsers[];
 
 export interface IUser {

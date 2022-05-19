@@ -103,7 +103,6 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log('init');
     this.routeSubscription = this.route.paramMap.subscribe((params) => {
       this.stateBoardSubscription = this.store
         .select(selectBoard(params.get('id')))
@@ -126,8 +125,6 @@ export class BoardPageComponent implements OnInit, OnDestroy {
     this.dialog.createColumnDialog();
   }
   drop(event: CdkDragDrop<IColumn[]>) {
-    // console.log(this.currentBoardData!.columns.pop());
-    console.log(event.previousIndex + 1, event.currentIndex + 1);
     moveItemInArray(
       this.columnArray || [],
       event.previousIndex,

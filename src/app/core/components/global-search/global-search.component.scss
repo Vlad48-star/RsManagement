@@ -1,7 +1,31 @@
-.mat-form-field {
-  border: 1px solid red;
-  & .mat-icon {
-    color: #000;
-    font-size: 15px;
-  }
+.wrap-row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.search-container {
+  display: flex;
+}
+.wrap-mat-menu{
+  gap: 10px;
+  display: flex;
+}
+
+mat-icon{
+  background: center;
+  width: auto;
+  font-size: 45px;
+  color:#ff9800;
+}
+
+.wrap-mat-menu{
+  text-align: right;
+}
+
+button:hover{
+  background-color: transparent;
+}
+
+button:focus {
+  background-color: transparent;
 }

@@ -4,10 +4,10 @@ import {
   selectCurrentBoard,
   selectCurrentBoardColumnTask,
 } from './../selectors/board.selector';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { TaskActions } from './../actions/task.action';
 import { RequestsService } from '../../core/services/requests.service';
-import { Injectable, Pipe } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import {
   retry,
@@ -112,10 +112,6 @@ export class TaskEffects {
       ofType(TaskActions.dropTask),
       mergeMap(({ response, columnId }) =>
         response.map((el, index) => {
-          console.log(el.order, index + 1);
-
-          // const { title, order, description, userId, columnId, done, id } = el;
-
           return this.requestsService
             .updateTask({ ...el, order: index, columnId })
             .pipe(first())
@@ -140,9 +136,6 @@ export class TaskEffects {
       }),
       retry(4),
       map((response) => {
-        const { columnId } = response;
-        console.log(response);
-        // return TaskActions.updateOrderInColumn({ response: columnId });
         return TaskActions.dropTaskToAnotherColumnSuccess();
       }),
       catchError((error) => {
@@ -177,27 +170,6 @@ export class TaskEffects {
       })
     );
   });
-  // dropTaskToAnotherColumn$ = createEffect(() => {
-  //   return this.actions$.pipe(
-  //     ofType(TaskActions.dropTaskToAnotherColumn),
-  //     // mergeMap(({ fromColumn, toColumn }) =>
-  //     //   response.map((el, index) => {
-  //     //     console.log(el.order, index + 1);
-
-  //     //     // const { title, order, description, userId, columnId, done, id } = el;
-
-  //     //     return this.requestsService
-  //     //       .updateTask({ ...el, order: index, columnId })
-  //     //       .pipe(first())
-  //     //       .subscribe();
-  //     //   })
-  //     ),
-  //     debounceTime(300),
-  //     map(() => {
-  //       return TaskActions.dropTaskSuccess();
-  //     })
-  //   );
-  // });
 
   updateCurrentBoard$ = createEffect(() => {
     this.getCurrentBoardId();
@@ -208,7 +180,6 @@ export class TaskEffects {
         TaskActions.deleteTaskSuccess,
         TaskActions.dropTaskSuccess,
         TaskActions.dropTaskToAnotherColumnSuccess
-        // TaskActions.updateOrderInColumnSuccess
       ),
       map(() => BoardActions.get({ response: { id: this.currentBoardId } }))
     );

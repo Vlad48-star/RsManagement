@@ -1,4 +1,4 @@
-import { USER_KEY, TUserState } from './../actions/user.action';
+import { USER_KEY, TUserState, TAllUsersState, USER_SEARCH } from './../actions/user.action';
 import { columnItemReducer, columnReducer } from './column.reducer';
 import {
   COLUMN_KEY,
@@ -15,7 +15,7 @@ import {
 } from './../actions/board.action';
 import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { environment } from '../../../environments/environment';
-import { userReducer } from './user.reducer';
+import { userReducer, allUsersReducer } from './user.reducer';
 
 export interface State {
   [USER_KEY]: TUserState;
@@ -23,6 +23,7 @@ export interface State {
   [CURRENT_BOARD_KEY]: TCurrentBoardState;
   [CURRENT_COLUMN_KEY]: TCurrentColumnState;
   [COLUMN_KEY]: TColumnState;
+  [USER_SEARCH]: TAllUsersState;
 }
 
 export const reducers: ActionReducerMap<State> = {
@@ -31,6 +32,7 @@ export const reducers: ActionReducerMap<State> = {
   [CURRENT_BOARD_KEY]: boardItemReducer,
   [CURRENT_COLUMN_KEY]: columnItemReducer,
   [COLUMN_KEY]: columnReducer,
+  [USER_SEARCH]: allUsersReducer,
 };
 
 export const metaReducers: MetaReducer<State>[] = !environment.production

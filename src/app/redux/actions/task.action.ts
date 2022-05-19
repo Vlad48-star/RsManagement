@@ -1,6 +1,4 @@
-import { IColumnID } from './../../column/components/models/column.model';
 import { ITask } from './../../board/model/board.model';
-import { IColumn } from 'src/app/board/model/board.model';
 import { createAction, props } from '@ngrx/store';
 
 export const TASK_KEY = 'task';
@@ -52,8 +50,6 @@ export const TaskActions = {
     '[TASK] update tasks orders success'
   ),
 };
-
-export type TUserState = INewTask | object;
 
 export interface INewTaskForm {
   title: string;
