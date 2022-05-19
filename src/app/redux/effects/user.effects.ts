@@ -3,7 +3,7 @@ import { UserActions } from './../actions/user.action';
 import { RequestsService } from '../../core/services/requests.service';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, catchError, EMPTY, mergeMap, retry } from 'rxjs';
+import { map, catchError, EMPTY, mergeMap, retry, exhaustMap } from 'rxjs';
 import { MaterialService } from 'src/app/auth/class/material.service';
 
 @Injectable()
@@ -119,6 +119,24 @@ export class UserEffects {
           })
         );
       })
+    );
+  });
+
+  loadAllUsers$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.loadAllUsers),
+      exhaustMap(() =>
+        this.requestsService.loadAllUserss().pipe(
+          retry(4),
+          map((response) => {
+            return UserActions.loadAllUsersSuccess({ response });
+          }),
+          catchError((error) => {
+            MaterialService.toast(error.error.message);
+            return EMPTY;
+          })
+        )
+      )
     );
   });
 

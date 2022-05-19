@@ -1,3 +1,4 @@
+import { IUsers } from './../../redux/actions/user.action';
 import { Observable, retry } from 'rxjs';
 import {
   selectCurrentColumn,
@@ -178,5 +179,8 @@ export class RequestsService {
         '/tasks/' +
         response.taskId
     );
+  }
+  public loadAllUserss() {
+    return this.http.get<IUsers[]>(this.url + 'users');
   }
 }

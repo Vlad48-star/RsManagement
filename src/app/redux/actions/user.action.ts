@@ -17,9 +17,9 @@ export const UserActions = {
     '[USER] register user success',
     props<{ response: IPerson }>()
   ),
-  load: createAction('[USER] get all user data'),
+  load: createAction('[USER] get user data'),
   loadSuccess: createAction(
-    '[USER] success get all user data',
+    '[USER] success get user data',
     props<{ response: IUser }>()
   ),
   update: createAction(
@@ -32,16 +32,30 @@ export const UserActions = {
   ),
   delete: createAction('[USER] delete', props<{ id: string }>()),
   deleteSuccess: createAction('[USER] success delete'),
+
+  loadAllUsers: createAction('[USERS] get all users'),
+  loadAllUsersSuccess: createAction(
+    '[USERS] success get all users',
+    props<{ response: TAllUsersState }>()
+  ),
 };
 
 export const initialUserState: TUserState = {
   login: localStorage.getItem('login') || null,
 };
 
+export const initialAllUsersState: TAllUsersState = [];
+
 export type TUserState = IUser | object;
+export type TAllUsersState = IUsers[];
 
 export interface IUser {
   login: string;
   name?: string;
   id?: string;
+}
+export interface IUsers {
+  login: string;
+  name: string;
+  id: string;
 }

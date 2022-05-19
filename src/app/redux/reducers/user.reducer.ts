@@ -1,7 +1,9 @@
+import { IUser, IUsers } from 'src/app/redux/actions/user.action';
 import {
   initialUserState,
   UserActions,
   TUserState,
+  initialAllUsersState,
 } from './../actions/user.action';
 import { createReducer, on } from '@ngrx/store';
 
@@ -19,4 +21,10 @@ export const userReducer = createReducer(
   on(UserActions.deleteSuccess, (state): TUserState => {
     return initialUserState;
   })
+);
+export const allUsersReducer = createReducer(
+  initialAllUsersState,
+  on(UserActions.loadAllUsersSuccess, (state, { response }): IUsers[] => [
+    ...response,
+  ])
 );
