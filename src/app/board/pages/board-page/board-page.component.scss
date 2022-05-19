@@ -16,8 +16,8 @@
 
 .global-search {
   position: absolute;
-  right: 20px;
-  top: 0px;
+  right: 80px;
+  top: 80px;
 }
 .board-title-wrapper {
   margin-top: 10px;
@@ -58,7 +58,7 @@
     grid-template-rows: min-content;
     .wrap-form {
       display: grid;
-      grid-template-columns: 190px 3fr 1fr;
+      grid-template-columns: 190px 3fr 2fr;
       h3 {
         margin-bottom: 5px;
         color: #ff9800;
