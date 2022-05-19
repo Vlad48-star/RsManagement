@@ -3,7 +3,7 @@
     (click)="onEditTask()"
     [ngClass]="{ complete: task.done, 'title-column': true }"
   >
-    {{ task.title }} = {{ task.order }}
+    {{ task.title }}
   </div>
   <button class="btn" (click)="onDeleteTask()">
     <mat-icon>delete_forever</mat-icon>

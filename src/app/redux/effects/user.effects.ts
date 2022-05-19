@@ -56,7 +56,6 @@ export class UserEffects {
         this.requestsService.loadAllUsers().pipe(
           retry(4),
           map((response) => {
-            console.log(response);
             const item = response.find(
               (response) => response.login == localStorage.getItem('login')
             );
@@ -66,7 +65,6 @@ export class UserEffects {
             return UserActions.loadSuccess({ response: item });
           }),
           catchError((error) => {
-            console.log(error);
             MaterialService.toast(error.error.message);
             return EMPTY;
           })

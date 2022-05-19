@@ -71,7 +71,6 @@ export class ColumnComponent implements OnInit {
       );
       this.isEditTaskActive = false;
     }
-    console.log(this.editColumnForm.get('columnTitle')?.value);
     this.isEditTaskActive = false;
   }
 
@@ -104,7 +103,6 @@ export class ColumnComponent implements OnInit {
     });
   }
   drop(event: CdkDragDrop<ITask[]>) {
-    console.log('this.taskColumn', this.taskColumn);
     if (event.previousContainer === event.container) {
       moveItemInArray(this.taskColumn, event.previousIndex, event.currentIndex);
       this.store.dispatch(
@@ -114,7 +112,6 @@ export class ColumnComponent implements OnInit {
         })
       );
     } else {
-      console.log(event);
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
