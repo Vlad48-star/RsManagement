@@ -1,5 +1,5 @@
 import { IConfirmDialogData } from './../../models/confirmModal';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LangChangeService } from 'src/app/core/services/lang-change.service';
 
@@ -8,11 +8,9 @@ import { LangChangeService } from 'src/app/core/services/lang-change.service';
   templateUrl: './confirm-modal.component.html',
   styleUrls: ['./confirm-modal.component.scss'],
 })
-export class ConfirmModalComponent implements OnInit {
+export class ConfirmModalComponent {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: IConfirmDialogData,
     public auth: LangChangeService
   ) {}
-
-  ngOnInit(): void {}
 }

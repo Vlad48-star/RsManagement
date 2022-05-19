@@ -8,9 +8,8 @@ describe('CrateBoardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CrateBoardComponent ]
-    })
-    .compileComponents();
+      declarations: [CrateBoardComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

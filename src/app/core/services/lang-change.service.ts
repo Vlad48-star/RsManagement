@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LangChangeService {
+export class LangChangeService implements OnInit {
   lang!: string | null;
-  statusLang!: Boolean;
+  statusLang!: boolean;
 
   ngOnInit() {
     this.lang = localStorage.getItem('lang');

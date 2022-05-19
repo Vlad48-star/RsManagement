@@ -10,7 +10,10 @@ import { LangChangeService } from 'src/app/core/services/lang-change.service';
   styleUrls: ['./board-menu.component.scss'],
 })
 export class BoardMenuComponent implements OnInit, OnDestroy {
-  constructor(private activateRoute: ActivatedRoute, public auth: LangChangeService) {}
+  constructor(
+    private activateRoute: ActivatedRoute,
+    public auth: LangChangeService
+  ) {}
   urlSubscription!: Subscription;
 
   urlParams: IBoardMenu = {};
