@@ -1,0 +1,49 @@
+<div class="add-task">
+  <form [formGroup]="newBoardForm" (ngSubmit)="formSubmit()">
+    <!-- TODO Сделай пожалуйста красивые input, что бы placeholder поднимался вверх при клике на поле -->
+    <!-- https://material.angular.io/components/input/overview -->
+
+    <div class="flex-column">
+      <input
+        type="text"
+        class="input-text"
+        name="title"
+        formControlName="title"
+        [placeholder]="auth.lang === 'ru' ? 'Заголовок' : 'Title'"
+        required
+      />
+      <textarea
+        class="description"
+        name="description"
+        formControlName="description"
+        placeholder="{{ auth.lang === 'ru' ? 'Описание' : 'Description' }}"
+        required
+      >
+      </textarea>
+      <ng-container *ngIf="(title!.invalid && title!.dirty) || errorOnsubmit">
+        <span class="text-center" *ngIf="title!.errors?.['required']">{{
+          auth.lang === 'ru'
+            ? 'Пожалуйста, введите имя доски'
+            : 'Please enter board name'
+        }}</span>
+      </ng-container>
+      <ng-container
+        *ngIf="(description!.invalid && description!.dirty) || errorOnsubmit"
+      >
+        <span class="text-center" *ngIf="description!.errors?.['required']">{{
+          auth.lang === 'ru'
+            ? 'Пожалуйста, описание для доски'
+            : 'Please enter board descriptions'
+        }}</span>
+      </ng-container>
+      <div class="wrap-flex">
+        <button class="btn red" [mat-dialog-close]="false">
+          {{ auth.lang === 'ru' ? 'Отменить' : 'Back' }}
+        </button>
+        <button class="btn">
+          {{ auth.lang === 'ru' ? 'Добавить' : 'Add' }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,22 @@
+<div class="wrap-row">
+  <input type="text" placeholder="{{auth.lang === 'ru' ? 'искать...' : 'search...'}}" />
+    <div class="wrap-mat-menu">
+      <button class="no-hover" mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>search</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <mat-option value="by-task-number">{{
+          auth.lang === 'ru' ? 'по номеру задания' : 'by task number'
+        }}</mat-option>
+        <mat-option value="by-task-name">{{
+          auth.lang === 'ru' ? 'по названии задания' : 'by task name'
+        }}</mat-option>
+        <mat-option value="by-user">{{
+          auth.lang === 'ru' ? 'по пользователю' : 'by user'
+        }}</mat-option>
+        <mat-option value="by-task-description">{{
+          auth.lang === 'ru' ? 'по описании задания' : 'by task description'
+        }}</mat-option>
+      </mat-menu>
+    </div>
+</div>

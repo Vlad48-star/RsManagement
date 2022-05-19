@@ -1,0 +1,11 @@
+<div class="wrapper">
+  <h2>{{ auth.lang === 'ru' ? 'Задачи:' : 'Boards:' }}</h2>
+  <ng-container
+    *ngIf="urlParams.id !== undefined ? true : false; else elseTemplate"
+  >
+    <app-list></app-list>
+  </ng-container>
+  <ng-template #elseTemplate>{{
+    auth.lang === 'ru' ? 'Выберите доску' : 'Choose a board'
+  }}</ng-template>
+</div>

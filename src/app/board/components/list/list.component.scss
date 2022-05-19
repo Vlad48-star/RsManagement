@@ -1,0 +1,28 @@
+.list-wrapper {
+  max-width: 200px;
+  overflow: auto;
+  max-height: 70vh;
+}
+
+.list-wrapper::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+  cursor: pointer;
+}
+
+.list-wrapper::-webkit-scrollbar-thumb {
+  border: 1px solid transparent;
+  border-radius: 7px;
+  background-color: transparent;
+  background-clip: content-box;
+}
+
+.list-wrapper::-webkit-scrollbar-thumb:hover {
+  background-color: #26a69a;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    max-width: 120px;
+  }
+}

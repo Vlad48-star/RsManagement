@@ -1,0 +1,14 @@
+h2{
+  margin: 0;
+  padding-top: 15px;
+}
+
+.wrapper {
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    max-width: 110px;
+  }
+}

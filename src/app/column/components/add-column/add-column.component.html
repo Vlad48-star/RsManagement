@@ -1,0 +1,32 @@
+<div>
+  <form
+    [formGroup]="newColumnForm"
+    (ngSubmit)="formSubmit()"
+    class="flex-column"
+  >
+    <div class="grid-row">
+      <input
+        type="text"
+        class="input-text"
+        name="title"
+        formControlName="title"
+        required
+      />
+      <ng-container *ngIf="(title!.invalid && title!.dirty) || errorOnsubmit">
+        <span class="text-center" *ngIf="title!.errors?.['required']">{{
+          auth.lang === 'ru'
+            ? 'Пожалуйста, введите имя колонки'
+            : 'Please enter a column name'
+        }}</span>
+      </ng-container>
+      <div class="wrap-flex">
+        <button class="btn btn-text red" [mat-dialog-close]="false">
+          {{ auth.lang === 'ru' ? 'Отменить' : 'Back' }}
+        </button>
+        <button class="btn btn-text">
+          {{ auth.lang === 'ru' ? 'Добавить' : 'Add' }}
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

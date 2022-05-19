@@ -1,0 +1,31 @@
+.task {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .title-column {
+    padding-left: 5px;
+    word-break: break-all;
+    font-weight: 500;
+  }
+}
+.task-box {
+  display: flex;
+  justify-content: flex-end;
+}
+.btn {
+  display: grid;
+  align-items: center;
+  background-color: grey;
+  padding: 0;
+  height: 24px;
+}
+
+.btn:hover {
+  background-color: #f44336;
+  transition: all 0.6s;
+}
+
+.complete {
+  text-decoration: line-through;
+}

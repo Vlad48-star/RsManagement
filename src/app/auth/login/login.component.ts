@@ -1,0 +1,54 @@
+import { Router } from '@angular/router';
+import { AuthService } from './../../core/services/auth.service';
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { LangChangeService } from 'src/app/core/services/lang-change.service';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
+})
+export class LoginComponent {
+  errorOnsubmit = false;
+  loginForm!: any;
+
+  constructor(
+    private register: AuthService,
+    private router: Router,
+    public auth: LangChangeService
+  ) {
+    this.createForm();
+  }
+
+  formSubmit() {
+    this.errorOnsubmit = true;
+    if (!this.loginForm.valid) {
+      return;
+    }
+    this.errorOnsubmit = false;
+    this.register.person = this.loginForm.value.login;
+    this.register.login(this.loginForm.value);
+  }
+
+  private createForm() {
+    this.loginForm = new FormGroup({
+      login: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/),
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
+    });
+  }
+
+  get login() {
+    return this.loginForm.get('login');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
+  }
+}

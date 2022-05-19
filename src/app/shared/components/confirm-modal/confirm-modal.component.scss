@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .btn{
+    background-color: #424242;
+  }
+  button:hover{
+    background-color: #2bbbad;
+    transition: all 1s;
+  }
+}
+
+.footer-button{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  .color{
+    background-color: #ff9800;
+  }
+  button:hover{
+    background-color: #2bbbad;
+    transition: all 1s;
+  }
+}

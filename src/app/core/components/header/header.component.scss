@@ -1,0 +1,130 @@
+p{
+  margin: 0;
+}
+
+h3{
+  margin: 0;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.btn-floating .btn-large .waves-effect .waves-light .black{
+  background-color:#ff9800;
+}
+
+header{
+  height: 70px;
+  display: flex;
+  padding: 0 20px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid;
+  .logo-container{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    .logo-title {
+      font-size: 25px;
+      font-weight: 900;
+    }
+  }
+  .wrap-add-board{
+    position: relative;
+    display:grid;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    .btn-floating{
+      position: absolute;
+      top: 42px;
+      right: 27%;
+      i{
+        font-size: 1.9rem;
+        color: #000;
+      }
+    }
+  }
+  .wrap-mat-menu{
+    gap: 10px;
+    display: flex;
+  }
+}
+
+.logo{
+  width: 40px;
+  height: 40px;
+}
+
+
+mat-icon{
+  background: center;
+  height: 50px;
+  width: 55px;
+  font-size: 55px;
+  padding-right: 10px;
+  color:#ff9800;
+}
+
+.pos-toggler{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  height: 48px;
+}
+
+.mat-menu-item{
+  text-align: right;
+}
+
+button:hover{
+  background-color: transparent;
+}
+
+button:focus {
+  background-color: transparent;
+}
+
+@media (max-width: 768px) {
+  header{
+    height: 60px;
+    padding: 0 5px;
+    h3{
+      font-size: 14px;
+      font-weight: 900;
+    }
+    h2{
+      text-align: center;
+      font-size: 16px;
+      font-weight: 900;
+      line-height: 0.8;
+      margin-bottom: 25px;
+    }
+    .logo{
+      width: 30px;
+      height: 30px;
+    }
+    .logo-container{
+      .logo-title {
+        font-size: 14px;
+        font-weight: 900;
+      }
+    }
+    mat-icon{
+      background: center;
+      height: 35px;
+      width: 45px;
+      font-size: 35px;
+      color:#ff9800;
+    }
+    .wrap-mat-menu{
+      gap: 5px;
+      display: flex;
+    }
+    .wrap-add-board{
+      .btn-floating{
+        top:31px;
+        right: 22%;
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+<header class="wrap-header">
+  <div class="position-logo">
+    <img class="logo" src="./assets/svg/rs.svg" alt="" />
+    <div class="text-logo">Management</div>
+  </div>
+  <div class="wrap-toggle">
+    <app-toggler></app-toggler>
+    <div class="registration-wrap">
+      <button
+        class="sigh-in btn"
+        [routerLink]="['/login']"
+        routerLinkActive="router-link-active"
+      >
+        {{ auth.lang === 'ru' ? 'Войти' : 'Login' }}
+      </button>
+      <button
+        class="btn waves-effect waves-light"
+        [routerLink]="['/registration']"
+      >
+        {{ auth.lang === 'ru' ? 'Регистрация' : 'Sign up' }}
+      </button>
+    </div>
+  </div>
+</header>
+<main class="back-image">
+  <div class="wrap-video">
+    <iframe
+      class="video"
+      src="https://www.youtube.com/embed/ecKxYHBUKtI"
+      title="YouTube video player"
+      frameborder="0"
+    ></iframe>
+    <p class="summary-video">
+      {{
+        auth.lang === 'ru'
+          ? 'Сэкономьте своё время. Ознакомтесь с возможностями приложения!'
+          : 'Save your time. Check out the features of the application!'
+      }}
+    </p>
+  </div>
+  <div class="wrap-persons">
+    <div class="center-position">
+      <div class="person-max"></div>
+      <p>Perdebaev Abdikhamid</p>
+      <p>{{ auth.lang === 'ru' ? 'Возраст' : 'Age' }} 26</p>
+      <a href="https://cvdesign.mobi/r-PCORMG">
+        <p>
+          {{ auth.lang === 'ru' ? 'Подробнее в резюме' : 'More about in CV' }}
+        </p>
+      </a>
+    </div>
+    <div class="center-position">
+      <div class="person-vlad"></div>
+      <p>Vlad Hitrikov</p>
+      <p>{{ auth.lang === 'ru' ? 'Возраст' : 'Age' }} 26</p>
+      <a href="https://resume.io/r/aB2FxvdHA">
+        <p>
+          {{ auth.lang === 'ru' ? 'Подробнее в резюме' : 'More about in CV' }}
+        </p>
+      </a>
+    </div>
+    <div class="center-position">
+      <div class="person-dmitri"></div>
+      <p>Dmitry Legankov</p>
+      <p>{{ auth.lang === 'ru' ? 'Возраст' : 'Age' }} 26</p>
+      <a
+        href="https://drive.google.com/file/d/1VE3sZJ9j2Dyl_j2IJZJQjR4Tnr4AmU0o/view"
+      >
+        <p>
+          {{ auth.lang === 'ru' ? 'Подробнее в резюме' : 'More about in CV' }}
+        </p>
+      </a>
+    </div>
+  </div>
+</main>
+<app-footer></app-footer>

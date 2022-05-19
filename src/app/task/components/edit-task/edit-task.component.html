@@ -1,0 +1,35 @@
+<form [formGroup]="editTaskForm" class="login-form" (ngSubmit)="onSubmit()">
+  <div class="header">
+    <h2>
+      {{
+        auth.lang === 'ru' ? 'Форма для изменения задания' : 'Editing Task Form'
+      }}
+    </h2>
+    <button class="btn" mat-icon-button [mat-dialog-close]="false">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <input
+    class="text-title"
+    formControlName="taskTitle"
+    type="text"
+    placeholder="{{ auth.lang === 'ru' ? 'Название' : 'Title' }}"
+    required
+  />
+  <textarea
+    class="description"
+    name="description"
+    formControlName="taskDescription"
+    placeholder="{{ auth.lang === 'ru' ? 'Описание' : 'Description' }}"
+  >
+  </textarea>
+  <div class="position-done">
+    <label for="done">
+      <input type="checkbox" formControlName="taskDone" id="done" />
+      <span>{{ auth.lang === 'ru' ? 'Выполнено' : 'Done' }}</span>
+    </label>
+  </div>
+  <button class="btn" type="submit" mat-button [disabled]="editTaskForm.invalid">
+    {{ auth.lang === 'ru' ? 'Отправить' : 'Submit' }}
+  </button>
+</form>

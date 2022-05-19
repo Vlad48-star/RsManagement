@@ -1,0 +1,11 @@
+<ng-container *ngIf="(boards$ | async)?.length; else addFirstBoard">
+  <div class="list-wrapper">
+    <app-list-item
+      *ngFor="let board of boards$ | async"
+      [board]="board"
+    ></app-list-item>
+  </div>
+</ng-container>
+<ng-template #addFirstBoard>
+  <div>{{ auth.lang === 'ru' ? 'У вас пока что нету досок, попробуй создать первую' : 'You don\'t have boards yet, try to create the first one' }}</div>
+</ng-template>

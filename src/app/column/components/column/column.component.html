@@ -1,0 +1,60 @@
+<div class="wrapper">
+  <div class="wrap-column">
+    <h2 *ngIf="!isEditTaskActive; else editActive" (click)="onEditColumn()">
+      {{ columnInfo?.title }}
+    </h2>
+    <button class="btn red" (click)="onDeleteColumn()">
+      {{ auth.lang === 'ru' ? 'Удалить' : 'Delete' }}
+    </button>
+  </div>
+  <ng-template #editActive>
+    <form
+      class="grid-row"
+      [formGroup]="editColumnForm"
+      class="login-form"
+      (ngSubmit)="updateColumn()"
+    >
+      <input
+        class="text-column-title"
+        formControlName="columnTitle"
+        type="text"
+        placeholder="title"
+        (blur)="updateColumn()"
+        #input
+      />
+      <div class="wrap-column">
+        <button
+          class="btn red"
+          type="button"
+          (click)="isEditTaskActive = !isEditTaskActive"
+        >
+          {{ auth.lang === 'ru' ? 'Назад' : 'Back' }}
+        </button>
+        <button class="btn" type="submit" [disabled]="editColumnForm.invalid">
+          {{ auth.lang === 'ru' ? 'Отправить' : 'Change' }}
+        </button>
+      </div>
+    </form>
+  </ng-template>
+  <div
+    cdkDropList
+    [cdkDropListData]="this.taskColumn"
+    class="task-list"
+    (cdkDropListDropped)="drop($event)"
+    [id]="columnInfo.id"
+  >
+    <app-task
+      [columnInfo]="columnInfo"
+      *ngFor="let task of this.taskColumn | sort: 'order'"
+      [task]="task"
+      cdkDrag
+      class="task-box"
+      [cdkDragData]="task"
+    ></app-task>
+  </div>
+  <div class="wrap-btn-add-task">
+    <button class="btn" (click)="onAddTask()">
+      {{ auth.lang === 'ru' ? 'Добавить' : 'Add task' }}
+    </button>
+  </div>
+</div>

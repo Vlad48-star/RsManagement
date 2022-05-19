@@ -1,0 +1,39 @@
+.size-form {
+  width: 300px;
+}
+
+.registration-form {
+  display: grid;
+  justify-items: center;
+  width: 100%;
+  padding-top: 10%;
+  .content {
+    background-color: white;
+    max-width: 400px;
+    border-radius: 3px;
+    padding: 25px 40px;
+    box-shadow: rgb(0 0 0 / 10%) 0 0 10px;
+  }
+  .wrap-btn {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+}
+.btn {
+  background-color: #ff9800;
+}
+
+.form-group {
+  display: grid;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 500px) {
+  .registration-form {
+    margin-top: 2%;
+    .content {
+      padding: 15px 15px;
+    }
+  }
+}

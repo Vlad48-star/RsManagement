@@ -1,0 +1,11 @@
+<div class="task">
+  <div
+    (click)="onEditTask()"
+    [ngClass]="{ complete: task.done, 'title-column': true }"
+  >
+    {{ task.title }}
+  </div>
+  <button class="btn" (click)="onDeleteTask()">
+    <mat-icon>delete_forever</mat-icon>
+  </button>
+</div>
