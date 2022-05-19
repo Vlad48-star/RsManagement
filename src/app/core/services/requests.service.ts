@@ -141,8 +141,12 @@ export class RequestsService {
       }
     );
   }
-  public updateTask({ ...response }: ITaskUpdate) {
+  public updateTask(
+    { ...response }: ITaskUpdate,
+    newColumnId = response.columnId
+  ) {
     const { title, order, description, userId, columnId, done, id } = response;
+    console.log(response);
     this.getCurrentBoardId();
     return this.http.put<ITaskRes>(
       this.url +
@@ -157,7 +161,7 @@ export class RequestsService {
         order,
         description,
         userId,
-        columnId,
+        columnId: newColumnId,
         done,
         boardId: this.currentBoardId,
       }

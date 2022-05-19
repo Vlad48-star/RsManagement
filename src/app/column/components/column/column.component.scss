@@ -62,6 +62,7 @@ h2 {
 }
 
 .task-box {
+  height: min-content;
   color: rgba(0, 0, 0, 0.87);
   cursor: move;
   background: white;

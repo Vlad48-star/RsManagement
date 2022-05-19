@@ -1,12 +1,24 @@
 import { BoardActions } from './../actions/board.action';
 import { selectUser } from './../selectors/user.selector';
-import { selectCurrentBoard } from './../selectors/board.selector';
-import { Store } from '@ngrx/store';
+import {
+  selectCurrentBoard,
+  selectCurrentBoardColumnTask,
+} from './../selectors/board.selector';
+import { Store, select } from '@ngrx/store';
 import { TaskActions } from './../actions/task.action';
 import { RequestsService } from '../../core/services/requests.service';
-import { Injectable } from '@angular/core';
+import { Injectable, Pipe } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { retry, map, catchError, EMPTY, mergeMap, exhaustMap } from 'rxjs';
+import {
+  retry,
+  map,
+  catchError,
+  EMPTY,
+  mergeMap,
+  exhaustMap,
+  first,
+  debounceTime,
+} from 'rxjs';
 import { MaterialService } from 'src/app/auth/class/material.service';
 
 @Injectable()
@@ -62,7 +74,10 @@ export class TaskEffects {
     return this.actions$.pipe(
       ofType(TaskActions.updateTask),
       exhaustMap((actions) => {
-        return this.requestsService.updateTask(actions.response);
+        return this.requestsService.updateTask(
+          actions.response,
+          actions.newColumnId
+        );
       }),
       retry(4),
       map((response) => TaskActions.updateTaskSuccess({ response })),
@@ -72,6 +87,7 @@ export class TaskEffects {
       })
     );
   });
+
   deleteTask$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(TaskActions.deleteTask),
@@ -90,13 +106,109 @@ export class TaskEffects {
       )
     );
   });
+
+  dropTask$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(TaskActions.dropTask),
+      mergeMap(({ response, columnId }) =>
+        response.map((el, index) => {
+          console.log(el.order, index + 1);
+
+          // const { title, order, description, userId, columnId, done, id } = el;
+
+          return this.requestsService
+            .updateTask({ ...el, order: index, columnId })
+            .pipe(first())
+            .subscribe();
+        })
+      ),
+      debounceTime(300),
+      map(() => {
+        return TaskActions.dropTaskSuccess();
+      })
+    );
+  });
+
+  dropTaskFromAnotherColumn$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(TaskActions.dropTaskToAnotherColumn),
+      mergeMap((actions) => {
+        return this.requestsService.updateTask(
+          actions.response,
+          actions.newColumnId
+        );
+      }),
+      retry(4),
+      map((response) => {
+        const { columnId } = response;
+        console.log(response);
+        // return TaskActions.updateOrderInColumn({ response: columnId });
+        return TaskActions.dropTaskToAnotherColumnSuccess();
+      }),
+      catchError((error) => {
+        MaterialService.toast(error.error.message);
+        return EMPTY;
+      })
+    );
+  });
+
+  updateTasksAfterDnD$ = createEffect(() => {
+    this.getCurrentBoardId();
+    return this.actions$.pipe(
+      ofType(TaskActions.updateOrderInColumn),
+      concatLatestFrom(({ response }) => [
+        this.store.select(selectCurrentBoardColumnTask(response)),
+      ]),
+      mergeMap(([columnId, response]) => {
+        return response![0].tasks.map((el, index) => {
+          return this.requestsService
+            .updateTask({
+              ...el,
+              columnId: columnId.response,
+              order: index + 1,
+            })
+            .pipe(first())
+            .subscribe();
+        });
+      }),
+      debounceTime(300),
+      map(() => {
+        return TaskActions.updateOrderInColumnSuccess();
+      })
+    );
+  });
+  // dropTaskToAnotherColumn$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(TaskActions.dropTaskToAnotherColumn),
+  //     // mergeMap(({ fromColumn, toColumn }) =>
+  //     //   response.map((el, index) => {
+  //     //     console.log(el.order, index + 1);
+
+  //     //     // const { title, order, description, userId, columnId, done, id } = el;
+
+  //     //     return this.requestsService
+  //     //       .updateTask({ ...el, order: index, columnId })
+  //     //       .pipe(first())
+  //     //       .subscribe();
+  //     //   })
+  //     ),
+  //     debounceTime(300),
+  //     map(() => {
+  //       return TaskActions.dropTaskSuccess();
+  //     })
+  //   );
+  // });
+
   updateCurrentBoard$ = createEffect(() => {
     this.getCurrentBoardId();
     return this.actions$.pipe(
       ofType(
         TaskActions.createTaskSuccess,
         TaskActions.updateTaskSuccess,
-        TaskActions.deleteTaskSuccess
+        TaskActions.deleteTaskSuccess,
+        TaskActions.dropTaskSuccess,
+        TaskActions.dropTaskToAnotherColumnSuccess
+        // TaskActions.updateOrderInColumnSuccess
       ),
       map(() => BoardActions.get({ response: { id: this.currentBoardId } }))
     );

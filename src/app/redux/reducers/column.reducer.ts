@@ -1,3 +1,4 @@
+import { TaskActions } from './../actions/task.action';
 import { IColumn } from './../../board/model/board.model';
 import {
   initialColumnState,

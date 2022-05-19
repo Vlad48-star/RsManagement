@@ -38,7 +38,7 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   currentBoardData?: IBoardData | TCurrentBoardState;
   stateBoardSubscription!: Subscription;
   routeSubscription!: Subscription;
-
+  columnArray: IColumn[] | undefined = [];
   currentBoard$!: Observable<TCurrentBoardState>;
 
   errorOnsubmit = false;
@@ -112,9 +112,10 @@ export class BoardPageComponent implements OnInit, OnDestroy {
         });
     });
     this.currentBoard$ = this.store.select(selectCurrentBoard);
-    this.currentBoard$.subscribe(
-      (res) => (this.currentBoardData = Object.assign({}, res))
-    );
+    this.currentBoard$.subscribe((res) => {
+      this.currentBoardData = Object.assign({}, res);
+      this.columnArray = res?.columns.slice();
+    });
   }
   ngOnDestroy(): void {
     this.stateBoardSubscription.unsubscribe();
@@ -126,11 +127,14 @@ export class BoardPageComponent implements OnInit, OnDestroy {
   }
   drop(event: CdkDragDrop<IColumn[]>) {
     // console.log(this.currentBoardData!.columns.pop());
-    console.log(event.previousIndex, event.currentIndex);
-    // moveItemInArray(
-    //   this.currentBoardData!.columns,
-    //   event.previousIndex,
-    //   event.currentIndex
-    // );
+    console.log(event.previousIndex + 1, event.currentIndex + 1);
+    moveItemInArray(
+      this.columnArray || [],
+      event.previousIndex,
+      event.currentIndex
+    );
+    this.store.dispatch(
+      BoardActions.dropColumn({ response: this.columnArray || [] })
+    );
   }
 }

@@ -1,3 +1,4 @@
+import { IColumn } from 'src/app/board/model/board.model';
 import {
   INewBoard,
   IBoardID,
@@ -36,6 +37,10 @@ export const BoardActions = {
     '[CURRENT_BOARD] success get board data',
     props<{ response: IBoardData }>()
   ),
+  dropColumn: createAction(
+    '[CURRENT_BOARD] drop column',
+    props<{ response: IColumn[] }>()
+  ),
 };
 
 export const initialBoardState: TBoardState = [];
@@ -43,3 +48,8 @@ export const initialCurrentBoardState: TCurrentBoardState = undefined;
 
 export type TBoardState = IBoard[];
 export type TCurrentBoardState = IBoardData | undefined;
+
+export type TDropELement = {
+  previousIndex: number;
+  currentIndex: number;
+};

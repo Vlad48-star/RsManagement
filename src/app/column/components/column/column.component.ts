@@ -1,3 +1,6 @@
+import { first } from 'rxjs';
+import { selectCurrentBoardColumnTask } from './../../../redux/selectors/board.selector';
+import { TaskActions } from './../../../redux/actions/task.action';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RequestsService } from './../../../core/services/requests.service';
 import { ColumnActions } from './../../../redux/actions/column.action';
@@ -34,7 +37,7 @@ export class ColumnComponent implements OnInit {
   @Input() columnInfo!: IColumn;
   @Input() columnOrder!: number;
   editColumnForm!: FormGroup;
-  _tempTaskColumn: ITask[] = [];
+  taskColumn: ITask[] = [];
   objectLanguage!: IConfirmDialogData;
   ngOnInit(): void {
     this.editColumnForm = new FormGroup({
@@ -42,7 +45,7 @@ export class ColumnComponent implements OnInit {
         Validators.required,
       ]),
     });
-    this._tempTaskColumn = [...this.columnInfo.tasks];
+    this.taskColumn = this.columnInfo.tasks.slice();
   }
   isEditTaskActive = false;
 
@@ -95,29 +98,42 @@ export class ColumnComponent implements OnInit {
         cancelText: 'No',
       };
     }
-    this.dialog
-      .confirmDialog(this.objectLanguage)
-      .subscribe((res) => {
-        if (res)
-          this.store.dispatch(
-            ColumnActions.delete({ response: { id: this.columnInfo.id } })
-          );
-      });
+    this.dialog.confirmDialog(this.objectLanguage).subscribe((res) => {
+      if (res)
+        this.store.dispatch(
+          ColumnActions.delete({ response: { id: this.columnInfo.id } })
+        );
+    });
   }
   drop(event: CdkDragDrop<ITask[]>) {
-    // if (event.previousContainer === event.container) {
-    //   moveItemInArray(
-    //     event.container.data,
-    //     event.previousIndex,
-    //     event.currentIndex
-    //   );
-    // } else {
-    //   transferArrayItem(
-    //     event.previousContainer.data,
-    //     event.container.data,
-    //     event.previousIndex,
-    //     event.currentIndex
-    //   );
-    // }
+    console.log('this.taskColumn', this.taskColumn);
+    if (event.previousContainer === event.container) {
+      moveItemInArray(this.taskColumn, event.previousIndex, event.currentIndex);
+      this.store.dispatch(
+        TaskActions.dropTask({
+          response: this.taskColumn,
+          columnId: this.columnInfo.id,
+        })
+      );
+    } else {
+      console.log(event);
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+
+      this.store.dispatch(
+        TaskActions.dropTaskToAnotherColumn({
+          response: {
+            ...event.item.data,
+            columnId: event.previousContainer['id'],
+            order: event.currentIndex,
+          },
+          newColumnId: event.container['id'],
+        })
+      );
+    }
   }
 }
