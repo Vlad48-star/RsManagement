@@ -37,7 +37,7 @@ export class RequestsService {
       .subscribe((res) => (this.currentBoardId = res!.id));
   }
   getCurrentColumnsId() {
-    this.store.select(selectCurrentColumnID).subscribe(console.log);
+    this.store.select(selectCurrentColumnID).subscribe();
   }
 
   public login({ login, password }: ILogin) {
@@ -114,11 +114,6 @@ export class RequestsService {
   public updateColumn({ title, order, id }: IColumnUpdate) {
     this.getCurrentBoardId();
     this.getCurrentColumnsId();
-    console.log(id);
-    console.log(this.url + 'boards/' + this.currentBoardId + '/columns/' + id, {
-      title,
-      order,
-    });
     return this.http.put<IColumnUpdate>(
       this.url + 'boards/' + this.currentBoardId + '/columns/' + id,
       { title, order }
@@ -138,7 +133,6 @@ export class RequestsService {
     newColumnId = response.columnId
   ) {
     const { title, order, description, userId, columnId, done, id } = response;
-    console.log(response);
     this.getCurrentBoardId();
     return this.http.put<ITaskRes>(
       this.url +

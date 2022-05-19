@@ -26,7 +26,6 @@ export class EditTaskComponent implements OnInit {
   editTaskForm!: FormGroup;
 
   ngOnInit(): void {
-    console.log(this.data);
     this.editTaskForm = new FormGroup({
       taskTitle: new FormControl(this.oldTaskData.title, [Validators.required]),
       taskDescription: new FormControl(this.oldTaskData.description, [
@@ -37,7 +36,6 @@ export class EditTaskComponent implements OnInit {
   }
 
   onSubmit() {
-    //TODO Добавить проверку на наличие ошибок при сабите
     this.store.dispatch(
       TaskActions.updateTask({
         response: {

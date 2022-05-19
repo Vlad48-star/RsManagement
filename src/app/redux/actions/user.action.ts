@@ -35,10 +35,10 @@ export const UserActions = {
 };
 
 export const initialUserState: TUserState = {
-  login: localStorage.getItem('login') || null,
+  login: localStorage.getItem('login') || 'login',
 };
 
-export type TUserState = IUser | object;
+export type TUserState = IUser;
 
 export interface IUser {
   login: string;
