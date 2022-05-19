@@ -51,8 +51,6 @@ export const TaskActions = {
   ),
 };
 
-export type TUserState = INewTask | object;
-
 export interface INewTaskForm {
   title: string;
   order: number;

@@ -1,3 +1,4 @@
+import { selectUser } from 'src/app/redux/selectors/user.selector';
 import { DialogService } from 'src/app/shared/services/dialog.service';
 import { BoardActions } from './../../../redux/actions/board.action';
 import { Store } from '@ngrx/store';
@@ -5,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import { LangChangeService } from '../../services/lang-change.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { Observer, Observable } from 'rxjs';
+import { TUserState, IUser } from 'src/app/redux/actions/user.action';
 
 @Component({
   selector: 'app-header',
@@ -18,6 +21,7 @@ export class HeaderComponent implements OnInit {
     public langService: LangChangeService,
     public auth: AuthService
   ) {}
+  public userName$: Observable<TUserState> = this.store.select(selectUser);
 
   exit() {
     this.auth.logout();

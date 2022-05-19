@@ -12,7 +12,7 @@
     >
   </div>
   <div class="wrap-mat-menu">
-    <h3>{{ auth.person }}</h3>
+    <h3>{{ (this.userName$ | async)?.login }}</h3>
     <button class="no-hover" mat-icon-button [matMenuTriggerFor]="menu">
       <mat-icon>how_to_reg</mat-icon>
     </button>
