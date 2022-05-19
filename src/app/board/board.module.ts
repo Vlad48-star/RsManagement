@@ -17,7 +17,6 @@ import { ColumnModule } from '../column/column.module';
 import { EditComponent } from './components/edit/edit.component';
 import { MainComponent } from './pages/main/main.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { TestComponent } from '../shared/components/test/test.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +28,6 @@ import { TestComponent } from '../shared/components/test/test.component';
     BoardMenuComponent,
     EditComponent,
     MainComponent,
-    TestComponent,
   ],
   imports: [
     CommonModule,
