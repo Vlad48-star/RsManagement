@@ -5,7 +5,7 @@ import { BoardActions } from './../actions/board.action';
 import { RequestsService } from './../../core/services/requests.service';
 import { ColumnActions } from './../actions/column.action';
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType, concatLatestFrom } from '@ngrx/effects';
 import { selectCurrentBoard } from '../selectors/board.selector';
 
 import {
@@ -147,7 +147,7 @@ export class ColumnEffects {
     this.getCurrentBoardId();
     return this.actions$.pipe(
       ofType(ColumnActions.deleteSuccess),
-      withLatestFrom(this.store.select(selectAllColumn)),
+      concatLatestFrom(() => this.store.select(selectAllColumn)),
       mergeMap(([deleteResponse, columnSelector]) => {
         console.log(deleteResponse, columnSelector);
         if (columnSelector.length == 0) return of([]);

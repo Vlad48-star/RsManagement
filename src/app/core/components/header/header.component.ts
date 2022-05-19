@@ -12,11 +12,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  constructor(
+    private store: Store,
+    private dialog: DialogService,
+    public langService: LangChangeService,
+    public auth: AuthService
+  ) {}
 
-  constructor(private store: Store, private dialog: DialogService, public langService: LangChangeService, public auth: AuthService) {}
-
-
-  exit(){
+  exit() {
     this.auth.logout();
   }
 

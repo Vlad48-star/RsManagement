@@ -17,7 +17,11 @@ import { IConfirmDialogData } from 'src/app/shared/models/confirmModal';
   styleUrls: ['./task.component.scss'],
 })
 export class TaskComponent {
-  constructor(private dialog: DialogService, private store: Store, public auth: LangChangeService) {}
+  constructor(
+    private dialog: DialogService,
+    private store: Store,
+    public auth: LangChangeService
+  ) {}
   @Input() task!: ITaskUpdate;
   @Input() columnInfo!: IColumn;
   objectLanguage!: IConfirmDialogData;
@@ -43,18 +47,16 @@ export class TaskComponent {
         cancelText: 'No',
       };
     }
-    this.dialog
-      .confirmDialog(this.objectLanguage)
-      .subscribe((res) => {
-        if (res)
-          this.store.dispatch(
-            TaskActions.deleteTask({
-              response: {
-                columnId: this.columnInfo?.id,
-                taskId: this.task?.id,
-              },
-            })
-          );
-      });
+    this.dialog.confirmDialog(this.objectLanguage).subscribe((res) => {
+      if (res)
+        this.store.dispatch(
+          TaskActions.deleteTask({
+            response: {
+              columnId: this.columnInfo?.id,
+              taskId: this.task?.id,
+            },
+          })
+        );
+    });
   }
 }
