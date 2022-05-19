@@ -1,12 +1,8 @@
 import { IColumn } from './../../../board/model/board.model';
 import { selectCurrentColumn } from './../../../redux/selectors/column.selector';
 import { DialogService } from 'src/app/shared/services/dialog.service';
-import {
-  INewTask,
-  INewTaskForm,
-  TaskActions,
-} from './../../../redux/actions/task.action';
-import { Component, Input } from '@angular/core';
+import { TaskActions } from './../../../redux/actions/task.action';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { LangChangeService } from 'src/app/core/services/lang-change.service';

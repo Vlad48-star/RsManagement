@@ -4,10 +4,10 @@ import {
   selectCurrentBoard,
   selectCurrentBoardColumnTask,
 } from './../selectors/board.selector';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { TaskActions } from './../actions/task.action';
 import { RequestsService } from '../../core/services/requests.service';
-import { Injectable, Pipe } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import {
   retry,

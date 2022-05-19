@@ -1,12 +1,7 @@
 import { Store } from '@ngrx/store';
-import {
-  ITaskRes,
-  ITaskUpdate,
-  TaskActions,
-} from './../../../redux/actions/task.action';
+import { ITaskUpdate, TaskActions } from './../../../redux/actions/task.action';
 import { DialogService } from 'src/app/shared/services/dialog.service';
-import { RequestsService } from './../../../core/services/requests.service';
-import { ITask, IColumn } from './../../../board/model/board.model';
+import { IColumn } from './../../../board/model/board.model';
 import { Component, Input } from '@angular/core';
 import { LangChangeService } from 'src/app/core/services/lang-change.service';
 import { IConfirmDialogData } from 'src/app/shared/models/confirmModal';

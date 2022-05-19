@@ -1,5 +1,4 @@
-import { IUser } from 'src/app/redux/actions/user.action';
-import { UserActions, TUserState } from './../../redux/actions/user.action';
+import { UserActions } from './../../redux/actions/user.action';
 import { RequestsService } from './requests.service';
 import { ILogin, IToken, IPerson } from './models/request.model';
 import { Injectable } from '@angular/core';
