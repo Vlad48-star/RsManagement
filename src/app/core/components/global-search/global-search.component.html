@@ -1,7 +1,10 @@
-    <input type="text" placeholder="{{auth.lang === 'ru' ? 'искать...' : 'search...'}}" />
-    <mat-form-field appearance="fill">
-      <mat-label><mat-icon>search</mat-icon></mat-label>
-      <mat-select [(value)]="selected" (selectionChange)="qwe()">
+<div class="wrap-row">
+  <input type="text" placeholder="{{auth.lang === 'ru' ? 'искать...' : 'search...'}}" />
+    <div class="wrap-mat-menu">
+      <button class="no-hover" mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>search</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
         <mat-option value="by-task-number">{{
           auth.lang === 'ru' ? 'по номеру задания' : 'by task number'
         }}</mat-option>
@@ -14,5 +17,6 @@
         <mat-option value="by-task-description">{{
           auth.lang === 'ru' ? 'по описании задания' : 'by task description'
         }}</mat-option>
-      </mat-select>
-    </mat-form-field>
+      </mat-menu>
+    </div>
+</div>
