@@ -52,10 +52,10 @@
     padding: 10px;
   }
   .wrap-current-board {
-    display: grid;
+    // display: grid;
     padding: 25px 10px 0;
     overflow: hidden;
-    grid-template-rows: min-content;
+    // grid-template-rows: min-content;
     .wrap-form {
       display: grid;
       grid-template-columns: 190px 3fr 1fr;
@@ -77,7 +77,7 @@
         margin-bottom: 5px;
         font-size: 25px;
       }
-      .description{
+      .description {
         background: white;
         border-radius: 4px;
         border: solid 1px #ccc;
