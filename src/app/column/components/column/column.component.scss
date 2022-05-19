@@ -59,8 +59,9 @@ h2 {
   // display: grid;
   display: flex;
   flex-direction: column;
-  grid-gap: 5px;
+  gap: 5px;
   overflow: auto;
+  max-height: 50vh;
 }
 
 .task-box {

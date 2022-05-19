@@ -36,6 +36,7 @@ export class EditTaskComponent implements OnInit {
   }
 
   onSubmit() {
+    //TODO Добавить проверку на наличие ошибок при сабите
     this.store.dispatch(
       TaskActions.updateTask({
         response: {
