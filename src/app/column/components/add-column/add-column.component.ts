@@ -14,7 +14,11 @@ import { LangChangeService } from 'src/app/core/services/lang-change.service';
   styleUrls: ['./add-column.component.scss'],
 })
 export class AddColumnComponent implements OnInit, OnDestroy {
-  constructor(private store: Store, private dialog: DialogService, public auth: LangChangeService) {
+  constructor(
+    private store: Store,
+    private dialog: DialogService,
+    public auth: LangChangeService
+  ) {
     this.createForm();
   }
   newColumnForm!: FormGroup;
@@ -38,7 +42,10 @@ export class AddColumnComponent implements OnInit, OnDestroy {
       ColumnActions.add({
         response: {
           ...this.newColumnForm.value,
-          order: this.currentBoardInfo.columns.length + 1,
+          order:
+            this.currentBoardInfo.columns[
+              this.currentBoardInfo.columns.length - 1
+            ].order + 1,
         },
         id: { id: this.currentBoardInfo.id },
       })

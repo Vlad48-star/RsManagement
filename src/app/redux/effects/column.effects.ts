@@ -1,7 +1,6 @@
 import { selectAllColumn } from './../selectors/column.selector';
 import { IColumn } from './../../board/model/board.model';
-import { select, Store } from '@ngrx/store';
-import { TaskActions } from './../actions/task.action';
+import { Store } from '@ngrx/store';
 import { BoardActions } from './../actions/board.action';
 import { RequestsService } from './../../core/services/requests.service';
 import { ColumnActions } from './../actions/column.action';
@@ -17,13 +16,8 @@ import {
   mergeMap,
   exhaustMap,
   first,
-  concatMap,
   withLatestFrom,
-  of,
-  tap,
-  debounce,
   debounceTime,
-  switchMap,
 } from 'rxjs';
 import { MaterialService } from 'src/app/auth/class/material.service';
 
@@ -200,7 +194,7 @@ export class ColumnEffects {
         })
       ),
       debounceTime(300),
-      map((param) => {
+      map(() => {
         return ColumnActions.successUpdateCurrentColumnOrder();
       })
     );

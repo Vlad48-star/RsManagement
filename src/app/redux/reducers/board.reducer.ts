@@ -6,6 +6,7 @@ import {
   TCurrentBoardState,
 } from './../actions/board.action';
 import { createReducer, on } from '@ngrx/store';
+import { TaskActions } from '../actions/task.action';
 
 export const boardReducer = createReducer(
   initialBoardState,
@@ -36,9 +37,5 @@ export const boardItemReducer = createReducer(
       ...response,
       columns: [...response.columns].sort((a, b) => a.order - b.order),
     };
-  }),
-  on(BoardActions.dropColumn, (state, { response }) => {
-    console.log(response);
-    return state;
   })
 );

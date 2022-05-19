@@ -1,3 +1,5 @@
+import { IColumnID } from './../../column/components/models/column.model';
+import { ITask } from './../../board/model/board.model';
 import { IColumn } from 'src/app/board/model/board.model';
 import { createAction, props } from '@ngrx/store';
 
@@ -14,7 +16,7 @@ export const TaskActions = {
   ),
   updateTask: createAction(
     '[TASK] update task',
-    props<{ response: ITaskUpdate }>()
+    props<{ response: ITaskUpdate; newColumnId?: string }>()
   ),
   updateTaskSuccess: createAction(
     '[TASK] update task success',
@@ -27,6 +29,27 @@ export const TaskActions = {
   deleteTaskSuccess: createAction(
     '[TASK] delete task success',
     props<{ response: { columnId: string; taskId: string } }>()
+  ),
+  dropTask: createAction(
+    '[TASK] drop task',
+    props<{ response: ITask[]; columnId: string }>()
+  ),
+  dropTaskSuccess: createAction('[TASK] drop task success'),
+
+  dropTaskToAnotherColumn: createAction(
+    '[TASK] drop task to another column',
+    props<{ response: ITaskUpdate; newColumnId?: string }>()
+  ),
+  dropTaskToAnotherColumnSuccess: createAction(
+    '[TASK] drop task to another column success'
+  ),
+
+  updateOrderInColumn: createAction(
+    '[TASK]  update tasks orders',
+    props<{ response: string }>()
+  ),
+  updateOrderInColumnSuccess: createAction(
+    '[TASK] update tasks orders success'
   ),
 };
 

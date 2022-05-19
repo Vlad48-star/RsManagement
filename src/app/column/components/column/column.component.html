@@ -38,17 +38,18 @@
   </ng-template>
   <div
     cdkDropList
-    [cdkDropListData]="columnInfo.tasks"
+    [cdkDropListData]="this.taskColumn"
     class="task-list"
     (cdkDropListDropped)="drop($event)"
-    class="task-list"
+    [id]="columnInfo.id"
   >
     <app-task
       [columnInfo]="columnInfo"
-      *ngFor="let task of this._tempTaskColumn | sort: 'order'"
+      *ngFor="let task of this.taskColumn | sort: 'order'"
       [task]="task"
       cdkDrag
       class="task-box"
+      [cdkDragData]="task"
     ></app-task>
   </div>
   <div class="wrap-btn-add-task">
