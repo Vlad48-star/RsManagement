@@ -18,6 +18,9 @@ import {
   first,
   withLatestFrom,
   debounceTime,
+  EmptyError,
+  isEmpty,
+  of,
 } from 'rxjs';
 import { MaterialService } from 'src/app/auth/class/material.service';
 
@@ -145,8 +148,10 @@ export class ColumnEffects {
     return this.actions$.pipe(
       ofType(ColumnActions.deleteSuccess),
       withLatestFrom(this.store.select(selectAllColumn)),
-      mergeMap(([deleteResponse, columnSelector]) =>
-        columnSelector.map((el, index) => {
+      mergeMap(([deleteResponse, columnSelector]) => {
+        console.log(deleteResponse, columnSelector);
+        if (columnSelector.length == 0) return of([]);
+        return columnSelector.map((el, index) => {
           console.log(el.order, index + 1);
           if (el.order == index + 1) {
             return null;
@@ -159,11 +164,17 @@ export class ColumnEffects {
             })
             .pipe(first())
             .subscribe();
-        })
-      ),
+        });
+      }),
       debounceTime(300),
       map((param) => {
+        console.log(param);
         return ColumnActions.successUpdateCurrentColumnOrder();
+      }),
+      catchError((error) => {
+        console.log(error);
+        MaterialService.toast(error.error.message);
+        return EMPTY;
       })
     );
   });
