@@ -1,0 +1,7 @@
+.mat-form-field {
+  border: 1px solid red;
+  & .mat-icon {
+    color: #000;
+    font-size: 15px;
+  }
+}

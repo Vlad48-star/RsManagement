@@ -1,0 +1,18 @@
+    <input type="text" placeholder="{{auth.lang === 'ru' ? 'искать...' : 'search...'}}" />
+    <mat-form-field appearance="fill">
+      <mat-label><mat-icon>search</mat-icon></mat-label>
+      <mat-select [(value)]="selected" (selectionChange)="qwe()">
+        <mat-option value="by-task-number">{{
+          auth.lang === 'ru' ? 'по номеру задания' : 'by task number'
+        }}</mat-option>
+        <mat-option value="by-task-name">{{
+          auth.lang === 'ru' ? 'по названии задания' : 'by task name'
+        }}</mat-option>
+        <mat-option value="by-user">{{
+          auth.lang === 'ru' ? 'по пользователю' : 'by user'
+        }}</mat-option>
+        <mat-option value="by-task-description">{{
+          auth.lang === 'ru' ? 'по описании задания' : 'by task description'
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
