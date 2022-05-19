@@ -42,10 +42,11 @@ export class AddColumnComponent implements OnInit, OnDestroy {
       ColumnActions.add({
         response: {
           ...this.newColumnForm.value,
-          order:
-            this.currentBoardInfo.columns[
-              this.currentBoardInfo.columns.length - 1
-            ].order + 1,
+          order: this.currentBoardInfo.columns.length
+            ? this.currentBoardInfo.columns[
+                this.currentBoardInfo.columns.length - 1
+              ].order + 1
+            : 1,
         },
         id: { id: this.currentBoardInfo.id },
       })
