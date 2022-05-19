@@ -9,14 +9,14 @@
         required
         placeholder="{{ auth.lang === 'ru' ? 'Название' : 'Title' }}"
       />
-      <input
-        type="text"
-        class="input-text"
+      <textarea
+        class="description"
         name="description"
         formControlName="description"
-        required
         placeholder="{{ auth.lang === 'ru' ? 'Описание' : 'Description' }}"
-      />
+        required
+      >
+      </textarea>
       <div class="flex-wrap">
         <button class="btn red" [mat-dialog-close]="false">
           {{ auth.lang === 'ru' ? 'Назад' : 'Back' }}

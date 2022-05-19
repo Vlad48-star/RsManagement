@@ -1,9 +1,4 @@
-import { Observable, retry } from 'rxjs';
-import {
-  selectCurrentColumn,
-  selectCurrentColumnID,
-} from './../../redux/selectors/column.selector';
-import { selectAllColumn } from 'src/app/redux/selectors/column.selector';
+import { selectCurrentColumnID } from './../../redux/selectors/column.selector';
 import { selectCurrentBoard } from './../../redux/selectors/board.selector';
 import { Store } from '@ngrx/store';
 import {
@@ -32,12 +27,9 @@ import { IUser } from 'src/app/redux/actions/user.action';
 export class RequestsService {
   constructor(private http: HttpClient, private store: Store) {}
   private url = 'https://calm-beach-54874.herokuapp.com/';
-  // private url = 'https://still-waters-55383.herokuapp.com/';
 
   currentBoardId?: string;
   currentColumnId?: string;
-
-  //TODO убрать эту дичь
 
   getCurrentBoardId() {
     this.store

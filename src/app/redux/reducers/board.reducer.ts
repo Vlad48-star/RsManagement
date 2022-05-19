@@ -6,7 +6,6 @@ import {
   TCurrentBoardState,
 } from './../actions/board.action';
 import { createReducer, on } from '@ngrx/store';
-import { TaskActions } from '../actions/task.action';
 
 export const boardReducer = createReducer(
   initialBoardState,

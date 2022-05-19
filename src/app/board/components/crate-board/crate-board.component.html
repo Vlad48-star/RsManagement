@@ -1,29 +1,25 @@
-<div>
-  <form
-    [formGroup]="newBoardForm"
-    (ngSubmit)="formSubmit()"
-    class="flex-column"
-  >
+<div class="add-task">
+  <form [formGroup]="newBoardForm" (ngSubmit)="formSubmit()">
     <!-- TODO Сделай пожалуйста красивые input, что бы placeholder поднимался вверх при клике на поле -->
     <!-- https://material.angular.io/components/input/overview -->
 
-    <div class="grid-row">
+    <div class="flex-column">
       <input
         type="text"
         class="input-text"
         name="title"
         formControlName="title"
-        [placeholder]="auth.lang === 'ru' ? 'Заголовок' : 'title'"
+        [placeholder]="auth.lang === 'ru' ? 'Заголовок' : 'Title'"
         required
       />
-      <input
-        type="text"
-        class="input-text"
+      <textarea
+        class="description"
         name="description"
         formControlName="description"
-        [placeholder]="auth.lang === 'ru' ? 'Описание' : 'description'"
+        placeholder="{{ auth.lang === 'ru' ? 'Описание' : 'Description' }}"
         required
-      />
+      >
+      </textarea>
       <ng-container *ngIf="(title!.invalid && title!.dirty) || errorOnsubmit">
         <span class="text-center" *ngIf="title!.errors?.['required']">{{
           auth.lang === 'ru'

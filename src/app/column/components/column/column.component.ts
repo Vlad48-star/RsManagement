@@ -1,5 +1,3 @@
-import { first } from 'rxjs';
-import { selectCurrentBoardColumnTask } from './../../../redux/selectors/board.selector';
 import { TaskActions } from './../../../redux/actions/task.action';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RequestsService } from './../../../core/services/requests.service';
